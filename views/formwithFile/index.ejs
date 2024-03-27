@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2d type of form</title>
+     <style>
+        body{
+            background-color: rgb(235, 233, 221);
+        }
+        fieldset{
+    border-radius: 20px ;
+    width: 900px;
+    margin-left: 220px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+table tr td .line{
+    border-bottom: 2px solid black;
+}
+.edu tr{
+    width: 10%;
+}
+.edu td{
+    width: fit-content;
+}
+.eduf{
+    margin-left: -20px;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.submit input{
+    cursor: pointer;
+    margin-left: 10px;
+    border: 2px solid black;
+    background-color: orange;
+    color: black;
+    width: 80px;
+    height: 30px;
+    padding: 5px;
+    text-align: center;
+}
+.submit a{
+    margin-top: 20px;
+    text-decoration: none;
+    margin-left: 10px;
+    border: 2px solid black;
+    background-color: orange;
+    color: black;
+    width: 150px;
+    height: 30px;
+    padding: 10px;
+    text-align: center;
+  }
+     </style>
+</head>
+<body>
+    <h1 align = "center">Job Application Form</h1>
+
+    <form action="/file/index" name="form2" method="post">
+
+    <fieldset>
+        <legend>Basic Details</legend>
+      <div class="basic">
+
+        <table align="center">
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" name="fname" id="fname" /></div></td>
+                <td>Email:</td>
+                <td><input type="text" name="email" id="email" /></td>
+                
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" name="lname" id="lname" /> </td>
+                <td>Gender</td>
+                <td>Male<input type="radio" name="gender" value="Male" id="male" class="rg" selected />
+                    Female<input type="radio" name="gender" value="Female" id="female" class="rg" /></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="text" name="age" id="age" /></td>
+                <td>Hobbies:</td>
+                <td>
+                    A<input type="checkbox" name="hobbie" id="" value="A">
+                    B<input type="checkbox" name="hobbie" id="" value="B">
+                    C<input type="checkbox" name="hobbie" id="" value="C">
+                    D<input type="checkbox" name="hobbie" id="" value="D">
+                </td>
+            </tr>
+            <tr>
+                <td>Phone No:</td>
+                <td><input type="text" name="num" id="num" maxlength="10"/></td>
+                <td>Address:</td>
+                <td><input type="text" name="address" id="add" /></td>
+            </tr>
+        
+        </table>
+       </div>
+    </fieldset>
+     <div class="submit">
+        <input type="reset" value="reset">
+        <input type="submit" value="submit" onclick="return validate();">
+    </div>
+   
+  </form>
+  <div class="submit">
+      <a href="/file/lessDetails.ejs">get Data</a>
+  </div>
+</body>
+
+ <script>
+
+       function validate(){
+     
+          var re = "^[6-9]{1}[0-9]{9}$";
+          var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
+          var form = document.getElementsByTagName('form');
+          var fname = document.getElementById('fname');
+          var lname = document.getElementById('lname');
+          var email = document.getElementById('email');
+          var valueOfMail = email.value;
+          var result = valueOfMail.match(ereg);
+          var age = document.getElementById('age');
+          var check = document.querySelector('input[name="gender"]:checked');  
+          var vage = age.value;
+          var checkbox = document.querySelector('input[name="hobbie"]:checked');
+          var number = document.getElementById('num');
+          var add = document.getElementById('add');
+          var numvalue = number.value;
+          var result2 = numvalue.match(re);
+        
+            if(fname.value == ''){
+                alert("please enter first name...");
+                fname.focus();
+                return false;
+            }
+
+            else if(lname.value == ''){
+                alert("please enter last name...");
+                lname.focus();
+                return false;
+            }
+
+            else if(valueOfMail == ''){
+                alert("please enter email...");
+                email.focus();
+                return false;
+            }
+            else if(result == null){
+                alert("please enter valid email...");
+                email.focus();
+                return false;
+            }
+            else if(vage == ''){
+                alert("please enter age...");
+                age.focus();
+                return false;
+            }
+            else if(isNaN(vage) || vage < 1 || vage > 120 ){
+                 alert("please enter valid age...");
+                 age.value = '';
+                 age.focus();
+                 return false;
+            }
+            else if(!check){
+                  alert("please select your gender...");
+                  return false;
+            }
+            else if(!checkbox){
+                  alert("please select any hobbie...");
+                  return false;
+            }
+            else if(numvalue == ''){
+                alert('please enter a number...');
+                number.focus();
+                return false;
+            }
+            else if(result2 == null){
+                   alert("please enter valid number...");
+                   number.focus();
+                   return false;
+            }
+            else if(add.value == ''){
+                alert("please enter the address...");
+                add.focus();
+                return false;
+            }
+            else{
+                alert('form submited...');
+                return true;
+            }
+        }
+ </script>
+</html>

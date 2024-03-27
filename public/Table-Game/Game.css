@@ -1,0 +1,43 @@
+body{
+    background-color: pink;
+}
+table{
+    border: 2px solid black;
+    /* width: 100%;
+    height: 100%; */
+    border-collapse: collapse;
+}
+table td{
+    border: 2px solid black;
+}
+table tr,td{
+    width: 30px;
+    height: 30px;
+}
+table{
+   
+    background-color: rgba(0, 255, 255,1.0);
+}
+table tr:first-child td:first-child{
+    background-color: rgba(0, 153, 255, 0.8);
+}
+#time{
+    border: 2px solid black;
+    background-color: blueviolet;
+    border-radius: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input{
+    margin-top: 10px;
+    background-color: black;
+    color: brown;
+    cursor: pointer;
+}
+input{
+    display: flex;
+    
+}

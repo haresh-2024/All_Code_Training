@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeZones</title>
+</head>
+<style>
+    .main{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<body>
+    <h1 align="center">Hareshkumar Chauhan 24DEV006 19/03/2024</h1>
+    <h1 align="center">Time Zone Convert</h1>
+    <div class="main">
+       <div class="first">
+           <label for="from">Country: </label>
+           <select name="fcity" id="fcity">
+               <option value="default" disabled selected>Select Country</option>
+           </select>
+    </div>
+       <div class="second">
+
+           <label for="to">City With TimeZone : </label>
+           <select name="tcity" id="tcity">
+            <option value="default" disabled >Select TimeZone</option>
+           </select>
+       </div>
+
+        <input type="submit" value="Convert" id="submit">
+     <div class="result">
+         <h2 id="fromtime"></h2>
+         <h2 id="totime"></h2>
+         <h2 id="mytime"></h2>
+         <h2 id="ctime"></h2>
+     </div>
+    </div>
+</body>
+
+<script>
+     async function run(){
+         let cityData = await fetch('http://localhost:3000/timezonew/city',{
+          method:"GET",
+               headers: {
+                   'Content-Type': ' application/json'
+               },
+           });
+           var result = await cityData.json();
+           const select1 =  document.getElementById('fcity');
+           result.result1.forEach((element ,index)=> {
+                 select1.innerHTML = select1.innerHTML +`<option value="${element.city}" id="${index}">${element.city}</option>`;
+           });  
+           
+           var select2 =  document.getElementById('tcity');
+           select1.addEventListener('change',async (req,res)=>{
+               select2.innerHTML = ' <option value="default" disabled selected>Select TimeZone</option>';
+               var code;
+               result.result2.forEach((element ,index)=> {
+                    if(element.city == select1.value){
+                        code = element.country;
+                    }
+               }); 
+               result.result2.forEach((element ,index)=> {
+                   if(element.country == code){
+                       select2.innerHTML = select2.innerHTML +`<option value="${element.timezone}" id="${index}">${element.timezone}</option>`;
+                   }
+                });  
+            
+           })
+           
+           var time = new Date();
+           document.getElementById('submit').addEventListener('click', async (e)=>{
+        
+                document.getElementById('mytime').innerText =`Current time of us is ` + time.toLocaleTimeString('en-US');
+                document.getElementById('totime').innerText = `Current time of ${select2.value} is ` + time.toLocaleTimeString('en-US',{timeZone: select2.value});  
+          })
+     } 
+     run();
+</script>
+</html>

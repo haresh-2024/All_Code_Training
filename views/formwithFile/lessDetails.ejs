@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>less Data</title>
+    <style>
+        body{
+            background-color: rgb(235, 233, 221);
+        }
+        table{
+            border-collapse: collapse;
+        }
+        table tr td,th{
+            padding: 10px;
+        }
+        td a{
+            text-decoration: none;
+            background-color: orange;
+            border: 2px solid black;
+            padding: 5px;
+            color: black;
+        }
+        .home{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        a{
+            text-decoration: none;
+            background-color: orange;
+            border: 2px solid black;
+            padding: 5px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">Student Details</h1>
+     <table border="1" align="center">
+        <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Email</th>
+          <th>Number</th>
+          <th>View More</th>
+        </tr>
+      
+        <% for (var j = 0; j < i; j++) { %>
+          <tr>
+            <td><%= e[j].fname %></td>
+            <td><%= e[j].lname %></td>
+            <td><%= e[j].email %></td>
+            <td><%= e[j].num %></td>
+            <td><a href="/file/fullDetails?<%= j %>">View more</a></td>
+          </tr>    
+        <% } %>
+      </table>
+      <div class="home">
+          <a href="/file">Back to Register</a>
+      </div>
+    </body>
+</html>

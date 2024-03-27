@@ -1,0 +1,54 @@
+[
+  {
+    "fname": "dhaval",
+    "email": "dhaval@gmail.com",
+    "lname": "monani",
+    "gender": "Male",
+    "age": "22",
+    "hobbie": [
+      "A",
+      "B"
+    ],
+    "num": "7536984121",
+    "address": "Jamnagar"
+  },
+  {
+    "fname": "haresh",
+    "email": "haresh@gmail.com",
+    "lname": "chauhan",
+    "gender": "Male",
+    "age": "21",
+    "hobbie": [
+      "A",
+      "C"
+    ],
+    "num": "8141755953",
+    "address": "amreli"
+  },
+  {
+    "fname": "vivek",
+    "email": "vivek@gmail.com",
+    "lname": "kandoliya",
+    "gender": "Male",
+    "age": "21",
+    "hobbie": [
+      "B",
+      "D"
+    ],
+    "num": "9856742120",
+    "address": "rajkot"
+  },
+  {
+    "fname": "raj",
+    "email": "raj@gmail.com",
+    "lname": "koradiya",
+    "gender": "Male",
+    "age": "20",
+    "hobbie": [
+      "A",
+      "D"
+    ],
+    "num": "9632587410",
+    "address": "junagadh"
+  }
+]

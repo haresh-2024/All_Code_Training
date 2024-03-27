@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View More</title>
+    <style>
+        table td{
+          width: 100px;
+          height: 100px;
+        }
+        #table2{
+            display: none;
+        }
+        #table2 td{
+            width: auto;
+        }
+    </style>
+</head>
+<body> 
+
+            <table id="table" border="1" align="center">
+                <tr>
+
+                    <th>id</th>
+                    <th>slug</th>
+                    <th>title</th>
+                    <th>image</th>
+                    <th>thumbnail</th>
+                    <th>status</th>
+                    <th>category</th>
+                    <th>publishedAt</th>
+             </tr>
+
+                
+            </table>
+            <input type="button" value="Show Comments" onclick="view()">
+            <table id="table2" border="1" align="center">
+
+            </table>
+</body>
+<script>
+    
+    var i = window.location.href.slice(27);
+        async function fetchData(){
+            try{
+                const response = await fetch(`https://jsonplaceholder.org/posts/${i}`);
+                const data = await response.json();
+                return data;
+            }
+            catch(e){
+                console.error(e);
+            }
+        }
+        async function readData(){
+            const data = await fetchData();
+
+            if(!data){
+                return;
+            }
+            const table = document.getElementById('table');
+                var tr = document.createElement('tr');
+                 tr.innerHTML = `<td>${data.id}</td>
+                <td>${data.slug}</td>
+                <td>${data.title}</td>
+                <td><img src="${data.thumbnail}" alt=""></td>
+                <td>${data.status}</td>
+                <td>${data.category}</td>
+                <td>${data.category}</td>
+                <td>${data.publishedAt}</td>`;
+                table.appendChild(tr);
+            }
+        readData();
+        function view(){
+            async function fetchData(){
+            try{
+                const response = await fetch(`https://jsonplaceholder.org/comments/`);
+                const data = await response.json();
+                console.log(data);
+                return data;
+            }
+            catch(e){
+                console.error(e);
+            }
+        }
+        async function readData(){
+            const data = await fetchData();
+
+            if(!data){
+                return;
+            }
+            const table = document.getElementById('table2');
+            table.style.display ='block';
+            console.log(data);
+            var tr = document.createElement('tr');
+            var arr = data.filter(element =>{
+                return element.postId == i;
+            });
+            table.innerHTML = '';
+            arr.forEach(element => {
+                        table.innerHTML = table.innerHTML + `<tr><td>${element.comment}</td></tr>`;
+                });
+            }
+            readData()
+        }
+</script>
+</html>

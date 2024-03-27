@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling</title>
+    <link rel="stylesheet" href="/event/event.css">
+</head>
+<!-- onload="function15()" -->
+<body onresize="function17()">
+    <h1 align="center">Hareshkumar Chauhan 24DEV006 31/01/2024</h1>
+    <form action="" method="get"></form>
+    <table>
+        <tr>
+            <td>Onclick</td>
+            <td>
+             <input type="button" name="click" id="click" onclick="function1()"  value="click me">
+            </td>
+            
+            <td>OnMouseOver and OnMouseOut</td>
+            <td><h2 id="over" onmouseover="function2()" onmouseout="function3()">Mouse Over and Out</h2></td>
+            
+            <td>OnMouseDown and OnMouseUp</td>
+            <td><h2 id="up" onmousedown="function4()" onmouseup="function5()">Mouse Up / Down </h2></td>
+        </tr>
+        <tr>
+            <td>MouseMove</td>
+            <td><h2 id="move" onmousemove="function6()">MouseMove</h2></td>
+            <td>onConTextMenu</td>
+            <td><h2 id="menu" oncontextmenu="function7()">right click is disable</h2></td>
+            <td>OnDoubleClick</td>
+            <td><input type="button" value="double click" ondblclick="function8()"></td>  
+        </tr>
+        <tr>
+            <td>onKeyDown</td>
+            <td><input type="text" name="" id="keydown" onkeydown="function9()"></td>
+            <td>onKeyUp</td>
+            <td><input type="text" name="keyup" id="keyup" onkeyup="function10()"></td>
+            <td>onKeyPress</td>
+            <td><input type="text" name="keypress" id="keypress" onkeypress="function11()"></td>   
+        </tr>
+        <tr>
+            <td>onfocus</td>
+            <td><input type="text" id="fucus" onfocus="function12()"></td>
+            <td>onblur</td>
+            <td><input type="text" name="" id="blur" onblur="function13()"></td>
+            <td>onchange</td>
+            <td><select name="" id="change" onchange="function14()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select></td>  
+        </tr>
+        <tr>
+            <td>onload</td>
+            <td><h4 id="load"></h4></td>
+            <td>onUnload</td>
+            <td><h4 id="unload"></h4></td>
+            <td>onresize</td>
+            <td><h4 id="size"></h4></td>   
+        </tr>
+        <tr>
+            <td>oncopy</td>
+            <td><h4 id="copy" oncopy="function18()">copy this text</h4></td>
+            <td>ondrag</td>
+            <td><h4 id="drag" ondrag="function19()">drag this text</h4></td>
+            <td>ondrop</td>
+            <td><h4 id="drop" ondrag="function20()">drag and drop this text</h4></td>
+        </tr>
+        <tr>
+            <td>oninput</td>
+            <td><input type="text" name="" id="input" oninput="function21()"></td>
+            <td>onpaste</td>
+            <td><input type="text" name="" id="paste" onpaste="function22()"></td>
+            <td>onscroll</td>
+            <td><p id="scroll" style="width: 200px; height:50px; overflow: scroll;" onscroll="function23()">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illo ratione, quod blanditiis delectus dolor harum possimus praesentium minus molestiae odit quisquam dicta maiores ipsum assumenda laudantium architecto laborum, quo quos officia voluptas vero error numquam? Sapiente voluptas atque temporibus laudantium, dolore cum tenetur? Mollitia, assumenda laborum? Nesciunt, atque non!</p></td>
+        </tr>
+        <tr>
+            <td>onselect</td>
+            <td><input type="text" id="select" value="Select this text.." onselect="function24()"></td>
+            <td>ontuggle</td>
+            <td><details ontoggle="function25()">
+                <summary>Toggle this</summary>
+                <p>hiiii you toggle</p>
+            </details>
+            </td>
+            <td>onwhell</td>
+            <td><h4 id="roll" onwheel="function26()">roll mouse over this</h4></td>
+        </tr>
+    </table>
+
+    <input type="reset" value="reset">
+    <input type="submit" value="submit">
+</form>
+</body>
+<script src="/event/event.js"></script>
+</html>

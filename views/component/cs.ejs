@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component</title>
+</head>
+<body>
+    <% if(control != 'combobox'){ %>
+    <label for="field"><%=field%></label>
+    <% result.forEach(element => { %>
+        <% for (const key in element) { %>
+            <label for="<%= element[key]%>"><%= element[key]%></label>
+
+            <% if( select == element[key]){%>
+               
+                <input type="<%=control%>" name="<%=field %>" id="<%= element[key] %>" checked>
+            <% }else{ %>
+                <input type="<%=control%>" name="<%=field %>" id="<%= element[key] %>">
+            <% } %>
+        <%}%>
+    <% }); %>
+    <% }else if(control == 'combobox'){%>
+        <label for="<%=field%>">select <%=field%></label>
+      <select name="<%=field%>" id="<%=field%>">
+        <% result.forEach(element => { %>
+            <% for (const key in element) { %>
+                <% if( select == element[key]){%>
+                    <option value="<%= element[key]%>"selected><%= element[key]%></option>
+                <% }else{ %>
+                    <option value="<%= element[key]%>"><%= element[key]%></option>
+                <% } %>
+               
+            <%}%>
+        <% }); %>
+     </select>
+    <% } %>
+</body>
+</html>

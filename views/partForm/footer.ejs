@@ -1,0 +1,529 @@
+    
+</body>
+<script>
+    var part = 0;
+    var formPart = document.getElementsByClassName('menu');
+    var highlight = document.getElementsByClassName('highlight');
+    var div = document.getElementById('hidden');
+    var p = document.getElementById('error');
+        if(part == 0){
+          formPart[0].style.display = 'block'; 
+          highlight[0].style.background = 'red'; 
+        }
+        function onshow(n){
+            formPart[n-1].style.display = 'none'
+            formPart[n].style.display = 'block';
+            highlight[n].style.background = 'red';
+            highlight[n-1].style.background = 'white'; 
+        }
+        function prev(n){
+            formPart[n].style.display = 'none'
+            formPart[n - 1].style.display = 'block';
+            highlight[n - 1].style.background = 'red';
+            highlight[n].style.background = 'white'; 
+        } 
+        function validation1(){
+            var fname = document.getElementById('fname');
+            var lname = document.getElementById('lname');
+            var email = document.getElementById('email');
+            var des = document.getElementById('des');
+            var add1 = document.getElementById('add1');
+            var add2 = document.getElementById('add2');
+            var num = document.getElementById('num');
+            var city = document.getElementById('city');
+            var dob = document.getElementById('dob');
+            var zip = document.getElementById('zip'); 
+
+            var arr = [fname,lname,email,des,num,city,dob,zip];
+           var actualName = ['first name','last name','email','Designation','Phone','city','date of birth','zip code'];
+           for(var i=0;i<arr.length;i++){
+               if(arr[i].value == ''){
+                p.innerText = `please enter ${actualName[i]}`;
+                div.style.display = 'block';
+                return false;
+               }
+            }
+            if(add1.value == '' && add2.value == ''){
+                p.innerText = `please enter address1 or address2`;
+                div.style.display = 'block';
+                return false;
+            }
+            var nre = "^[6-9]{1}[0-9]{9}$";
+            var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
+            if(!(email.value.match(ereg))){
+                p.innerText = `please enter valid email`;
+                div.style.display = 'block';
+                return false;
+            }
+            if(!(num.value.match(nre))){
+                p.innerText = `please enter valid number`;
+                div.style.display = 'block';
+                return false;
+            }
+            var date = '[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])';
+   
+            if(!(dob.value.match(date))){
+               p.innerText = `please enter valid Date of Birth`;
+               div.style.display = 'block';
+               return false;
+            }
+         
+            if( isNaN(zip.value) || zip.value.length != 6){
+               p.innerText = `please enter valid zipcode`;
+               div.style.display = 'block';
+               return false;
+            }
+            
+            onshow(1);
+        }
+        function validation2(){
+            var sscn = document.getElementById('sscn'); 
+            var sscy = document.getElementById('sscy'); 
+            var sscp = document.getElementById('sscp'); 
+            var hscn = document.getElementById('hscn'); 
+            var hscy = document.getElementById('hscy'); 
+            var hscp = document.getElementById('hscp'); 
+            var bdn = document.getElementById('bdn'); 
+            var bcourse = document.getElementById('bcourse'); 
+            var bdy = document.getElementById('bdy'); 
+            var bdp = document.getElementById('bdp');
+     
+           var arr = [sscn,sscy,sscp,hscn,hscy,hscp,bdn,bcourse,bdy,bdp];
+           var actualName = ['ssc board','ssc year','ssc percentage','hsc board','hsc year','hsc percentage','bachelor board','bachelor course','bachelor year','bachelor percentage'];
+           for(var i=0;i<arr.length;i++){
+               if(arr[i].value == ''){
+                p.innerText = `please enter ${actualName[i]}`;
+                div.style.display = 'block';
+                return false;
+               }
+            }
+
+            if( isNaN(sscy.value) || isNaN(hscy.value) || isNaN(bdy.value)){
+               p.innerText = `please enter year`;
+               div.style.display = 'block';
+               return false;
+            }
+            if( sscy.value.length != 4 || hscy.value.length != 4 || bdy.value.length != 4 ){
+               p.innerText = `please enter valid year`;
+               div.style.display = 'block';
+               return false;
+            }
+            if( isNaN(sscp.value) || isNaN(hscp.value) || isNaN(bdp.value)){
+               p.innerText = `please enter number for percentage`;
+               div.style.display = 'block';
+               return false;
+            }
+            if( sscp.value.length != 2 || hscp.value.length != 2 || bdp.value.length != 2){
+               p.innerText = `please enter valid percentage`;
+               div.style.display = 'block';
+               return false;
+            }
+            if(mdn.value != '' || mcourse.value != '' || mdy.value != '' || mdp.value != ''){
+               var arr = [mdn,mcourse,mdy,mdp];
+               var actualName = ['University of Master','Course Name of Master','Passing Year of master','Percantage of master'];
+               for(var i=0;i<arr.length;i++){
+                  if(arr[i].value == ''){
+                  p.innerText = `please enter ${actualName[i]}`;
+                  div.style.display = 'block';
+                  return false;
+                 }
+               }
+            }
+
+            onshow(2);
+        }
+        function validation3(){
+            var cname = document.getElementById('cname');
+            var cdes = document.getElementById('cdes');
+            var cfrom = document.getElementById('cfrom');
+            var cto = document.getElementById('cto');
+
+            if(cname.value != '' || cdes.value != '' || cfrom.value != '' || cto.value != ''){
+               if(cname.value == ''){
+                  p.innerText = `please enter Last Company Name `;
+                  div.style.display = 'block';
+                  return false;
+               }
+               if(cdes.value == ''){
+                  p.innerText = `please enter Last Job Designation `;
+                  div.style.display = 'block';
+                  return false;
+               }
+               if(cfrom.value == ''){
+                  p.innerText = `please enter work Experience join Data `;
+                  div.style.display = 'block';
+                  return false;
+               }
+               if(cto.value == ''){
+                  p.innerText = `please enter work Experience Left Data `;
+                  div.style.display = 'block';
+                  return false;
+               }
+               var date = '[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])';
+   
+               if(!(cto.value.match(date))){
+               p.innerText = `please enter valid Date of Join`;
+               div.style.display = 'block';
+               return false;
+               }
+                if(!(cfrom.value.match(date))){
+                p.innerText = `please enter valid Date of left`;
+                div.style.display = 'block';
+                return false;
+                }
+            }
+            onshow(3);
+        }
+        function validation4(){
+           var hindi = document.getElementById('hindi');
+           var guj = document.getElementById('guj');
+           var eng = document.getElementById('eng');
+           var hread = document.getElementById('hread');
+           var eread = document.getElementById('eread');
+           var gread = document.getElementById('gread');
+           var hwrite = document.getElementById('hwrite');
+           var ewrite = document.getElementById('ewrite');
+           var gwrite = document.getElementById('gwrite');
+           var hspeak = document.getElementById('hspeak');
+           var espeak = document.getElementById('espeak');
+           var gspeak = document.getElementById('gspeak');
+
+           if(hindi.checked != true && eng.checked != true && guj.checked != true){
+                  p.innerText = `please select any language that you known`;
+                  div.style.display = 'block';
+                  return false;
+         }
+         if(hindi.checked == true){
+            if(hread.checked != true  && hwrite.checked != true && hspeak.checked != true){
+                  p.innerText = `please select language know type for hindi`;
+                  div.style.display = 'block';
+                  return false;
+               }
+         }
+         if(guj.checked == true){
+            if(gread.checked != true && gspeak.checked != true && gwrite != true){
+                  p.innerText = `please select language know type gujarati`;
+                  div.style.display = 'block';
+                  return false;
+            }
+         }
+         if(eng.checked == true){
+            if(eread.checked != true && espeak.checked != true && ewrite != true){
+                  p.innerText = `please select language know type english`;
+                  div.style.display = 'block';
+                  return false;
+               }
+         }
+
+         onshow(4);
+        }function validation5(){
+           var php = document.getElementById('php');
+           var rphp = document.getElementById('rphp');
+           var oracle = document.getElementById('oracle');
+           var roracle = document.getElementById('roracle');
+           var mysql = document.getElementById('mysql');
+           var rmysql = document.getElementById('rmysql');
+           var larvel = document.getElementById('larvel');
+           var rlarvel = document.getElementById('rlarvel');
+
+           if(php.checked == true){
+            var getSelectedValue = document.querySelector( 'input[name="rphp"]:checked');  
+            if(getSelectedValue == null) {   
+                  p.innerText = `please select level of technologie for php`;
+                  div.style.display = 'block';
+                  return false;
+               }
+         }
+         if(mysql.checked == true){
+            var getSelectedValue = document.querySelector( 'input[name="rmysql"]:checked');
+            if(getSelectedValue == null) {    
+               p.innerText = `please select level of technologie for mysql`;
+               div.style.display = 'block';
+               return false;
+            }
+         }
+         if(larvel.checked == true){
+            var getSelectedValue = document.querySelector( 'input[name="rlarvel"]:checked');
+            if(getSelectedValue == null) {      
+               p.innerText = `please select level of technologie for laravel`;
+               div.style.display = 'block';
+               return false;
+            }
+         }
+         if(oracle.checked == true){
+            var getSelectedValue = document.querySelector( 'input[name="roracle"]:checked');   
+            if(getSelectedValue == null) {   
+               p.innerText = `please select level of technologie for oracle`;
+               div.style.display = 'block';
+               return false;
+            }
+         }
+         onshow(5);
+        }
+        function validation6(){
+           var refname = document.getElementById('refname');
+           var refcon = document.getElementById('refcon');
+           var refrel = document.getElementById('refrel');
+           var getSelectedValue = document.querySelectorAll( 'input[name="refcon"]');
+   
+         if(refcon.value != '' || refname.value != '' || refrel.value != ''){
+               if(refcon.value == ''){
+                  p.innerText = `please enter refrence contact number `;
+                  div.style.display = 'block';
+                  return false;
+               }
+               if(refname.value == ''){
+                  p.innerText = `please enter referance contact name `;
+                  div.style.display = 'block';
+                  return false;
+               }
+               if(refrel.value == ''){
+                  p.innerText = `please enter referance contact relationship `;
+                  div.style.display = 'block';
+                  return false;
+               }
+         }
+            onshow(6);
+        }
+        function showError(){
+            document.getElementById('hidden').style.display = 'none';
+         }
+        document.getElementById('submit').addEventListener('click',async (e)=>{
+     
+           e.preventDefault();
+            var notice = document.getElementById('notice');
+            var ctc = document.getElementById('ctc');
+            var ectc = document.getElementById('ectc');
+            var arr = [notice,ectc,cctc];
+            var actualName = ['notice period','expected ctc','current ctc'];
+            for(var i=0;i<arr.length;i++){
+                  if(arr[i].value == ''){
+                  p.innerText = `please enter ${actualName[i]}`;
+                  div.style.display = 'block';
+                  return false;
+                  }
+               }
+               if( isNaN(notice.value) || isNaN(cctc.value) || isNaN(ectc.value)){
+                        p.innerText = `please enter valid details for preferance. `;
+                        div.style.display = 'block';
+                        return false;
+               }
+
+            if(window.location.pathname == '/partForm'){
+
+            
+               let form = document.getElementById('form2');
+               const data = new URLSearchParams(new FormData(form));
+               let bodyData = await fetch('http://localhost:3000/partForm/form',{
+                  method:"POST",
+                  headers: {
+                     'Content-Type': ' application/x-www-form-urlencoded'
+                  },
+                  body: data
+               });
+               var result = await bodyData.json();
+               alert(`${result.alert}`);
+              window.location.pathname = '/partForm'; 
+            }
+            
+            if(window.location.pathname == '/partForm/update'){
+               let form = document.getElementById('form2');
+               const data = new URLSearchParams(new FormData(form));
+               var Id = window.location.href.split('?id=')[1];
+               let bodyData = await fetch('http://localhost:3000/partForm/update/form',{
+                  method:"POST",
+                  headers: {
+                     'Content-Type': ' application/x-www-form-urlencoded',
+                     'userId' : `${Id}` 
+                  },
+                  body: data,
+                  
+               });
+               var result = await bodyData.json();
+               alert(result.alert);
+               window.location.pathname = '/partForm'   
+            } 
+           
+         })
+   // update
+
+if(window.location.pathname == '/partForm/update'){
+               update();
+}
+async function update(){
+   
+      let bodyData = await fetch(window.location.href,{
+         method:"POST",
+         headers: {
+            'Content-Type': ' application/json'
+         },
+      });
+      var result = await bodyData.json();
+       document.getElementById('hidden').value = window.location.href.split('?id=')[1];
+       document.getElementById('fname').value = result.res1[0].fname;
+       document.getElementById('lname').value = result.res1[0].lname;
+       document.getElementById('email').value = result.res1[0].email;
+       document.getElementById('des').value = result.res1[0].designation;
+       document.getElementById('add1').value = result.res1[0].address;
+       document.getElementById('num').value = result.res1[0].mobile;
+       document.getElementById('city').value = result.res1[0].city;
+       document.getElementById('dob').value = result.res1[0].dob;
+       document.getElementById('zip').value = result.res1[0].zipcode; 
+       document.getElementById('sscn').value = result.res2[0].board;
+       document.getElementById('sscy').value = result.res2[0].year;
+       document.getElementById('sscp').value = result.res2[0].percentage;
+       document.getElementById('hscn').value = result.res2[1].board; 
+       document.getElementById('hscy').value = result.res2[1].year; 
+       document.getElementById('hscp').value = result.res2[1].percentage;
+       document.getElementById('bdn').value = result.res2[2].board; 
+       document.getElementById('bcourse').value = result.res2[2].courseName;
+       document.getElementById('bdy').value = result.res2[2].year;
+       document.getElementById('bdp').value = result.res2[2].percentage;
+
+       if(result.res2[3] != undefined){
+         document.getElementById('mdn').value = result.res2[3].board; 
+         document.getElementById('mcourse').value = result.res2[3].courseName;
+         document.getElementById('mdy').value = result.res2[3].year;
+         document.getElementById('mdp').value = result.res2[3].percentage;
+       }
+       
+      result.res3.forEach((element,index)=> {
+         document.getElementById('cname').value = result.res3[index].cname;
+         document.getElementById('cdes').value = result.res3[index].designation;
+         document.getElementById('cfrom').value = result.res3[index].fromW;
+         document.getElementById('cto').value = result.res3[index].toW;         
+      });
+
+           var hindi = document.getElementById('hindi');
+           var guj = document.getElementById('guj');
+           var eng = document.getElementById('eng');
+           var hread = document.getElementById('hread');
+           var eread = document.getElementById('eread');
+           var gread = document.getElementById('gread');
+           var hwrite = document.getElementById('hwrite');
+           var ewrite = document.getElementById('ewrite');
+           var gwrite = document.getElementById('gwrite');
+           var hspeak = document.getElementById('hspeak');
+           var espeak = document.getElementById('espeak');
+           var gspeak = document.getElementById('gspeak');
+           
+         result.res4.forEach( (element,index) =>{
+
+            if(result.res4[index].language == 'hindi'){
+               hindi.checked = true;
+               if(result.res4[index].lread == 'y'){
+                  hread.checked = true;
+               }
+               if(result.res4[index].lwrite == 'y'){
+                  hwrite.checked = true;
+               }
+               if(result.res4[index].speak == 'y'){
+                  hspeak.checked = true;
+               }
+               
+            }
+            if(result.res4[index].language == 'english'){
+               eng.checked = true;
+               if(result.res4[index].lread == 'y'){
+                  eread.checked = true;
+               }
+               if(result.res4[index].lwrite == 'y'){
+                  ewrite.checked = true;
+               }
+               if(result.res4[index].speak == 'y'){
+                  espeak.checked = true;
+               }
+            }
+            if(result.res4[index].language == 'gujarati'){
+               guj.checked = true;
+               if(result.res4[index].lread == 'y'){
+                  gread.checked = true;
+               }
+               if(result.res4[index].lwrite == 'y'){
+                  gwrite.checked = true;
+               }
+               if(result.res4[index].speak == 'y'){
+                  gspeak.checked = true;
+               }
+            }
+         });
+
+           var php = document.getElementById('php');
+           var lphp = document.getElementsByClassName('lphp');
+           var oracle = document.getElementById('oracle');
+           var loracle = document.getElementsByClassName('loracle');
+           var mysql = document.getElementById('mysql');
+           var lmysql = document.getElementsByClassName('lmysql');
+           var larvel = document.getElementById('larvel');
+           var llarvel = document.getElementsByClassName('llarvel');
+   
+
+           result.res5.forEach((element,index)=>{
+               if(result.res5[index].technologies == 'php'){
+                  php.checked = true;
+                  if(result.res5[index].level == 'Beginer'){
+                     lphp[0].checked = true;
+                  }
+                  if(result.res5[index].level == 'Mediater'){
+                     lphp[1].checked = true;
+                  }
+                  if(result.res5[index].level == 'Expert'){
+                     lphp[2].checked = true;
+                  }
+               } 
+
+               if(result.res5[index].technologies == 'mysql'){
+                  mysql.checked = true;
+                  if(result.res5[index].level == 'Beginer'){
+                     lmysql[0].checked = true;
+                  }
+                  if(result.res5[index].level == 'Mediater'){
+                     lmysql[1].checked = true;
+                  }
+                  if(result.res5[index].level == 'Expert'){
+                     lmysql[2].checked = true;
+                  }
+               } 
+
+               if(result.res5[index].technologies == 'oracle'){
+                  oracle.checked = true;
+                  if(result.res5[index].level == 'Beginer'){
+                     loracle[0].checked = true;
+                  }
+                  if(result.res5[index].level == 'Mediater'){
+                     loracle[1].checked = true;
+                  }
+                  if(result.res5[index].level == 'Expert'){
+                     loracle[2].checked = true;
+                  }
+               } 
+
+               if(result.res5[index].technologies == 'laravel'){
+                  larvel.checked = true;
+                  if(result.res5[index].level == 'Beginer'){
+                     llarvel[0].checked = true;
+                  }
+                  if(result.res5[index].level == 'Mediater'){
+                     llarvel[1].checked = true;
+                  }
+                  if(result.res5[index].level == 'Expert'){
+                     llarvel[2].checked = true;
+                  }
+               } 
+           });
+
+           result.res6.forEach((element,index) => {
+              document.getElementById('refname').value = result.res6[index].name;
+              document.getElementById('refcon').value = result.res6[index].contact;
+              document.getElementById('refrel').value = result.res6[index].relationship;
+            });
+
+            document.getElementById('notice').value = result.res7[0].notice;
+            document.getElementById('cctc').value = result.res7[0].cctc;
+            document.getElementById('ectc').value = result.res7[0].ectc;
+            document.getElementById('dept').value = result.res7[0].department;
+            document.getElementById('loc').value = result.res7[0].location;
+   }
+  
+      </script>
+</html>

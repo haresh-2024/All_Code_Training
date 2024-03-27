@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+    <style>
+           body{
+            background-color: rgb(73, 107, 243);
+        }
+        div{
+            background-color: white;
+            padding: 10px;
+            border: 1px solid white;
+            border-radius: 10px;
+            max-width: max-content;
+            margin-left: 550px;
+            margin-top: 40px;
+        }
+        input[type = 'submit']{
+            background-color: rgb(37, 109, 209);
+            border: none;
+            width: 180px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        table{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        table td{
+           padding: 10px;
+        }
+        #hidden{
+            display: none;
+        }
+        tr td a{
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+<body>
+    <h1 align="center">Hareshkumar Chauhan 24DEV006 22/03/2024</h1>
+    <div>
+
+        <h2 align="center">Login</h2>
+        <form name="reg" id="reg" method="post">
+            
+            <table id="table">
+                <tr><td><input type="text" id="user" name="user" placeholder="User Name"></td></tr>
+                <tr><td><input type="password" id="pass" name="pass" placeholder="Password"></td></tr>
+                <tr><td><a href="http://localhost:3000/password">Forget Password?</a></td></tr>
+                <tr><td><input type="submit" value="Login" id="submit"></td></tr>
+                <tr><td>Don't have an account?&nbsp;<a href="http://localhost:3000/">Register</a></td></tr>
+            </table>
+        </form>
+        
+        
+    </div>
+</body>
+<script>
+document.getElementById('submit').addEventListener('click',async (e)=>{
+               
+        
+               e.preventDefault();
+
+               var u =  document.getElementById('user').value;
+               var p = document.getElementById('pass').value;
+    
+                if( u == '' || p == ''){
+                    alert('please enter details');
+                } 
+                else{
+
+                    let form = document.getElementById('reg');
+                    const data = new URLSearchParams(new FormData(form));
+                    let bodyData = await fetch('http://localhost:3000/details',{
+                       method:"POST",
+                       headers: {
+                             'Content-Type': ' application/x-www-form-urlencoded',
+                       },
+                       body: data,
+                    });
+                    var result = await bodyData.json();
+                    alert(result.alert);
+
+                    if(result.alert == 'you already register but your account in inactive..'){
+                    console.log(result.user,result.pin)
+                    document.getElementById('hidden').style.display = 'block';
+                        document.getElementById('hidden').innerHTML = `${result.alert} to active your account <a href="http://localhost:3000/active?user=${result.user}&pin=${result.pin}" target="_blank" id="click">http://localhost:3000/active?user=${result.user}&pin=${result.pin}</a>`;
+                        document.getElementById('click').addEventListener('click',async (e) =>{
+                            window.location.href = 'http://localhost:3000/login';
+                        });
+                   }
+                  if(result.alert == 'login successfully...'){
+                   window.location.pathname = `/dash`
+                   }
+                }
+
+});
+</script>
+</html>

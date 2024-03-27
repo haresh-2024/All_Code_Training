@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+  <style>
+    div{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>example of (query/Url) /generate/sname/controltype</h2>
+  <div>
+    <table border="1">
+      <tr>
+        <th>sid</th>
+            <th>sname</th>
+            <th>skey</th>
+            <th>control</th>
+            <th>multitype</th>
+          </tr>
+          <% result1.forEach(element => { %>
+            <tr>
+              
+              <% for (const key in element) { %>
+                <td><%= element[key]  %></td>    
+                <% } %>
+              </tr>    
+              <% }); %>
+            </table>
+      <table border="1">
+        <tr>
+          <th>oid</th>
+          <th>sid</th>
+          <th>oname</th>
+          <th>okey</th>
+          
+        </tr>
+        <% result2.forEach(element => { %>
+          <tr>
+            
+            <% for (const key in element) { %>
+              <td><%= element[key]  %></td>    
+              <% } %>
+            </tr>    
+            <% }); %>
+          </table>
+        </div>
+</body>
+</html>

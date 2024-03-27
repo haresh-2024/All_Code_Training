@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password</title>
+</head>
+    <style>
+        body{
+            background-color: rgb(73, 107, 243);
+        }
+        div{
+            background-color: white;
+            padding: 10px;
+            border: 1px solid white;
+            border-radius: 10px;
+            max-width: max-content;
+            margin-left: 550px;
+            margin-top: 40px;
+        }
+        input[type = 'submit']{
+            background-color: rgb(37, 109, 209);
+            border: none;
+            width: 180px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        table{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        table td{
+           padding: 10px;
+        }
+        #hidden{
+            display: none;
+            color:rgb(136, 255, 0);
+        }
+        tr td a{
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+<body>
+    <div>
+
+        <h2 align="center">Password Change</h2>
+        <form name="reg" id="reg" method="post">
+            
+            <table id="table">
+                <tr><td><input type="password" id="user" name="user" placeholder="New Password"></td></tr>
+                <tr><td><input type="password" id="pass" name="pass" placeholder="Confirm Password"></td></tr>
+                <tr><td><input type="submit" value="change" id="submit"></td></tr>
+                <tr><td><a href="http://localhost:3000/">Back to Register</a></td></tr>
+                <tr><td><a href="http://localhost:3000/login">Back to Login</a></td></tr>
+            </table>
+        </form>
+    </div>
+        <h2 id="hidden"></h2>
+
+</body>
+<script>
+document.getElementById('submit').addEventListener('click',async (e)=>{
+               
+        
+               e.preventDefault();
+
+               var u =  document.getElementById('user').value;
+               var p = document.getElementById('pass').value;
+    
+                if( u == '' || p == ''){
+                    alert('please enter details');
+                } 
+                else if( u != p){
+                    alert("Both password not match...")
+                }
+                else{
+                    var userName =  window.location.search.split('=')[1];
+                    let form = document.getElementById('reg');
+                    const data = new URLSearchParams(new FormData(form));
+                    let bodyData = await fetch('http://localhost:3000/change',{
+                       method:"POST",
+                       headers: {
+                             'Content-Type': ' application/x-www-form-urlencoded',
+                              'userName' : `${userName}`
+                       },
+                       body: data,
+                    });
+
+                    var result = await bodyData.json();
+                    alert(result.alert);
+                    if(result.alert == 'Password Change Successfully'){
+                        window.location.href = 'http://localhost:3000/login'
+                    }
+                    else{
+                        window.location.href = 'http://localhost:3000/password'
+                    }
+
+                }
+
+});
+</script>
+</html>

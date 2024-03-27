@@ -1,0 +1,21 @@
+<%- include('select') %>
+     <table border="1" align="center">
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Present</th>
+          <th>Percentage</th>
+        </tr>
+      
+        <% result.forEach( (row) => { %>
+          <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+          </tr>    
+        <% }) %>
+      </table>
+<%- include('footer') %>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Data</title>
+    <style>
+        body{
+            background-color: rgb(235, 233, 221);
+        }
+        table{
+            border-collapse: collapse;
+            font-size: 0.6rem;
+        }
+        table tr td,th{
+            padding: 10px;
+        }
+        td a{
+            text-decoration: none;
+            background-color: orange;
+            border: 2px solid black;
+            padding: 5px;
+            color: black;
+        }
+        .home{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        a{
+            text-decoration: none;
+            background-color: orange;
+            border: 2px solid black;
+            padding: 5px;
+            color: black;
+        }
+        .btn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            gap: 20px;
+            margin-top: -40px;
+        }
+        .btn input{
+            text-decoration: none;
+            background-color: orange;
+            border: 2px solid black;
+            padding: 5px;
+            color: black;
+            text-align: center;
+            width: 30px;
+        
+        }
+        .order{
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            margin-bottom: 10px;
+        }
+        .secondFilter{
+            display: none;
+        }
+        </style>
+</head>
+<body>
+    <h1 align="center">Hareshkumar Chauhan 24DEV006 04/03/2024</h1>
+    <h1 align="center">Student Details (December Report)</h1>
+   
+  
+    <div class="firstFilter" >
+        <form action="/fps/order" method="post">
+            <input type="text" name="id" id="id" required placeholder="Filter By Id">
+            <input type="submit" value="Go">
+        </form>
+        <p id="click" onclick="show()">show more...</p>
+    </div>
+     
+    <div class="secondFilter" id="secondFilter">
+        <form action="/fps/filter" method="post">
+            <input type="text" name="fname" id="fname" placeholder="filter by first name">
+            <input type="text" name="lname" id="lname" placeholder="filter by last name">
+            <select name="opt1" id="opt1">
+                <option value="default" >select</option>
+                <option value=">">More</option>
+                <option value="<">Less</option>
+                
+            </select>
+            <input type="text" name="status" id="status" placeholder="filter by day attendence">
+            <select name="opt2" id="opt2">
+                <option value="default" >select</option>
+                <option value=">">More</option>
+                <option value="<">Less</option>
+            </select>
+            <input type="text" name="percent" id="percent" placeholder="filter by percentage of attendence">
+            <input type="submit" value="Go">
+        </form>
+   </div>

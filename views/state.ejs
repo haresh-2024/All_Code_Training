@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State</title>
+</head>
+<body>
+    <label for="state">Select State</label>
+    <select name="state" id="state">
+    <option value="default" disabled selected>select state</option>
+    </select>
+    <label for="city">Select City</label>
+     <select name="city" id="city">
+        <option value="default" disabled selected>select city</option>
+     </select>
+</body>
+  <script>
+                async function show(){
+                    let bodyData = await fetch('http://localhost:3000/data',{
+                       method:"POST",
+                       headers: {
+                             'Content-Type': ' application/x-www-form-urlencoded',
+                       },
+                    });
+                    var result = await bodyData.json();
+                    result.state.forEach(element => {
+
+                        if(element.id == 29 ){
+                            document.getElementById('state').innerHTML =  document.getElementById('state').innerHTML + `<option value="Union Territories" disabled>Union Territories</option>`;
+                            document.getElementById('state').innerHTML =  document.getElementById('state').innerHTML + `<option value="${element.name}">${element.name}</option>`;
+                        }
+                        else{
+                            document.getElementById('state').innerHTML =  document.getElementById('state').innerHTML + `<option value="${element.name}">${element.name}</option>`;                      
+                        }
+                    });
+                    document.getElementById('state').addEventListener('change',async (req,res)=>{
+                        var state = document.getElementById('state').value;
+                        var index;
+                        result.state.forEach(element =>{
+                            if(element.name == state){
+                                index = element.id;
+                            }
+                        })
+                        document.getElementById('city').innerHTML = ``;
+                        result.city.forEach(element => {
+                            if(element.id == index){
+                                document.getElementById('city').innerHTML =  document.getElementById('city').innerHTML + `<option value="${element.name}">${element.name}</option>`;                      
+                            }
+                       });
+                    })
+                }
+                show();
+  </script>
+</html>

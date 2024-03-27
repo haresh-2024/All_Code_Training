@@ -1,0 +1,139 @@
+<table border="1" align="center">
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Present</th>
+      <th>Percentage</th>
+    </tr>
+  
+    <% if (symbol1 == '>' && symbol2 == '>') {%>
+        <% result.forEach( (row) => { %>
+            <% if ((row.percentage > percent) && (row.present > status)) {%>
+            <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% } %> 
+         <% }) %>
+
+      <% } else if (symbol1 == '<' && symbol2 == '<') {%>
+        <% result.forEach( (row) => { %>
+            <% console.log('2d'); %>
+        <% if (row.percentage < percent && row.present < status) {%>
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.percentage %></td>
+            <td><%= row.present%></td>
+         </tr>
+         <% } %> 
+         <% }) %>
+     
+
+      <% } else if (symbol1 == '>' && symbol2 == '<') {%>
+        <% result.forEach( (row) => { %>
+            <% console.log('3rd'); %>
+        <% if (row.percentage < percent && row.present > status) {%>
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% } %> 
+         <% }) %>
+
+      <%} else if (symbol1 == '<' && symbol2 == '>') {%>
+        <% result.forEach( (row) => { %>
+            <% console.log('4th'); %>
+        <% if (row.percentage > percent && row.present < status) {%>
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% } %> 
+       <% }) %>
+       <%} else if (symbol1 == '<') {%>
+        <% result.forEach( (row) => { %>
+           
+        <% if (row.present < status ) {%>
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% } %> 
+       <% }) %>
+       <%} else if (symbol2 == '<') {%>
+        <% result.forEach( (row) => { %>
+           
+        <% if (row.percentage < percent) {%>
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% } %> 
+       <% }) %>
+
+       <%} else if (symbol1 == '>') {%>
+        <% result.forEach( (row) => { %>
+
+        <% if (row.present > status) {%>
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% } %> 
+       <% }) %>
+       <%} else if (symbol2 == '>') {%>
+        <% result.forEach( (row) => { %>
+
+        <% if (row.percentage > percent) {%>
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% } %> 
+       <% }) %>
+      <%} else{%>
+        <% result.forEach( (row) => { %>
+        
+         <tr>
+            <td><%= row.id%></td>
+            <td><%= row.f_name %></td>
+            <td><%= row.l_name %></td>
+            <td><%= row.present%></td>
+            <td><%= row.percentage %></td>
+        
+         </tr>
+         <% }) %>
+      <% } %>
+
+  </table>

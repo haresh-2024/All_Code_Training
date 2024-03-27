@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #hidden{
+            display: none;
+        }
+        #p1,#p2,#p3{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="hidden"></h2>
+    <p id="p1"><%= user %></p>
+    <p id="p2"><%= pin %></p>
+    <p id="p3"><%= alert %></p>
+</body>
+<script>
+     var user = document.getElementById('p1').innerText;
+     var pin = document.getElementById('p2').innerText;
+     var alert = document.getElementById('p3').innerText;
+       if(alert == 'your link is expire but here is your new link to active your account'){
+                    document.getElementById('hidden').style.display = 'block';
+                        document.getElementById('hidden').innerHTML = `to active your inactive account click there <a href="http://localhost:3000/active?user=${user}&pin=${pin}" target="_blank" id="click">http://localhost:3000/active?user=${user}&pin=${pin}</a>`;
+                        document.getElementById('click').addEventListener('click',async (e) =>{
+                            window.location.href = 'http://localhost:3000/login';
+                        });
+                   }
+</script>
+</html>
