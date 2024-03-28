@@ -1,0 +1,10 @@
+</body>
+<script>
+    function save(){
+        window.sessionStorage.setItem('input',document.getElementById('input').value);
+    }
+    function change(){
+        document.getElementById('input').value = window.sessionStorage.getItem('input');
+    }
+</script>
+</html>

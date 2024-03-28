@@ -46,6 +46,15 @@ app.use('/file',file);
 const comp = require("./routes/component")
 app.use('/comp',comp);
 
+const sql = require("./routes/sqlRunner")
+app.use('/sql',sql);
+
+const attend = require("./routes/attend")
+app.use('/attend',attend);
+
+const search = require("./routes/search")
+app.use('/search',search);
+
 // file rendering.....
 
 app.get('/views/Table-Game/',async (req,res)=>{

@@ -1,0 +1,35 @@
+<%- include('header') %>
+<h1 align="center">Hareshkumar Chauhan 24DEV006 05/03/2024</h1>
+<table border="1" align="center">
+   <tr>
+    <td>First Name</td>
+    <td>=</td>
+   </tr>
+   <tr>
+    <td>Last Name</td>
+    <td>^</td>
+   </tr>
+   <tr>
+    <td>email</td>
+    <td>$</td>
+   </tr>
+   <tr>
+    <td>Dob</td>
+    <td>}</td>
+   </tr>
+   <tr>
+    <td>Mobile No</td>
+    <td>{</td>
+   </tr>
+   <tr>
+    <td>City</td>
+    <td>:</td>
+   </tr>
+</table>
+<div class="form">
+    <form action="/search/process" method="post">
+        <input type="text" name="input" id="input" required autofocus>
+        <input type="submit" value="Go" onclick="save()">
+    </form>
+</div>
+<%- include('footer') %>

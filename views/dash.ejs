@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Welcome to dashboard</h1>
-    <a href="http://localhost:3000/login">logout</a>
+    <a href="http://localhost:3000/login" onclick="clear1()">logout</a>
     <a href="/views/Table" target="_blank">Dyanamic Table</a>
     <a href="/views/Table-Game/" target="_blank">Kuku-Cube</a>
     <a href="/views/Tic-Tac-Toe/" target="_blank">Tic-Tac-Toe</a>
@@ -22,6 +22,16 @@
     <a href="/page" target="_blank">Pagination with Filter</a>
     <a href="/file" target="_blank">Form Handle with json file</a>
     <a href="/comp" target="_blank">Dyanamic Component Generator</a>
-
+    <a href="/sql" target="_blank">Dyanamic Select Query Runner</a>
+    <a href="/attend" target="_blank">Attenance Report Of 3 Month</a>
+    <a href="/search" target="_blank">Delimeter Search</a>
+    
 </body>
+
+<script>
+    function clear1(){
+        document.cookie = document.cookie + "=; expires="+ new Date(0).toUTCString();
+        alert('Logout Successfully...');
+    }
+</script>
 </html>
