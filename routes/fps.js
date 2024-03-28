@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connecton2');
+const ver = require('../middleware/verify');
 
-
-router.get('/',(req,res)=>{
+router.get('/',ver,(req,res)=>{
     try{
        
         var total = 91;
@@ -23,7 +23,7 @@ router.get('/',(req,res)=>{
 
 
 // filter  
-router.post('/order', (req,res)=>{
+router.post('/order',ver,(req,res)=>{
 
     try{
         
@@ -37,7 +37,7 @@ router.post('/order', (req,res)=>{
         console.log(e);
     }
 })
-router.post('/filter',(req,res)=>{
+router.post('/filter',ver,(req,res)=>{
     try{
         if(req.body.fname == '' && req.body.lname == '' && req.body.percent == '' && req.body.status == ''){
             var sql = `select studentMaster.id,f_name,l_name,count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/91)*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' group by attendence.id order by studentMaster.id`;

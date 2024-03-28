@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connecton2');
+const ver = require('../middleware/verify');
 
-router.get('/', (req,res)=>{
+router.get('/',ver,(req,res)=>{
     try{
         var  i = 1;
         var first=i;
@@ -18,7 +19,7 @@ router.get('/', (req,res)=>{
         console.log("Something went Wrong..."+e);
     }
 })
-router.get('/last',(req,res)=>{
+router.get('/last',ver,(req,res)=>{
     try{
         
         var sql1 = "select count(*) as cont from StudentMaster26";
@@ -41,7 +42,7 @@ router.get('/last',(req,res)=>{
     }
 })
 
-router.get('/next/:Id',(req,res)=>{
+router.get('/next/:Id',ver,(req,res)=>{
     try{
         var i = req.params.Id;
         var first=i*10;
@@ -60,7 +61,7 @@ router.get('/next/:Id',(req,res)=>{
     }
 })
 
-router.get('/prev/:Id',(req,res)=>{
+router.get('/prev/:Id',ver,(req,res)=>{
     try{
         var i = req.params.Id;
         j = i-2;
@@ -92,7 +93,7 @@ router.get('/prev/:Id',(req,res)=>{
 // order by
 
 
-router.get('/order/:cols/:order',(req,res)=>{
+router.get('/order/:cols/:order',ver,(req,res)=>{
     try{
         var  i = 1;
         var first=i;
@@ -111,7 +112,7 @@ router.get('/order/:cols/:order',(req,res)=>{
     }
 })
 
-router.get('/oprev/:Id/:cols/:order',(req,res)=>{
+router.get('/oprev/:Id/:cols/:order',ver,(req,res)=>{
     try{
 
         var i = req.params.Id;
@@ -142,7 +143,7 @@ router.get('/oprev/:Id/:cols/:order',(req,res)=>{
     }
 })
 
-router.get('/onext/:Id/:cols/:order',(req,res)=>{
+router.get('/onext/:Id/:cols/:order',ver,(req,res)=>{
     try{
         var i = req.params.Id;
         var cols = req.params.cols;
@@ -163,7 +164,7 @@ router.get('/onext/:Id/:cols/:order',(req,res)=>{
     }
 })
 
-router.get('/olast/:cols/:order',(req,res)=>{
+router.get('/olast/:cols/:order',ver,(req,res)=>{
     try{
         var cols = req.params.cols;
         var order = req.params.order
@@ -186,7 +187,7 @@ router.get('/olast/:cols/:order',(req,res)=>{
     }
 })
 
-router.get('/rows/:Id',(req,res)=>{
+router.get('/rows/:Id',ver,(req,res)=>{
     try{
         var i = req.params.Id;
         var last = i*10;
@@ -210,7 +211,7 @@ router.get('/rows/:Id',(req,res)=>{
     }
 })
 
-router.get('/orow/:Id/:cols/:order',(req,res)=>{
+router.get('/orow/:Id/:cols/:order',ver,(req,res)=>{
     try{
         var i = req.params.Id;
         var cols = req.params.cols;

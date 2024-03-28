@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connection');
+const ver = require('../middleware/verify');
 
-router.get('/',async (req,res)=>{
+router.get('/',ver,async (req,res)=>{
     try{
         var sql2 = "show Tables";
         var result2 = await con.query(sql2);
@@ -13,7 +14,7 @@ router.get('/',async (req,res)=>{
           res.render('sqlRunner/error',{e});
       }
 })
-router.all('/main',async (req,res)=>{
+router.all('/main',ver,async (req,res)=>{
   try{
       if(req.body.opt == 'select'){
           
@@ -59,7 +60,7 @@ router.all('/main',async (req,res)=>{
 
 
 
-router.get('/ofirst/:sql',async(req,res)=>{
+router.get('/ofirst/:sql',ver,async(req,res)=>{
     
     try{
         var i = 1;
@@ -90,7 +91,7 @@ router.get('/ofirst/:sql',async(req,res)=>{
     }
 })
 
-router.get('/oprev/:Id/:sql',async(req,res)=>{
+router.get('/oprev/:Id/:sql',ver,async(req,res)=>{
     
     try{
         var i = req.params.Id;
@@ -128,7 +129,7 @@ router.get('/oprev/:Id/:sql',async(req,res)=>{
     }
 })
 
-router.get('/onext/:Id/:sql',async(req,res)=>{
+router.get('/onext/:Id/:sql',ver,async(req,res)=>{
     
     try{
         var i = req.params.Id;
@@ -157,7 +158,7 @@ router.get('/onext/:Id/:sql',async(req,res)=>{
     }
 })
 
-router.get('/olast/:sql',async(req,res)=>{
+router.get('/olast/:sql',ver,async(req,res)=>{
     
     try{
         var sql = req.params.sql;
@@ -185,7 +186,7 @@ router.get('/olast/:sql',async(req,res)=>{
     }
 })
 
-router.get('/onext/:Id/:sql',async(req,res)=>{
+router.get('/onext/:Id/:sql',ver,async(req,res)=>{
     
     try{
         var i = req.params.Id;

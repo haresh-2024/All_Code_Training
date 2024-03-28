@@ -5,8 +5,9 @@ const fs = require('fs');
 const { json } = require('body-parser');
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json())
+const ver = require('../middleware/verify');
 
-router.get('/', (req, res) => {
+router.get('/',ver,(req, res) => {
     try{
         res.render("formwithFile/index");
     }
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
 })
 
 // for saving data into file...
-router.post('/index', (req, res) => {
+router.post('/index',ver,(req, res) => {
     
     if(fs.existsSync('/home/haresh-chauhan/All_Code_Training/routes/details.json')){
         try{
@@ -58,7 +59,7 @@ router.post('/index', (req, res) => {
 })
 
 // for getting full details.
-router.get('/fullDetails', (req, res) => {
+router.get('/fullDetails',ver,(req, res) => {
     try{
         fs.readFile('/home/haresh-chauhan/All_Code_Training/routes/details.json','utf-8',function(err,data){  
             if(err) throw err;
@@ -74,7 +75,7 @@ router.get('/fullDetails', (req, res) => {
 })
 
 // for 4 data recieve...
-router.get('/lessDetails.ejs', (req, res) => {
+router.get('/lessDetails.ejs',ver,(req, res) => {
     
     try{
         fs.readFile('/home/haresh-chauhan/All_Code_Training/routes/details.json','utf-8',function(err,data){  
@@ -90,7 +91,7 @@ router.get('/lessDetails.ejs', (req, res) => {
 })
 
 // for delete the data.
-router.get('/deleteDetails', (req, res) => {
+router.get('/deleteDetails',ver,(req, res) => {
     
     try{
         fs.readFile('/home/haresh-chauhan/All_Code_Training/routes/details.json','utf-8',function(err,data){  
@@ -113,7 +114,7 @@ router.get('/deleteDetails', (req, res) => {
 })
 
 // this for get value from file.
-router.get('/update', (req, res) => {
+router.get('/update',ver,(req, res) => {
     
     try{
         fs.readFile('/home/haresh-chauhan/All_Code_Training/routes/details.json','utf-8',function(err,data){  
@@ -130,7 +131,7 @@ router.get('/update', (req, res) => {
 })
 
 // this will update the value.
-router.post('/fullDetails', (req, res) => {
+router.post('/fullDetails',ver,(req, res) => {
     try{
         fs.readFile('/home/haresh-chauhan/All_Code_Training/routes/details.json','utf-8',function(err,data){  
             if(err) throw err;

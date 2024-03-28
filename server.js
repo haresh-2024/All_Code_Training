@@ -7,6 +7,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const { type } = require('os');
 const { get } = require('http');
+var con = require('./connection');
+var ver = require('./middleware/verify');
 
 
 app.get('/',async (req,res)=>{
@@ -55,22 +57,25 @@ app.use('/attend',attend);
 const search = require("./routes/search")
 app.use('/search',search);
 
+const insert = require("./routes/insertion")
+app.use('/insert',insert);
+
 // file rendering.....
 
-app.get('/views/Table-Game/',async (req,res)=>{
+app.get('/views/Table-Game/',ver,async (req,res)=>{
     res.render('html/Game')
 });
-app.get('/views/Tic-Tac-Toe/',async (req,res)=>{
+app.get('/views/Tic-Tac-Toe/',ver,async (req,res)=>{
     res.render('html/tic-tac-toe')
 });
-app.get('/views/Event/',async (req,res)=>{
+app.get('/views/Event/',ver,async (req,res)=>{
     res.render('html/event');
 });
-app.get('/views/Table/',async (req,res)=>{
+app.get('/views/Table/',ver,async (req,res)=>{
     res.render('html/dynamicTable');
 });
 
-app.get('/json',async (req,res)=>{
+app.get('/json',ver,async(req,res)=>{
     try{
         res.render('jsonPlaceholder/json');
     }
@@ -78,7 +83,7 @@ app.get('/json',async (req,res)=>{
         console.log(e);
     }
 })
-app.get('/view/:id',async (req,res)=>{
+app.get('/view/:id',ver,async (req,res)=>{
     try{
         res.render('jsonPlaceholder/jsonview');
     }
@@ -87,7 +92,7 @@ app.get('/view/:id',async (req,res)=>{
     }
 })
 
-app.get('/views/state',async (req,res)=>{
+app.get('/views/state',ver,async (req,res)=>{
     
     try{
         res.render('state');
@@ -96,7 +101,7 @@ app.get('/views/state',async (req,res)=>{
        console.log(e);
     }
 })
-app.post('/data',async (req,res)=>{
+app.post('/data',ver,async (req,res)=>{
     
     try{
         var sql = `select * from state`;

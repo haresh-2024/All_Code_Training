@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connection');
+const ver = require('../middleware/verify');
 
-router.get('/',async (req,res)=>{
+router.get('/',ver,async (req,res)=>{
       try{
           var sql1 = `select * from select_master`;
           var result1 = await con.query(sql1);
@@ -16,7 +17,7 @@ router.get('/',async (req,res)=>{
             res.render('component/error',{e});
         }
 });
-router.get('/generate/:field/:control',async (req,res) =>{
+router.get('/generate/:field/:control',ver,async (req,res) =>{
     try{
         var field = req.params.field;
         var control = req.params.control;
@@ -37,7 +38,7 @@ router.get('/generate/:field/:control',async (req,res) =>{
         res.render('component/error',{e});
     }
 })
-router.get('/generate/:field/:control/:select',async (req,res) =>{
+router.get('/generate/:field/:control/:select',ver,async (req,res) =>{
     try{
         var field = req.params.field;
         var control = req.params.control; 

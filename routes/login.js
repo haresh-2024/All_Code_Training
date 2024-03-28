@@ -152,7 +152,7 @@ router.post('/details',async(req,res)=>{
                }
                const token = jwt.sign(data, jwtSecretKey);
             
-               res.cookie('token',token,{maxAge: 100000});
+               res.cookie('token',token,{maxAge: 1000000});
                res.send({
                    alert:'login successfully...'
                })
@@ -192,7 +192,9 @@ router.get('/dash',async (req,res) =>{
        if(token){
            let jwtSecretKey = process.env.JWT_SECRET_KEY;
            var verfiy = jwt.verify(token,jwtSecretKey);
-           res.render('dash');
+           var user = verfiy.user;
+           user = user.split('@')[0];
+           res.render('dash',{user});
        }
        else{
            res.redirect('login');

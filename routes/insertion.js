@@ -3,24 +3,22 @@ const router = express.Router();
 const con = require('../connection');
 const ver = require('../middleware/verify');
 
-router.get('/partForm',ver,async (req,res)=>{
+router.get('/',ver,async (req,res)=>{
     
     try{
-        res.render('partForm/index');
+        res.render('insertejs/main');
     }
     catch(e){
-       res.send({
-        alert : `error occur1 ${e}`
-       })
+        console.log(e);
     }
 })
-router.post('/partForm/form',ver,async (req,res)=>{
+router.post('/form',ver,async (req,res)=>{
     try{
-     
+
         var data = req.body;
-       
+        
         // basic details insertion... 
-        console.log(data);
+       
         var basicindex = `select Id from basicDetails order by Id desc limit 1`;
         var index = await con.query(basicindex);
         index = index[0][0].Id + 1;
@@ -31,13 +29,16 @@ router.post('/partForm/form',ver,async (req,res)=>{
         var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
 
         if(data.fname == ''|| data.lname == '' || data.des == '' || data.email == '' || (data.add1 == '' && data.add2 == '') || data.num == '' || data.city == '' || data.zip == '' || data.dob == '' || data.gender == '' ){
-             res.send({ alert : 'error occur1'})
+            var e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else if(!(data.email.match(ereg))){
-            res.send({ alert : 'error occur2'})
+            var e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else if(!(data.num.match(nre))){
-          res.send({ alert : 'error occur3'})
+            var e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else{
             var basicInsert = await con.query(insert,[values]);
@@ -49,7 +50,8 @@ router.post('/partForm/form',ver,async (req,res)=>{
         var insert = `insert into educationDetails values ?`;
 
         if(data.sboard == '' || data.syear== '' || data.sper == '' || data.hboard == '' || data.hyear== '' || data.hper == '' || data.bboard == '' || data.bcourse == '' || data.byear == '' ||data.bper == ''){
-            res.send({ alert : 'error occur4'})
+            e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else if(data.mboard == '' || data.mcourse == '' || data.myear == '' || data.mper == ''){
             var values = [[index,'ssc','10th',data.sboard,data.syear,data.sper],
@@ -65,21 +67,22 @@ router.post('/partForm/form',ver,async (req,res)=>{
             await con.query(insert,[values]);
         }
         else{
-        res.send({ alert : 'error occur5'})
+        var e = "internal sever error...";
+        res.render('insertejs/error',{e});
        }
        
-    //    work experience
+       // work experience
 
+       var insert = `insert into workExper values (?)`;
        for(var i=0;i<data.cname.length;i++){
-           
-           if(data.cname[i] != '' && data.cdes[i] != '' && data.cfrom[i] != '' && data.cto[i] != ''){
+        if(data.cname[i] == '' || data.cdes[i] == '' || data.cfrom[i] == '' || data.cto[i] == ''){
 
-            var insert = `insert into workExper values (?)`;
+        }
+        else{
             var values = [index,data.cname[i],data.cdes[i],data.cfrom[i],data.cto[i]];
-            var result = await con.query(insert,[values]);
-            console.log(result);
+            await con.query(insert,[values]);
+        }
        }
-    }
 
        // language 
       
@@ -87,7 +90,8 @@ router.post('/partForm/form',ver,async (req,res)=>{
         var v2= 'n';
         var v3 = 'n';
         if(typeof(data.gujarati) == 'undefined' && typeof(data.hindi) == 'undefined' && typeof(data.english) == 'undefined'){
-            res.send({ alert : 'error occur6'})
+            var e = "internal server error...";
+            res.render('insertejs/error',{e});
         }
         if(typeof(data.gujarati) != 'undefined'){
             if(data.gujarati[0] == 'Gujarati'){
@@ -129,48 +133,52 @@ router.post('/partForm/form',ver,async (req,res)=>{
         var v2= 'n';
         var v3 = 'n';
         if(typeof(data.larvel) == 'undefined' && typeof(data.php) == 'undefined' && typeof(data.oracle) == 'undefined' && typeof(data.mysql) == 'undefined'){
-            res.send({ alert : 'error occur7'})
+            var e = "internal error...";
+            res.render('insertejs/error',{e});
         }
         if(typeof(data.php) != 'undefined'){
-            if(data.php == 'php'){
+            if(data.php[0] == 'php'){
                  var insert = `insert into technologie values (${index},'php','${data.rphp}')`;
                  await con.query(insert);
             }
         }
        if(typeof(data.larvel) != 'undefined'){
-           if(data.larvel == 'larvel'){
+           if(data.larvel[0] == 'larvel'){
             var insert = `insert into technologie values (${index},'larvel','${data.rlarvel}')`;
             await con.query(insert);
            }
        }
        if(typeof(data.mysql) != 'undefined'){
-           if(data.mysql == 'mysql'){
+           if(data.mysql[0] == 'mysql'){
             var insert = `insert into technologie values (${index},'mysql','${data.rmysql}')`;
             await con.query(insert);
            }
        }
        if(typeof(data.oracle) != 'undefined'){
-           if(data.oracle == 'oracle'){
+           if(data.oracle[0] == 'oracle'){
              var insert = `insert into technologie values (${index},'oracle','${data.roracle}')`;
              await con.query(insert);
            }
        }
  
 
-    // // referances
+    // referances
      var insert = `insert into referance values (?)`;
   
      for(var i=0;i<data.refname.length;i++){
         if(data.refname[i] == '' && data.refcon[i] == '' && data.refrel[i] == ''){}
         else if(data.refname[i] == '' ||data.refcon[i] == '' || data.refrel[i] == ''){
             if(data.refname[i] != ''){ 
-                res.send({ alert : 'error occur8'})
+                var e = 'internal server error';
+                res.render('insertejs/error',{e});
             }
             if(data.refcon[i] != ''){
-                res.send({ alert : 'error occur9'})
+                var e = 'internal server error';
+                res.render('insertejs/error',{e});
             }
             if(data.refrel[i] != ''){
-                res.send({ alert : 'error occur10'})
+                var e = 'internal server error';
+                res.render('insertejs/error',{e});
             }
         }
         else{
@@ -179,44 +187,31 @@ router.post('/partForm/form',ver,async (req,res)=>{
         }
     }
 
-    // // preferance
+    // preferance
     
     var insert = `insert into preferance values (?)`;
     if(data.notice == '' || data.ectc == '' || data.cctc == ''){
-        return res.send({ alert : 'error occur11'})
+         var e ="internal server error...";
+         res.render('insertejs/error',{e});
     }
     else{
         var values = [index,data.loc,data.notice,data.ectc,data.cctc,data.dept];
         var basicInsert = await con.query(insert,[values]);
-    
     }
-    res.send({
-        alert: 'submited...'
-    });
+
+    res.render('insertejs/result');
 }
     catch(e){
-        res.send({
-            alert: `error occur12 ${e}`
-        })
+        res.render('insertejs/error',{e});
+        console.log(e);
     }
 })
 
-// update...
-router.get('/partForm/update',ver,async (req,res)=>{
-    try{
-        res.render('partForm/index');
-    }
-    catch(e){
-        res.send({
-            alert: `error occur13 ${e}`
-        })
-    }
-})
+// update
 
-
-router.post('/partForm/update',ver,async (req,res)=>{
+router.get('/update/:id',ver,async (req,res)=>{
     try{
-        var id = req.query.id;
+        var id = req.params.id;
         var sql1 = `select * from basicDetails where Id = ${id}`;
         var sql2 = `select * from educationDetails where Id = ${id}`;
         var sql3 = `select * from workExper where Id = ${id}`;
@@ -241,69 +236,51 @@ router.post('/partForm/update',ver,async (req,res)=>{
         result6 = result6[0];
         result7 = result7[0];
 
-        res.send({
-            res1 : result1,
-            res2 : result2,
-            res3 : result3,
-            res4 : result4,
-            res5 : result5,
-            res6 : result6,
-            res7 : result7
-        })
+        res.render('insertejs/update',{result1,result2,result3,result4,result5,result6,result7,id});
     }
     catch(e){
-        res.send({
-            alert: `error occur14 ${e}`
-        })
+        res.render('insertejs/error',{e});
     }
 });
 
-// .......
 
-router.post('/partForm/update/form',ver,async (req,res)=>{
-    
-try{
+router.post('/update/:id',ver,async (req,res)=>{
+    try{
         var data = req.body;
-        var id = req.get('userId');
-        
+        var id = req.params.id;
         // basic details update... 
        
-        var update = `update basicDetails set fname = '${data.fname}',lname = '${data.lname}',designation='${data.des}',email = '${data.email}' ,mobile = '${data.num}',ver,address='${data.add1+data.add2}',city='${data.city}',state = '${data.state}',zipcode= '${data.zip}', gender = '${data.gender}',relationship = '${data.status}',dob = '${data.dob}' where Id = ${id}`;
+        var insert = `update basicDetails set fname = '${data.fname}',lname = '${data.lname}',designation='${data.des}',email = '${data.email}' ,mobile = '${data.num}',ver,address='${data.add1+data.add2}',city='${data.city}',state = '${data.state}',zipcode= '${data.zip}', gender = '${data.gender}',relationship = '${data.status}',dob = '${data.dob}' where Id = ${id}`;
         
         var nre = "^[6-9]{1}[0-9]{9}$";
         var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
 
         if(data.fname == ''|| data.lname == '' || data.des == '' || data.email == '' || (data.add1 == '' && data.add2 == '') || data.num == '' || data.city == '' || data.zip == '' || data.dob == '' || data.gender == '' ){
-           res.send({
-            alert:'error occur15'
-           })
+            var e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else if(!(data.email.match(ereg))){
-            res.send({
-                alert:'error occur16'
-               })
+            var e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else if(!(data.num.match(nre))){
-            res.send({
-                alert:'error occur17'
-               })
+            var e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else{
-            var basicUpdate = await con.query(update);
-            index = basicUpdate[0]['insertId'];
+            var basicInsert = await con.query(insert);
+            index = basicInsert[0]['insertId'];
         }
         
         // eduction details...
 
-        
+        var insert = `update educationDetails set degree=?,courseName = ? ,board = ? percentage = ? where Id = ${id}`;
 
         if(data.sboard == '' || data.syear== '' || data.sper == '' || data.hboard == '' || data.hyear== '' || data.hper == '' || data.bboard == '' || data.bcourse == '' || data.byear == '' ||data.bper == ''){
-            res.send({
-                alert:'error occur18'
-               })
+            e = 'internal server error...';
+            res.render('insertejs/error',{e});
         }
         else if(data.mboard == '' || data.mcourse == '' || data.myear == '' || data.mper == ''){
-            
             var values = [['ssc','10th',data.sboard,data.syear,data.sper],
                           ['hsc','12th',data.hboard,data.hyear,data.hper],
                           ['be',data.bboard,data.bcourse,data.byear,data.bper]];
@@ -315,43 +292,42 @@ try{
         }
         else if(data.mboard != '' && data.mcourse != '' && data.myear != '' && data.mper != ''){
             var values = [['ssc','10th',data.sboard,data.syear,data.sper],
-                          ['hsc','12th',data.hboard,data.hyear,data.hper],
-                          ['be',data.bboard,data.bcourse,data.byear,data.bper],
-                          ['me',data.mboard,data.mcourse,data.myear,data.mper]];
-            values.forEach(async element =>{
-                let insert = `update educationDetails set degree = '${element[0]}',courseName = '${element[1]}' ,board = '${element[2]}',year = '${element[3]}',percentage = '${element[4]}' where Id = ${id} and degree = '${element[0]}'`;
-                await con.query(insert,[element]); 
-            });
+            ['hsc','12th',data.hboard,data.hyear,data.hper],
+            ['be',data.bboard,data.bcourse,data.byear,data.bper],
+            ['me',data.mboard,data.mcourse,data.myear,data.mper]];
+values.forEach(async element =>{
+  let insert = `update educationDetails set degree = '${element[0]}',courseName = '${element[1]}' ,board = '${element[2]}',year = '${element[3]}',percentage = '${element[4]}' where Id = ${id} and degree = '${element[0]}'`;
+  await con.query(insert,[element]); 
+});
         }
         else{
-            res.send({
-                alert:'error occur19'
-               });
+        var e = "internal sever error...";
+        res.render('insertejs/error',{e});
        }
-   
+       
        // work experience
 
-       for(var i=0;i<data.cname.length;i++){
-        if(data.cname[i] == '' || data.cdes[i] == '' || data.cfrom[i] == '' || data.cto[i] == ''){
+            if(typeof(data.cname) == 'string'){
+                var update = `update workExper set cname = '${data.cname}',designation ='${data.cdes}',fromW = '${data.cfrom}',toW = '${data.cto}' where Id = ${id}`;
+                await con.query(update);
+            }
+            else{
+                data.cname.forEach(async (element,index) => {
+                    var update = `update workExper set cname = '${data.cname[index]}',designation ='${data.cdes[index]}',fromW = '${data.cfrom[index]}',toW = '${data.cto[index]}' where Id = ${id}`;
+                    console.log(update);
+                    await con.query(update);
+                });
+            }
+        
 
-        }
-        else{
-            var values = [index,data.cname[i],data.cdes[i],data.cfrom[i],data.cto[i]];
-            var update = `update workExper set cname = '${values[1]}',designation ='${values[2]}',fromW = '${values[3]}',toW = '${values[4]}' where Id = ${id}`;
-            var result =  await con.query(update);
-        }
-       }
-
-      
-    //    // language 
+       // language 
       
         var v1 = 'n';
         var v2= 'n';
         var v3 = 'n';
         if(typeof(data.gujarati) == 'undefined' && typeof(data.hindi) == 'undefined' && typeof(data.english) == 'undefined'){
-            res.send({
-                alert: 'error occur20'
-            })
+            var e = "internal server error...";
+            res.render('insertejs/error',{e});
         }
         if(typeof(data.gujarati) != 'undefined'){
             if(data.gujarati[0] == 'Gujarati'){
@@ -378,7 +354,7 @@ try{
        if(typeof(data.english) != 'undefined'){
          if(data.english[0] == 'English'){
             for(var j = 1;j<data.english.length;j++){
-                if(data.english[j] == 'Read'){v1 = 'y';} 
+                if(data.english[j] == 'Read'){v1='y';} 
                 if(data.english[j] == 'Write'){v2 = 'y';} 
                 if(data.english[j] == 'Speak'){v3 = 'y';}  
             }
@@ -386,75 +362,72 @@ try{
             var result = await con.query(insert);
          }
        }
-     
 
        // technoligies
 
         var v1 = 'n';
         var v2= 'n';
         var v3 = 'n';
-
         if(typeof(data.larvel) == 'undefined' && typeof(data.php) == 'undefined' && typeof(data.oracle) == 'undefined' && typeof(data.mysql) == 'undefined'){
-           res.send({
-            alert: 'error occur21'
-           })
+            var e = "internal error...";
+            res.render('insertejs/error',{e});
         }
-            if(data.php == 'php'){
-                 var insert = `update technologie set level = '${data.rphp}' where technologies = 'php' and Id = ${id}`;
+        if(typeof(data.php) != 'undefined'){
+            if(data.php[0] == 'php'){
+                var insert = `update technologie set level = '${data.rphp}' where technologies = 'php' and Id = ${id}`;
                  await con.query(insert);
-    
+            }
         }
-     
-           if(data.larvel == 'larvel'){
+       if(typeof(data.larvel) != 'undefined'){
+           if(data.larvel[0] == 'larvel'){
             var insert = `update technologie set level = '${data.rlarvel}' where technologies = 'laravel' and Id = ${id}`;
             await con.query(insert);
            }
-       
-           if(data.mysql == 'mysql'){
+       }
+       if(typeof(data.mysql) != 'undefined'){
+           if(data.mysql[0] == 'mysql'){
             var insert = `update technologie set level = '${data.rmysql}' where technologies = 'mysql' and Id = ${id}`;
             await con.query(insert);
+           }
        }
-      
-           if(data.oracle == 'oracle'){
+       if(typeof(data.oracle) != 'undefined'){
+           if(data.oracle[0] == 'oracle'){
             var insert = `update technologie set level = '${data.roracle}' where technologies = 'oracle' and Id = ${id}`; 
             await con.query(insert);
            }
-     
-    // referances
+       }
+ 
 
-    
-    for(var i=0;i<data.refname.length;i++){
+    // referances
+  
+     for(var i=0;i<data.refname.length;i++){
         if(data.refname[i] == '' && data.refcon[i] == '' && data.refrel[i] == ''){}
         else if(data.refname[i] == '' ||data.refcon[i] == '' || data.refrel[i] == ''){
             if(data.refname[i] != ''){ 
-                res.send({
-                    alert: 'error occur22'
-                })
+                var e = 'internal server error';
+                res.render('insertejs/error',{e});
             }
             if(data.refcon[i] != ''){
-                res.send({
-                    alert: 'error occur23'
-                })
+                var e = 'internal server error';
+                res.render('insertejs/error',{e});
             }
             if(data.refrel[i] != ''){
-                res.send({
-                    alert: 'error occur24'
-                })
+                var e = 'internal server error';
+                res.render('insertejs/error',{e});
             }
         }
         else{
-            var values = [index,data.refname[i],data.refcon[i],data.refrel[i]];
+            var values = [index,data.refname,data.refcon,data.refrel];
             var insert = `update referance set name = '${values[1]}',contact = '${values[2]}',relationship = '${values[3]}' where Id = ${id}`;
             await con.query(insert);
         }
     }
 
-    // // preferance
+    // preferance
     
     if(data.notice == '' || data.ectc == '' || data.cctc == ''){
-        res.send({
-            alert : 'error occur25'
-        })
+         var e ="internal server error...";
+         res.render('insertejs/error',{e});
     }
     else{
         var values = [index,data.loc,data.notice,data.ectc,data.cctc,data.dept];
@@ -462,14 +435,11 @@ try{
         await con.query(insert);
     }
 
-    res.send({
-        alert: 'Data Updated Successfully...'
-    })
-}
+    res.render('insertejs/result');
+    
+    }
     catch(e){
-        res.send({
-            alert : `error occur26 ${e}`
-        })
+        res.render('insertejs/error',{e});
     }
 });
 

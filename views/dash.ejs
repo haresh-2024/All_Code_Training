@@ -4,27 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(235, 233, 221);
+     }
+     div{
+         background-color: white;
+         padding: 10px;
+         border: 1px solid white;
+         border-radius: 10px;
+         max-width: max-content;
+         margin-left: 550px;
+         margin-top: 40px;
+     }
+     input[type = 'submit']{
+         background-color: rgb(37, 109, 209);
+         border: none;
+         width: 180px;
+         height: 30px;
+         border-radius: 5px;
+     }
+     table{
+         border: 2px solid;
+         text-align: center;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+         max-width: max-content;
+         border-collapse: collapse;
+     }
+     table tr td{
+        border: 2px solid;
+        padding: 10px;
+     }
+     #hidden{
+         display: none;
+     }
+     tr td a{
+         text-decoration: none;
+         color: blue;
+     }
+     #log{
+        position: relative;
+        top: -80px;
+        left: 1200px;
+        border:2px solid;
+        width: 80px;
+        height: 20px;
+        text-align: center;
+        padding: 10px;
+        background-color: orange;;
+    }
+    #log a{
+        text-decoration: none;
+        color: black;
+     }
+    </style>
 </head>
 <body>
-    <h1>Welcome to dashboard</h1>
-    <a href="http://localhost:3000/login" onclick="clear1()">logout</a>
-    <a href="/views/Table" target="_blank">Dyanamic Table</a>
-    <a href="/views/Table-Game/" target="_blank">Kuku-Cube</a>
-    <a href="/views/Tic-Tac-Toe/" target="_blank">Tic-Tac-Toe</a>
-    <a href="/views/Event/" target="_blank">Event Handling</a>
-    <a href="/json/" target="_blank">jsonPlaceHolder</a>
-    <a href="/views/state" target="_blank">State and City</a>
-    <a href="/partForm" target="_blank">Part Form with Ajax</a>
-    <a href="/timezone" target="_blank">TimeZone with Input</a>
-    <a href="/timezonew" target="_blank">TimeZone without Input</a>
-    <a href="/fps" target="_blank">Search With Id and Other Details</a>
-    <a href="/fpsr" target="_blank">Student Result Report</a>
-    <a href="/page" target="_blank">Pagination with Filter</a>
-    <a href="/file" target="_blank">Form Handle with json file</a>
-    <a href="/comp" target="_blank">Dyanamic Component Generator</a>
-    <a href="/sql" target="_blank">Dyanamic Select Query Runner</a>
-    <a href="/attend" target="_blank">Attenance Report Of 3 Month</a>
-    <a href="/search" target="_blank">Delimeter Search</a>
+    <h1 align="center">Welcome <%= user %></h1>
+    <h2 align="center">Task Done in training till now</h2>
+    <p id="log"><a href="http://localhost:3000/login" onclick="clear1()">logout</a></p>
+    <table align="center">
+    <tr>
+        <td><a href="/views/Table" target="_blank">Dyanamic Table</a></td>
+        <td><a href="/views/Table-Game/" target="_blank">Kuku-Cube</a></td>
+        <td><a href="/views/Tic-Tac-Toe/" target="_blank">Tic-Tac-Toe</a></td>
+    </tr>
+    <tr>
+        <td><a href="/views/Event/" target="_blank">Event Handling</a></td>
+        <td><a href="/json/" target="_blank">jsonPlaceHolder</a></td>
+        <td><a href="/views/state" target="_blank">State and City</a></td>
+    </tr>
+    <tr>
+        <td><a href="/insert" target="_blank">Job Application with EJS</a></td>
+        <td><a href="/partForm" target="_blank">Job Application with Ajax</a></td>
+        <td><a href="/timezone" target="_blank">TimeZone with Input</a></td>
+    </tr>
+    <tr>
+        <td><a href="/timezonew" target="_blank">TimeZone without Input</a></td>
+        <td><a href="/fps" target="_blank">Search With Id and Other Details</a></td>
+        <td><a href="/fpsr" target="_blank">Student Result Report</a></td>
+    </tr>
+    <tr>
+        <td><a href="/page" target="_blank">Pagination with Filter</a></td>
+        <td><a href="/file" target="_blank">Form Handle with json file</a></td>
+        <td><a href="/comp" target="_blank">Dyanamic Component Generator</a></td>
+    </tr>
+    <tr>
+        <td><a href="/sql" target="_blank">Dyanamic Select Query Runner</a></td>
+        <td><a href="/attend" target="_blank">Attenance Report Of 3 Month</a></td>
+        <td><a href="/search" target="_blank">Delimited Search</a></td>
+    </tr>
+
+    </table>
     
 </body>
 

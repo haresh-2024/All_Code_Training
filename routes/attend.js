@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connecton2');
+const ver = require('../middleware/verify');
 
-
-router.get('/', (req,res)=>{
+router.get('/',ver,(req,res)=>{
     try{
         var  i = 1;
         var first=i;
@@ -15,7 +15,7 @@ router.get('/', (req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(CEILING((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10`;
         con.query(sql,function(e,result){
             if(e) throw e;
-            res.render("attendReport",{result,i,first,last,start,end,total})
+            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -23,7 +23,7 @@ router.get('/', (req,res)=>{
         console.log("Something went Wrong..."+e);
     }
 })
-router.get('/ofirst/:start/:end/:total', (req,res)=>{
+router.get('/ofirst/:start/:end/:total',ver,(req,res)=>{
     try{
         var  i = 1;
         var first=i;
@@ -35,7 +35,7 @@ router.get('/ofirst/:start/:end/:total', (req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(CEILING((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10`;
         con.query(sql,function(e,result){
             if(e) throw e;
-            res.render("attendReport",{result,i,first,last,start,end,total})
+            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -44,7 +44,7 @@ router.get('/ofirst/:start/:end/:total', (req,res)=>{
     }
 })
 
-router.get('/indexf/:start/:end/:total',(req,res)=>{
+router.get('/indexf/:start/:end/:total',ver,(req,res)=>{
     try{
         var  i = 1;
         var first=i;
@@ -55,7 +55,7 @@ router.get('/indexf/:start/:end/:total',(req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10`;
         con.query(sql,function(e,result){
             if(e) throw e;
-            res.render("attendReport",{result,i,first,last,start,end,total})
+            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -64,7 +64,7 @@ router.get('/indexf/:start/:end/:total',(req,res)=>{
     }
 })
 
-router.get('/oprev/:Id/:start/:end/:total',(req,res)=>{
+router.get('/oprev/:Id/:start/:end/:total',ver,(req,res)=>{
     try{
 
         var i = req.params.Id;
@@ -87,7 +87,7 @@ router.get('/oprev/:Id/:start/:end/:total',(req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10  offset ? `;
         con.query(sql,value,function(e,result){
             if(e) throw e;
-            res.render("attendReport",{result,i,first,last,start,end,total})
+            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -96,7 +96,7 @@ router.get('/oprev/:Id/:start/:end/:total',(req,res)=>{
     }
 })
 
-router.get('/onext/:Id/:start/:end/:total',(req,res)=>{
+router.get('/onext/:Id/:start/:end/:total',ver,(req,res)=>{
     try{
         var i = req.params.Id;
         var start = req.params.start;
@@ -109,7 +109,7 @@ router.get('/onext/:Id/:start/:end/:total',(req,res)=>{
         i++;
         con.query(sql,value,function(e,result){
             if(e) throw e;
-            res.render("attendReport",{result,i,first,last,start,end,total})
+            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -118,7 +118,7 @@ router.get('/onext/:Id/:start/:end/:total',(req,res)=>{
     }
 })
 
-router.get('/olast/:start/:end/:total',(req,res)=>{
+router.get('/olast/:start/:end/:total',ver,(req,res)=>{
     try{
         var start = req.params.start;
         var end = req.params.end;
@@ -133,7 +133,7 @@ router.get('/olast/:start/:end/:total',(req,res)=>{
             var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10 offset ?`;
             con.query(sql,[first],function(e,result){
              if(e) throw e;
-             res.render("attendReport",{result,i,first,last,start,end,total})
+             res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
            });
         })
     }

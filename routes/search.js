@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connection');
+const ver = require('../middleware/verify');
 
-
-router.get('/',async (req,res)=>{
+router.get('/',ver,async (req,res)=>{
       try{
           res.render('delimeterSearch/main');
         }
@@ -11,7 +11,7 @@ router.get('/',async (req,res)=>{
             res.render('delimeterSearch/error',{e});
         }
 });
-router.post('/process',async (req,res)=>{
+router.post('/process',ver,async (req,res)=>{
     try{
        var input = req.body.input;
        var ar = Array.from(input);
@@ -80,6 +80,7 @@ router.post('/process',async (req,res)=>{
         
                var result = await con.query(sql);
                result = result[0];
+               console.log(arr,fi);
                res.render('delimeterSearch/search',{result});
             }
        }

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connection');
+const ver = require('../middleware/verify');
 
-
-router.get('/',async (req,res)=>{
+router.get('/',ver,async (req,res)=>{
     
     try{
         res.render('timezonew')
@@ -12,7 +12,7 @@ router.get('/',async (req,res)=>{
         console.log(e);
     }
 })
-router.get('/city',async (req,res)=>{
+router.get('/city',ver,async (req,res)=>{
     
     try{
          var sql = `select distinct(city) as 'city' from timezone`;

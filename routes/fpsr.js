@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require('../connection');
+const ver = require('../middleware/verify');
 
-
-router.get('/',async (req,res)=>{
+router.get('/',ver,async (req,res)=>{
     try{
         var  i = 1;
         var first=i;
@@ -19,7 +19,7 @@ router.get('/',async (req,res)=>{
     }
 })
 
-router.get('/oprev/:Id/',async(req,res)=>{
+router.get('/oprev/:Id/',ver,async(req,res)=>{
     try{
 
         var i = req.params.Id;
@@ -47,7 +47,7 @@ router.get('/oprev/:Id/',async(req,res)=>{
     }
 })
 
-router.get('/onext/:Id/',async(req,res)=>{
+router.get('/onext/:Id/',ver,async(req,res)=>{
     try{
         var i = req.params.Id;
         var first=(i*10)+1;
@@ -65,7 +65,7 @@ router.get('/onext/:Id/',async(req,res)=>{
     }
 })
 
-router.get('/olast',async (req,res)=>{
+router.get('/olast',ver,async (req,res)=>{
     try{
         var i = 30;
         var last = 300;
@@ -80,7 +80,7 @@ router.get('/olast',async (req,res)=>{
     }
 })
 
-router.get('/report/:Id',async (req,res) =>{
+router.get('/report/:Id',ver,async (req,res) =>{
     
     var Id = req.params.Id;
     var sql = `select subjectMaster.subName,(select obtainMark_t from result where enroll = ${Id} and examtype = 'final' and result.subId = subjectMaster.subId)as 'final_t',(select obtainMark_p from result where enroll = ${Id} and examtype = 'final' and result.subId = subjectMaster.subId )as 'final_p',(select obtainMark_t from result where enroll = ${Id} and examtype = 'terminal'  and result.subId = subjectMaster.subId)as 'terminal_t',(select obtainMark_p from result where enroll = ${Id} and examtype = 'terminal' and result.subId = subjectMaster.subId)as 'terminal_p',(select obtainMark_t from result where enroll =  ${Id} and examtype = 'preliminary' and result.subId = subjectMaster.subId )as 'pre_t',(select obtainMark_p from result where enroll = ${Id} and examtype = 'preliminary' and result.subId = subjectMaster.subId )as 'pre_p' from result join subjectMaster on result.subId = subjectMaster.subId and enroll = ${Id} limit 6`;
