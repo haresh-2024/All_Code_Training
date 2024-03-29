@@ -61,7 +61,15 @@ const insert = require("./routes/insertion")
 app.use('/insert',insert);
 
 // file rendering.....
-
+app.get('/ehya',ver,async(req,res) =>{
+  res.render('ehya/Index');
+})
+app.get('/hirex',ver,async(req,res) =>{
+    res.render('Hirex/index');
+  })
+app.get('/awan',ver,async(req,res) =>{
+    res.render('awanhoster/index');
+  })
 app.get('/views/Table-Game/',ver,async (req,res)=>{
     res.render('html/Game')
 });

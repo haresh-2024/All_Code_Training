@@ -1,0 +1,544 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: "haresh";
+    src: url(../Panchang_Complete/Fonts/OTF/Panchang-Semibold.otf);
+}
+body{
+    background-color: rgb(239, 246, 255);
+}
+header{
+    margin: 0 auto;
+    width: 90%;
+}
+.logo{
+    padding: 10px;
+}
+.head{
+    display: flex;
+    color: rgb(9, 34, 90);
+    align-items: center;
+    justify-content: center;
+}
+.list{
+    display: flex;
+    margin-left: 300px;
+}
+.list ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+.list ul li{
+    padding:  0 20px;
+}
+.list a{
+    border: 2px solid rgba(9, 35, 90, 0.738);
+    background-color: rgb(239, 246, 255);
+    padding: 10px;
+    text-decoration: none;
+    color: rgb(9, 34, 90);
+}
+hr{
+   border: 1px solid rgb(191, 208, 234);
+   margin-top: 30px;
+}
+.sect1{
+    margin: 0 auto;
+}
+.sect1main{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.sect1text{
+    display: flex;
+    flex-direction: column;
+    color: #0A2259;
+}
+.sect11{
+    font-size: 2.3rem;
+    margin-top: 100px;
+    width: 550px;
+    line-height: 80px;
+    font-family: "haresh";
+}
+.sect12{
+    font-size: 1.2rem;
+    width: 600px;
+    margin-top: 20px;
+    line-height: 30px;
+    margin-bottom: 50px;
+}
+.sect13 {
+  display: flex;
+}
+.sect13 input[value = "Get Started"]{
+    background-color: #F2A33A;
+    color: white;
+    width: 150px;
+    height: 50px;
+    font-size: 1.2rem;
+    border: none;
+}
+.sect13 input[value = "Get Migration Help"]{
+    margin-left: 20px;
+    background-color: rgb(239, 246, 255);
+    border: 1px solid rgb(11, 33, 90);
+    width: 230px;
+    color: rgb(11, 33, 90);
+    font-size: 1.2rem;
+}
+.sect1img{
+    display: flex;
+    align-items: center;
+    margin-top: 130px;
+}
+.imgarrow{
+    margin: 50px 0;
+}
+.sect2{
+    margin:0 auto;
+    background-color: rgb(250, 251, 255);
+}
+.sect2main{
+    width: 90%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 65px;
+}
+.sect21{
+    width: 200px;
+    color: rgb(9, 34, 90);
+    line-height: 25px;
+}
+
+.sect3{
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+}
+.sect3main{
+    width: 90%;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 50px;
+}
+.sect3img{
+    margin-top: 150px 0;
+}
+.sect3text{
+    display: flex;
+    flex-direction: column;
+}
+.sect32{
+    display: flex;
+    flex-wrap: wrap;
+    color: rgb(103, 132, 176);
+    width: 600px;
+}
+.sect32 h3{
+    margin-top: 60px;
+}
+.sect32 p{
+    color:rgb(170, 170, 170);
+    margin : 20px 0;
+    padding: 10px;
+    width: 270px;
+    line-height: 30px;
+}
+.sect333{
+    width: calc(100%/2);
+}
+.sect31{
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #0A2259;
+    font-family: "haresh";
+}
+.sect31 h2{
+    width: 520px;
+}
+.sect4{
+    background-color:rgb(248, 252, 255);
+    margin: 0 auto;
+}
+.sect4main{
+    width: 1250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.sect4box{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+}
+.cols{
+    display: flex;
+    width: calc(100% / 4);
+    padding: 0 10px; 
+}
+.sect4box .box{
+    background-color: rgb(255, 255, 255);  
+    padding: 20px;
+}
+.inbox{
+    background-color: rgb(239, 246, 255);
+    color: rgb(103, 134, 180);
+    padding: 10px;
+}
+.inbox h4{
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+.inbox p{
+    overflow-x: hidden;
+    min-width: 245px;
+    line-height: 30px;
+}
+.sect4text{
+    color: rgb(11, 33, 90);
+    font-size: 1.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 930px;
+    line-height: 60px;
+    margin-top: 80px;
+    margin-bottom: 60px;
+    font-family: "haresh";
+}
+.price{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin-top: 20px;
+    font-family: "haresh";
+    color: #0A2259;
+}
+.more{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin-top: 40px;
+    border:2px solid black ;
+    height: 50px;
+    width: 250px;
+    font-size: 1.1rem;
+    margin-left: 20px;
+}
+.more a{
+    text-decoration: none;
+    color: #0A2259;
+}
+.inbox img{
+    width: 20%;
+    background-color: rgb(249, 253, 255);
+    border-radius: 20px;
+    padding: 5px;
+    margin-right:15px;
+}
+.box:hover{
+    background-color: #0A2259;
+    
+}
+.box:hover .inbox{
+    color: rgb(248, 252, 255);
+    background-color: rgb(105, 136, 182);
+}
+.box:hover .more{
+    background-color: #F2A33A;
+    border: none;
+}
+.box:hover .more a{
+    color: rgb(248, 252, 255);
+}
+.box:hover .price{
+    color: rgb(247, 251, 254);
+}
+.sect5{
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+}
+.sect5main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 90%;
+    gap: 100px;
+}
+.tog{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.togc{
+    background-color: rgb(251, 252, 254);
+    width: 370px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+   
+    font-family: "haresh";
+    color: #0A2259;
+}
+.togc i{
+    font-size: 3rem;
+    padding: 0 30px;
+}
+.togc:hover{
+  background-color: rgb(239, 246, 255);
+ 
+}
+.sect5text{
+    display: flex;
+    flex-direction: column;
+}
+.sect5point{
+    display: flex;
+}
+.sect5head{
+    color: #0A2259;
+    font-family: "haresh";
+    font-size: 1.6rem;
+    width:550px;
+    margin-top: 140px;
+    margin-bottom: 20px;
+}
+.sect5p{
+    color: rgb(184, 184, 184);
+    line-height: 30px;
+    font-size: 1.1rem;
+    width: 700px;
+    margin-bottom: 20px;
+}
+.sect5point{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.pr{
+         display: flex;
+         flex-direction: column;
+}
+.pc{
+    display: flex;
+    padding: 15px 80px 15px 0px ;
+    color: rgb(102, 102, 102);
+}
+.sect5btn{
+    margin-top: 20px;
+    background-color: #F2A33A;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sect5btn a{
+    text-decoration: none;
+     color:rgb(255, 255, 255) ;
+     font-weight: 500;
+}
+#w{
+    background-color: rgb(239, 246, 255);
+}
+.sect6{
+    background-color: rgb(255, 255, 255);
+}
+.sect61{
+    display: flex;
+}
+.sect6main{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+}
+#scr{
+    overflow: scroll;
+    scrollbar-width: none;
+    
+}
+.sect6head{
+    display: flex;
+    margin-top: 150px;
+    color: #0A2259;
+    font-family: "haresh";
+    font-size: 1.6rem;
+    width: 550px;
+    
+}
+.btn{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 130px;
+    margin-left: 500px;
+     padding: 50px;
+}
+.sect6r{
+    display: flex;
+    gap: 50px;
+    margin: 0 0 0 100px;
+}
+.sec6c{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(245, 248, 253);
+    padding: 20px;
+    
+}
+.sec6c .scroll{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 290px;
+    height: 350px;
+    background-color: #ffffff;
+    
+}
+.group{
+    display: flex;
+}
+.scroll p{
+    width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(156, 167, 189);
+}
+.scroll img{
+    margin-bottom: 20px;
+}
+.scroll h3{
+    font-family: "haresh";
+    color: #0A2259;
+}
+
+.sect7{
+    margin: 0 auto;
+}
+.sect7main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 90%;
+    height: 600px;
+}
+.sect7text{
+    display: flex;
+    flex-direction: column;
+}
+.sect7h{
+    color: #0A2259;
+    font-size: 1.6rem;
+    font-family: "haresh";
+    width: 570px;
+    line-height: 60px;
+}
+.sect7p{
+    margin-top: 20px;
+    color: #0A2259;
+    font-size: 1.1rem;
+    width: 530px;
+}
+.sect7btn input{
+    margin-top: 50px;
+    width: 180px;
+    height: 40px;
+    font-size: 1rem;
+}
+.trial{
+    background-color: #F2A33A;
+    color: #ffffff;
+    border: none;
+}
+.plans{
+  margin-left: 10px;
+  color: #0A2259;
+  background-color: rgb(239, 246, 255);
+  border: 2px solid #0A2259;
+
+}
+footer{
+    background-color: #0A2259;
+}
+.footermain{
+    display: flex;
+    margin: 0 auto;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+.flogo{
+    display: flex;
+    flex-direction: column;
+}
+.f11{
+    margin-top: 10px;
+}
+.f44{
+    display: flex;
+    gap: 100px;
+    margin-left: 150px;
+}
+.f22{
+    width: 320px;
+    color:  #AAAAAA;
+    margin-top: 20px;
+}
+.licon{
+   margin-top: 30px;
+   margin-bottom: 40px;
+   color: white;
+}
+.licon i{
+    font-size: 1.5rem;
+    padding: 0 8px;
+}
+.lastsect{
+   display: flex;
+}
+.lastsect ul li{
+    list-style: none;
+    padding: 10px 0;
+}
+.lastsect ul li a{
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: white;
+}
+.lastsect ul h3{
+    font-size: 1.2rem;
+    color: white;
+    font-family: "haresh";
+    margin-bottom: 40px;
+    margin-top: 100px;
+}
+.sect8{
+  background-color: white;  
+  height: 500px;
+}
