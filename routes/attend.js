@@ -15,7 +15,7 @@ router.get('/',ver,(req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(CEILING((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10`;
         con.query(sql,function(e,result){
             if(e) throw e;
-            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
+            res.render("attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -35,7 +35,7 @@ router.get('/ofirst/:start/:end/:total',ver,(req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(CEILING((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10`;
         con.query(sql,function(e,result){
             if(e) throw e;
-            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
+            res.render("attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -55,7 +55,7 @@ router.get('/indexf/:start/:end/:total',ver,(req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10`;
         con.query(sql,function(e,result){
             if(e) throw e;
-            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
+            res.render("attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -87,7 +87,7 @@ router.get('/oprev/:Id/:start/:end/:total',ver,(req,res)=>{
         var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10  offset ? `;
         con.query(sql,value,function(e,result){
             if(e) throw e;
-            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
+            res.render("attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -109,7 +109,7 @@ router.get('/onext/:Id/:start/:end/:total',ver,(req,res)=>{
         i++;
         con.query(sql,value,function(e,result){
             if(e) throw e;
-            res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
+            res.render("attendReport",{result,i,first,last,start,end,total})
         });
         
     }
@@ -133,7 +133,7 @@ router.get('/olast/:start/:end/:total',ver,(req,res)=>{
             var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10 offset ?`;
             con.query(sql,[first],function(e,result){
              if(e) throw e;
-             res.render("insertejs/attendReport",{result,i,first,last,start,end,total})
+             res.render("attendReport",{result,i,first,last,start,end,total})
            });
         })
     }
