@@ -1,14 +1,11 @@
 const express = require('express')
-var app = express();
+const app = express();
 require('dotenv').config();
 app.set("view engine","ejs");
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const { type } = require('os');
-const { get } = require('http');
-var con = require('./connection');
-var ver = require('./middleware/verify');
+const ver = require('./middleware/verify');
 
 
 app.get('/',async (req,res)=>{
@@ -60,7 +57,13 @@ app.use('/search',search);
 const insert = require("./routes/insertion")
 app.use('/insert',insert);
 
-// file rendering.....
+const state = require("./routes/cityState")
+app.use('/state',state);
+
+const jsonp = require("./routes/jsonPlaceHolder")
+app.use('/json',jsonp);
+
+// html file rendering.....
 app.get('/ehya',ver,async(req,res) =>{
   res.render('ehya/Index');
 })
@@ -82,49 +85,5 @@ app.get('/views/Event/',ver,async (req,res)=>{
 app.get('/views/Table/',ver,async (req,res)=>{
     res.render('html/dynamicTable');
 });
-
-app.get('/json',ver,async(req,res)=>{
-    try{
-        res.render('jsonPlaceholder/json');
-    }
-    catch(e){
-        console.log(e);
-    }
-})
-app.get('/view/:id',ver,async (req,res)=>{
-    try{
-        res.render('jsonPlaceholder/jsonview');
-    }
-    catch(e){
-        console.log(e);
-    }
-})
-
-app.get('/views/state',ver,async (req,res)=>{
-    
-    try{
-        res.render('state');
-    }
-    catch(e){
-       console.log(e);
-    }
-})
-app.post('/data',ver,async (req,res)=>{
-    
-    try{
-        var sql = `select * from state`;
-        var result =  await con.query(sql);
-        var sql1 = `select * from city`;
-        var result1 = await con.query(sql1);
-        res.send({
-            state: result[0],
-            city : result1[0]
-        })
-    }
-    catch(e){
-        console.log(e);
-    }
-});
-
 
 app.listen(3000);

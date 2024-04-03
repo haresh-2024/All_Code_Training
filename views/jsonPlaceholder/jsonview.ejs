@@ -41,7 +41,7 @@
 </body>
 <script>
     
-    var i = window.location.href.slice(27);
+    var i = window.location.href.slice(32);
         async function fetchData(){
             try{
                 const response = await fetch(`https://jsonplaceholder.org/posts/${i}`);
@@ -74,9 +74,8 @@
         function view(){
             async function fetchData(){
             try{
-                const response = await fetch(`https://jsonplaceholder.org/comments/`);
+                const response = await fetch(`https://jsonplaceholder.org/comments`);
                 const data = await response.json();
-                console.log(data);
                 return data;
             }
             catch(e){
@@ -91,9 +90,9 @@
             }
             const table = document.getElementById('table2');
             table.style.display ='block';
-            console.log(data);
             var tr = document.createElement('tr');
-            var arr = data.filter(element =>{
+            console.log(i);
+            let arr = data.filter(element =>{
                 return element.postId == i;
             });
             table.innerHTML = '';

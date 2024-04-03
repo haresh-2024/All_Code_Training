@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const ver = require('../middleware/verify');
-const search = require('../controller/search')
+const stateCity = require('../controller/cityState');
 
-router.get('/',ver,search.index);
-router.post('/process',ver,search.process);
+router.get('/',ver,stateCity.state);
+router.post('/data',stateCity.city);
 
 module.exports = router;

@@ -9,12 +9,12 @@ const ver = (req,res,next) => {
             next();
         }
         else{
-           res.render('login');
+           res.render('login/login');
         }
     }
     catch(e){
         console.log(e);
-        res.render('login');
+        res.render('login/login');
 
     }
 }
