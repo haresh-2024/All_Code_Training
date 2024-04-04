@@ -64,7 +64,7 @@
 </head>
 <body>
     <h1 align="center">Hareshkumar Chauhan 24DEV006 27/02/2024</h1>
-    <h1 align="center">Student Details (December Report)</h1>
+    <h1 align="center">Student Details (<b id="month"></b> Report)</h1>
    
     <div class="order">
         <select name="order" id="order"onchange="change()">
@@ -96,11 +96,11 @@
           <div>
               <h3>Showing <%= first  %> to <%= last %> of 300 entries</h3>
           </div>
-          <a href="/attend/ofirst/<%= start %>/<%= end %>/<%= total %>" onclick="first()" id="first"><<</a>
-          <a href="/attend/oprev/<%= i  %>/<%= start %>/<%= end %>/<%= total %>" onclick="prev()" id="prev"><</a>
-          <input type="text" value="<%= i %>" id="page" disabled>
-          <a href="/attend/onext/<%= i  %>/<%= start %>/<%= end %>/<%= total %>" onclick="next()" id="next">></a>
-          <a href="/attend/olast/<%= start %>/<%= end %>/<%= total %>" onclick="last()" id="last">>></a>
+          <a href="/ofirst/<%= start %>/<%= end %>/<%= total %>" onclick="first()" id="first"><<</a>
+          <a href="/oprev/<%= i  %>/<%= start %>/<%= end %>/<%= total %>" onclick="prev()" id="prev"><</a>
+          <input type="text" value="<%= i %>" id="page" onchange="page1()">
+          <a href="/onext/<%= i  %>/<%= start %>/<%= end %>/<%= total %>" onclick="next()" id="next">></a>
+          <a href="/olast/<%= start %>/<%= end %>/<%= total %>" onclick="last()" id="last">>></a>
       </div>
     </body>
     <script>
@@ -124,28 +124,37 @@
                 return false;
             }
         }
+   
+        function page1(){
+            
+            let val = document.getElementById('page').value;
+            window.location.href = `/indexf/2024-01-01/2024-01-31/31/${val}`;
+        }
+
         const mySel = document.getElementById("order"); 
+
         mySel.addEventListener("change",function() { 
         localStorage.setItem("selValue",this.value);
         var month = document.getElementById('order');
             if(month.value == 'January'){
+                
+                window.location.href = '/indexf/2024-01-01/2024-01-31/31';
                
-                window.location.href = '/attend/indexf/2024-01-01/2024-01-31/31';
-                 
             }
             else if(month.value == 'February'){
               
-                window.location.href = '/attend/indexf/2024-02-01/2024-02-29/29';
-               
+                window.location.href = '/indexf/2024-02-01/2024-02-29/29';
+            
             }
             else if(month.value == 'December'){
            
-                window.location.href = '/attend/indexf/2023-12-01/2023-12-31/31';
-                
+                window.location.href = '/indexf/2023-12-01/2023-12-31/31';
+
             }
         }); 
         let val = localStorage.getItem("selValue"); 
         if (val) mySel.value=val;
+        document.getElementById('month').innerText = val;
         mySel.onchange();  
     </script>
 </html>

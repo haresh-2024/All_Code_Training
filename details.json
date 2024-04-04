@@ -31,10 +31,7 @@
     "lname": "kandoliya",
     "gender": "Male",
     "age": "21",
-    "hobbie": [
-      "B",
-      "D"
-    ],
+    "hobbie": "B",
     "num": "9856742120",
     "address": "rajkot"
   },

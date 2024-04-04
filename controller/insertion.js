@@ -4,6 +4,15 @@ const con = require('../connection/connection');
 const index = async (req,res)=>{
     
     try{
+        res.render('insertejs/home');
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+const insertPage =  async (req,res)=>{
+    
+    try{
         res.render('insertejs/main');
     }
     catch(e){
@@ -16,13 +25,10 @@ const insert = async (req,res)=>{
         var data = req.body;
         
         // basic details insertion... 
-       
-        var basicindex = `select Id from basicDetails order by Id desc limit 1`;
-        var index = await con.query(basicindex);
-        index = index[0][0].Id + 1;
-        var insert = `insert into basicDetails values (?)`;
-        var values = [index,data.fname,data.lname,data.des,data.email,data.num,data.add1+data.add2,data.city,data.state,data.zip,data.gender,data.status,data.dob];
-        
+        let index;
+        var insert = `insert into basicDetails (fname,lname,designation,email,mobile,address,city,state,zipcode,gender,relationship,dob) values (?)`;
+        var values = [data.fname,data.lname,data.des,data.email,data.num,data.add1+data.add2,data.city,data.state,data.zip,data.gender,data.status,data.dob];
+    
         var nre = "^[6-9]{1}[0-9]{9}$";
         var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
 
@@ -71,17 +77,17 @@ const insert = async (req,res)=>{
        
        // work experience
 
-       var insert = `insert into workExper values (?)`;
-       for(var i=0;i<data.cname.length;i++){
-        if(data.cname[i] == '' || data.cdes[i] == '' || data.cfrom[i] == '' || data.cto[i] == ''){
-
+        var insert = `insert into workExper values (?)`;
+        if(typeof(data.cname) == 'string'){
+           values = [index,data.cname,data.cdes,data.cfrom,data.cto]
+           await con.query(insert,[values]);
         }
         else{
-            var values = [index,data.cname[i],data.cdes[i],data.cfrom[i],data.cto[i]];
-            await con.query(insert,[values]);
+            data.cname.forEach(async (element,index) => {
+                var values = [index,data.cname[index],data.cdes[index],data.cfrom[index],data.cto[index]];
+                await con.query(insert,[values]);
+            });
         }
-       }
-
        // language 
       
         var v1 = 'n';
@@ -92,7 +98,7 @@ const insert = async (req,res)=>{
             res.render('insertejs/error',{e});
         }
         if(typeof(data.gujarati) != 'undefined'){
-            if(data.gujarati[0] == 'Gujarati'){
+            if(data.gujarati[0] == 'Gujarati') {
                  for(var j = 1;j<data.gujarati.length;j++){
                      if(data.gujarati[j] == 'Read'){v1='y';} 
                      if(data.gujarati[j] == 'Write'){v2 = 'y';} 
@@ -135,25 +141,26 @@ const insert = async (req,res)=>{
             res.render('insertejs/error',{e});
         }
         if(typeof(data.php) != 'undefined'){
-            if(data.php[0] == 'php'){
+            if(data.php == 'php'){
+                console.log('hiii');
                  var insert = `insert into technologie values (${index},'php','${data.rphp}')`;
                  await con.query(insert);
             }
         }
        if(typeof(data.larvel) != 'undefined'){
-           if(data.larvel[0] == 'larvel'){
+           if(data.larvel == 'larvel'){
             var insert = `insert into technologie values (${index},'larvel','${data.rlarvel}')`;
             await con.query(insert);
            }
        }
        if(typeof(data.mysql) != 'undefined'){
-           if(data.mysql[0] == 'mysql'){
+           if(data.mysql == 'mysql'){
             var insert = `insert into technologie values (${index},'mysql','${data.rmysql}')`;
             await con.query(insert);
            }
        }
        if(typeof(data.oracle) != 'undefined'){
-           if(data.oracle[0] == 'oracle'){
+           if(data.oracle == 'oracle'){
              var insert = `insert into technologie values (${index},'oracle','${data.roracle}')`;
              await con.query(insert);
            }
@@ -162,27 +169,36 @@ const insert = async (req,res)=>{
 
     // referances
      var insert = `insert into referance values (?)`;
-  
-     for(var i=0;i<data.refname.length;i++){
-        if(data.refname[i] == '' && data.refcon[i] == '' && data.refrel[i] == ''){}
-        else if(data.refname[i] == '' ||data.refcon[i] == '' || data.refrel[i] == ''){
-            if(data.refname[i] != ''){ 
-                var e = 'internal server error';
-                res.render('insertejs/error',{e});
+
+     if(typeof(data.refname) == 'string'){
+        var values = [index,data.refname,data.refcon,data.refrel];
+        await con.query(insert,[values]);
+     }
+     else{
+
+         for(var i=0;i<data.refname.length;i++){
+            if(data.refname[i] == '' && data.refcon[i] == '' && data.refrel[i] == ''){}
+            else if(data.refname[i] == '' ||data.refcon[i] == '' || data.refrel[i] == ''){
+                if(data.refname[i] != ''){ 
+                    var e = 'internal server error';
+                    res.render('insertejs/error',{e});
+                }
+                if(data.refcon[i] != ''){
+                    var e = 'internal server error';
+                    res.render('insertejs/error',{e});
+                }
+                if(data.refrel[i] != ''){
+                    var e = 'internal server error';
+                    res.render('insertejs/error',{e});
+                }
             }
-            if(data.refcon[i] != ''){
-                var e = 'internal server error';
-                res.render('insertejs/error',{e});
+            else{
+                     data.cname.forEach(async (element,index) => {
+                        var values = [index,data.refname[index],data.refcon[index],data.refrel[index]];
+                        await con.query(insert,[values]);
+                     });
             }
-            if(data.refrel[i] != ''){
-                var e = 'internal server error';
-                res.render('insertejs/error',{e});
-            }
-        }
-        else{
-            var values = [index,data.refname[i],data.refcon[i],data.refrel[i]];
-            await con.query(insert,[values]);
-        }
+         }
     }
 
     // preferance
@@ -240,16 +256,27 @@ var read = async (req,res)=>{
         res.render('insertejs/error',{e});
     }
 }
-
+const show = async (req,res)=>{
+     try{
+         let sql = 'select * from basicDetails';
+         let result = await con.query(sql);
+         result = result[0];
+         res.render('insertejs/table',{result});
+     }
+     catch(e){
+        console.log(e);
+     }
+}
 
 const update = async (req,res)=>{
     try{
         var data = req.body;
         var id = req.params.id;
+        console.log(data);
         // basic details update... 
        
-        var insert = `update basicDetails set fname = '${data.fname}',lname = '${data.lname}',designation='${data.des}',email = '${data.email}' ,mobile = '${data.num}',ver,address='${data.add1+data.add2}',city='${data.city}',state = '${data.state}',zipcode= '${data.zip}', gender = '${data.gender}',relationship = '${data.status}',dob = '${data.dob}' where Id = ${id}`;
-        
+        var update = `update basicDetails set fname = '${data.fname}',lname = '${data.lname}',designation='${data.des}',email = '${data.email}',mobile = '${data.num}',address='${data.add1+' '+data.add2}',city='${data.city}',state = '${data.state}',zipcode= '${data.zip}',gender = '${data.gender}',relationship = '${data.status}',dob = '${data.dob}' where Id = ${id}`;
+        console.log(update);
         var nre = "^[6-9]{1}[0-9]{9}$";
         var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
 
@@ -266,8 +293,7 @@ const update = async (req,res)=>{
             res.render('insertejs/error',{e});
         }
         else{
-            var basicInsert = await con.query(insert);
-            index = basicInsert[0]['insertId'];
+            var basicInsert = await con.query(update);
         }
         
         // eduction details...
@@ -440,4 +466,4 @@ const update = async (req,res)=>{
     }
 }
 
-module.exports = {index,insert,read,update};
+module.exports = {index,insert,read,insertPage,update,show};

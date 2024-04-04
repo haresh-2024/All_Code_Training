@@ -116,10 +116,10 @@
               <h3>Showing <%= first  %> to <%= last %> of 50000 entries</h3>
           </div>
         <a href="/page" onclick="first()" id="first"><<</a>
-        <a href="/page/prev/<%= i %>" id="prev"><</a>
+        <a href="/prev/<%= i %>" id="prev"><</a>
         <input type="text" value="<%= i %>" id="page" onchange="url()">
-        <a href="/page/next/<%= i %>" onclick="next()" id="next">></a>
-        <a href="/page/last" onclick="last()" id="last">>></a>
+        <a href="/next/<%= i %>" onclick="next()" id="next">></a>
+        <a href="/last" onclick="last()" id="last">>></a>
       </div>
     </body>
     <script>
@@ -141,7 +141,7 @@
                  else if(page.value > 5000){
                     document.getElementById('page').value = 5000;
                  }
-                 window.location.href =`/page/rows/${page.value}`;
+                 window.location.href =`/rows/${page.value}`;
         }
         function change(){
             var id = window.sessionStorage.getItem('change');
@@ -150,7 +150,7 @@
         function touch(e,n){
                 window.sessionStorage.setItem('time',`${e}1`);
                 window.sessionStorage.setItem('change',`${n}d`);
-                window.location.href = `/page/order/${e}/desc`;
+                window.location.href = `/order/${e}/desc`;
         }
     </script>
 </html>

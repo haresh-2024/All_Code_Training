@@ -1,4 +1,6 @@
+const { count } = require('console');
 const con = require('../connection/connecton2');
+const con1 = require('../connection/connection');
 
 // logic for home of attendance report
 
@@ -43,6 +45,34 @@ const first = (req,res) =>{
     catch(e){
         console.log("Something went Wrong..."+e);
     }
+}
+const no = async (req,res)=>{
+    try{
+
+        let select = `select count(*) as 'no' from studentMaster`;
+        let cout = await con1.query(select);
+        let index = cout[0][0].no;
+        var i = req.params.page;
+        if(i*10 > index){
+            
+        }
+        var start = req.params.start;
+        var end = req.params.end;
+        var total = req.params.total;
+        var first=(i*10) - 9;
+        var last = (i*10);
+        var value = [i*10]; 
+        var sql = `select studentMaster.id,concat(f_name,' ',l_name) as 'full_name',count(attendence.attendence) as 'present',concat(ceiling((count(attendence.attendence)/${total})*100),'%') as 'percentage' from studentMaster join attendence on studentMaster.id = attendence.id and attendence.attendence = 'P' and attendence.Date between '${start}' and '${end}' group by attendence.id order by studentMaster.id limit 10 offset ?`;
+        con.query(sql,value,function(e,result){
+            if(e) throw e;
+            res.render("attend/attendReport",{result,i,first,last,start,end,total})
+        });
+        
+    }
+    catch(e){
+        console.log("Something went Wrong..."+e);
+    }
+
 }
 
 // for particular page 
@@ -146,4 +176,4 @@ const last = (req,res)=>{
     }
 }
 
-module.exports = {index,first,page,prev,next,last};
+module.exports = {index,first,page,prev,next,last,no};

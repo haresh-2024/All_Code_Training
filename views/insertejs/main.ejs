@@ -5,16 +5,15 @@
         <p id="error"></p>
         <h2 id="cancel" onclick="showError()">-</h2>
      </div>
-    <form action="/insert/form" name="form2" method="post" onsubmit=" return validation();">
+    <form action="/form" name="form2" method="post" onsubmit=" return validation();">
     <fieldset>
         <legend>Basic Details</legend>
       <div class="basic">
-
+            <p class="error"></p>
         <table align="center">
             <tr>
                 <td>First Name:</td>
                 <td><input type="text" name="fname" id="fname" /></div></td>
-                
             </tr>
             <tr>
                 <td>Designation:</td>
@@ -74,6 +73,7 @@
 
     <fieldset class="eduf">
         <legend>Education Details</legend>
+        <p class="error"></p>
           <table class="edu">
            <tr>
             <td colspan="2">SSC Result</td>
@@ -144,42 +144,26 @@
 
     <fieldset>
         <legend>Work Experience</legend>
-        <table>
+        <p class="error"></p>
+        <input type="button" value="+" onclick="work_add()">
+        <input type="button" value="-" onclick="work_del()" id="work_minus">
+        <table id="work">
             <tr>
                 <td>Company name</td>
-                <td><input type="text" name="cname" id="cname"></td>
+                <td><input type="text" name="cname" class="cname"  value=""></td>
                 <td>Designation</td>
-                <td><input type="text" name="cdes" id="cdes"></td>
+                <td><input type="text" name="cdes" class="cdes"  value=""></td>
                 <td>From</td>
-                <td><input type="text" name="cfrom" id="cfrom"></td>
+                <td><input type="text" name="cfrom" class="cfrom" value=""></td>
                 <td>To</td>
-                <td><input type="text" name="cto" id="cto"></td>
-            </tr>
-            <tr>
-                <td>Company name</td>
-                <td><input type="text" name="cname" id="cname"></td>
-                <td>Designation</td>
-                <td><input type="text" name="cdes" id="cdes"></td>
-                <td>From</td>
-                <td><input type="text" name="cfrom" id="cfrom"></td>
-                <td>To</td>
-                <td><input type="text" name="cto" id="cto"></td>
-            </tr>
-            <tr>
-                <td>Company name</td>
-                <td><input type="text" name="cname" id="cname"></td>
-                <td>Designation</td>
-                <td><input type="text" name="cdes" id="cdes"></td>
-                <td>From</td>
-                <td><input type="text" name="cfrom" id="cfrom"></td>
-                <td>To</td>
-                <td><input type="text" name="cto" id="cto"></td>
+                <td><input type="text" name="cto" class="cto" value=""></td>
             </tr>
         </table>
 
     </fieldset>
      <fieldset>
         <legend>Language known</legend>  
+        <p class="error"></p>
             <table>
                 <tr>
                     <td><input type="checkbox" name="hindi" id="hindi" value="Hindi">Hindi</td>
@@ -203,56 +187,53 @@
      </fieldset>
      <fieldset>
         <legend>Technologies you know</legend>
+        <p class="error"></p>
         <table>
             <tr>
                 <td><input type="checkbox" name="php" id="php" value="php">PHP</td>
-                <td><input type="radio" name="rphp" id="rphp" value="Beginer">Beginer</td>
-                <td><input type="radio" name="rphp" id="rphp" value="Mediater">Mediater</td>
-                <td><input type="radio" name="rphp" id="rphp" value="Expert">Expert</td>
+                <td><input type="radio" name="rphp" class="rphp" value="Beginer">Beginer</td>
+                <td><input type="radio" name="rphp" class="rphp" value="Mediater">Mediater</td>
+                <td><input type="radio" name="rphp" class="rphp" value="Expert">Expert</td>
             </tr>
             <tr>
                 <td><input type="checkbox" name="mysql" id="mysql" value="mysql">Mysql</td>
-                <td><input type="radio" name="rmysql"  id="rmysql" value="Beginer">Beginer</td>
-                <td> <input type="radio" name="rmysql"  id="rmysql" value="Mediater">Mediater</td>
-                <td><input type="radio" name="rmysql" id="rmysql" value="Expert"> Expert</td>
+                <td><input type="radio" name="rmysql"  class="rmysql" value="Beginer">Beginer</td>
+                <td> <input type="radio" name="rmysql"  class="rmysql" value="Mediater">Mediater</td>
+                <td><input type="radio" name="rmysql" class="rmysql" value="Expert"> Expert</td>
             </tr>
             <tr>
                 <td><input type="checkbox" name="larvel" id="larvel" value="larvel">Larvel</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel" value="Beginer">Beginer</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel" value="Mediater">Mediater</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel" value="Expert">Expert</td>
+                <td><input type="radio" name="rlarvel" class="rlarvel" value="Beginer">Beginer</td>
+                <td><input type="radio" name="rlarvel" class="rlarvel" value="Mediater">Mediater</td>
+                <td><input type="radio" name="rlarvel" class="rlarvel" value="Expert">Expert</td>
             </tr>
             <tr>
                 <td><input type="checkbox" name="oracle" id="oracle" value="oracle">Oracle</td>
-                <td><input type="radio" name="roracle"  id="roracle" value="Beginer">Beginer</td>
-                <td><input type="radio" name="roracle"  id="roracle" value="Mediater">Mediater</td>
-                <td> <input type="radio" name="roracle" id="roracle" value="Expert">Expert</td>
+                <td><input type="radio" name="roracle"  class="roracle" value="Mediater">Mediater</td>
+                <td><input type="radio" name="roracle"  class="roracle" value="Beginer">Beginer</td>
+                <td> <input type="radio" name="roracle" class="roracle" value="Expert">Expert</td>
             </tr>
         </table>
      </fieldset>
      <fieldset>
         <legend>referances</legend>
-        <table>
+        <p class="error"></p>
+        <input type="button" value="+" onclick="ref_add()">
+        <input type="button" value="-" onclick="ref_del()">
+        <table id="ref">
             <tr>
                 <td>Name</td>
-                <td><input type="text" name="refname" id="refname"></td>
+                <td><input type="text" name="refname" class="refname"></td>
                 <td>Contact Number</td>
-                <td><input type="text" name="refcon" id="refcon"></td>
+                <td><input type="text" name="refcon" class="refcon"></td>
                 <td>Relation</td>
-                <td><input type="text" name="refrel" id="refrel"></td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="refname" id="refname"></td>
-                <td>Contact Number</td>
-                <td><input type="text" name="refcon" id="refcon"></td>
-                <td>Relation</td>
-                <td><input type="text" name="refrel" id="refrel"></td>
+                <td><input type="text" name="refrel" class="refrel"></td>
             </tr>
         </table>
      </fieldset>
      <fieldset>
         <legend>Preferances</legend>
+        <p class="error"></p>
         <table>
             <tr>
                 <td>Perferd location</td>

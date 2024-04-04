@@ -309,12 +309,12 @@
                         return false;
                }
 
-            if(window.location.pathname == '/partForm'){
+            if(window.location.pathname == '/partForm/partForm'){
 
             
                let form = document.getElementById('form2');
                const data = new URLSearchParams(new FormData(form));
-               let bodyData = await fetch('http://localhost:3000/partForm/form',{
+               let bodyData = await fetch('http://localhost:3000/partForm/partForm/form',{
                   method:"POST",
                   headers: {
                      'Content-Type': ' application/x-www-form-urlencoded'
@@ -330,7 +330,7 @@
                let form = document.getElementById('form2');
                const data = new URLSearchParams(new FormData(form));
                var Id = window.location.href.split('?id=')[1];
-               let bodyData = await fetch('http://localhost:3000/partForm/update/form',{
+               let bodyData = await fetch('http://localhost:3000/partForm/partForm/update/form',{
                   method:"POST",
                   headers: {
                      'Content-Type': ' application/x-www-form-urlencoded',

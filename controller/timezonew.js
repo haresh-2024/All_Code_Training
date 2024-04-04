@@ -16,6 +16,7 @@ const city = async (req,res)=>{
          var result = await con.query(sql);
          var sql1 = `select * from timezone`;
          var result1 = await con.query(sql1);
+         console.log(result1[0]);
          res.send({
             result1 : result[0],
             result2 : result1[0]

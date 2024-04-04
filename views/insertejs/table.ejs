@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    table{
+        max-width: fit-content;
+    }
+    table,td{
+    border: 2px solid black;
+    border-collapse: collapse;
+    }
+</style>
+<body>
+    <div class="main">
+        
+        <table>
+        <% result.forEach(element => { %>
+           <tr>
+                 <td><%= element.Id %></td>
+                 <td><%= element.fname %></td>
+                 <td><%= element.lname %></td>
+                 <td><%= element.email %></td>
+                 <td><a href="/update/<%= element.Id %>">update this</a></td>
+           </tr> 
+        <% }); %>
+    </table>
+    </div>
+</body>
+</html>

@@ -114,11 +114,11 @@
           <div>
               <h3>Showing <%= first  %> to <%= last %> of 50000 entries</h3>
           </div>
-        <a href="/page/order/<%= cols %>/<%= order %>" onclick="first()" id="first"><<</a>
-        <a href="/page/oprev/<%= i %>/<%= cols %>/<%= order %>" onclick="prev()" id="prev"><</a>
+        <a href="/order/<%= cols %>/<%= order %>" onclick="first()" id="first"><<</a>
+        <a href="/oprev/<%= i %>/<%= cols %>/<%= order %>" onclick="prev()" id="prev"><</a>
         <input type="text" value="<%= i %>" id="page" disabled>
-        <a href="/page/onext/<%= i %>/<%= cols %>/<%= order %>" onclick="next()" id="next">></a>
-        <a href="/page/olast/<%= cols %>/<%= order %>" onclick="last()" id="last">>></a>
+        <a href="/onext/<%= i %>/<%= cols %>/<%= order %>" onclick="next()" id="next">></a>
+        <a href="/olast/<%= cols %>/<%= order %>" onclick="last()" id="last">>></a>
       </div>
        
     </body>
@@ -140,7 +140,7 @@
                  else if(page.value > 5000){
                     document.getElementById('page').value = 5000;
                  }
-                 window.location.href =`/page/rows/${page.value}`;
+                 window.location.href =`/rows/${page.value}`;
         }
 
         function change(){
@@ -152,12 +152,12 @@
             if(time == `${e}1`){
                 window.sessionStorage.setItem('change',`${n}d`);
                 window.sessionStorage.setItem('time',`${e}0`);
-                window.location.href = `/page/order/${e}/desc`;
+                window.location.href = `/order/${e}/desc`;
             }
             else{
                 window.sessionStorage.setItem('change',`${n}u`);
                 window.sessionStorage.setItem('time',`${e}1`);
-                window.location.href = `/page/order/${e}/asc`;
+                window.location.href = `/order/${e}/asc`;
             }
         }
     </script>

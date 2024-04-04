@@ -44,15 +44,16 @@
 
 <script>
      async function run(){
-         let cityData = await fetch('http://localhost:3000/timezonew/city',{
+         let cityData = await fetch('http://localhost:3000/city',{
           method:"GET",
                headers: {
                    'Content-Type': ' application/json'
                },
            });
            var result = await cityData.json();
+           console.log(result);
            const select1 =  document.getElementById('fcity');
-           result.result1.forEach((element ,index)=> {
+           result.forEach((element ,index)=> {
                  select1.innerHTML = select1.innerHTML +`<option value="${element.city}" id="${index}">${element.city}</option>`;
            });  
            
@@ -60,12 +61,12 @@
            select1.addEventListener('change',async (req,res)=>{
                select2.innerHTML = ' <option value="default" disabled selected>Select TimeZone</option>';
                var code;
-               result.result2.forEach((element ,index)=> {
+               result.forEach((element ,index)=> {
                     if(element.city == select1.value){
                         code = element.country;
                     }
                }); 
-               result.result2.forEach((element ,index)=> {
+               result.forEach((element ,index)=> {
                    if(element.country == code){
                        select2.innerHTML = select2.innerHTML +`<option value="${element.timezone}" id="${index}">${element.timezone}</option>`;
                    }

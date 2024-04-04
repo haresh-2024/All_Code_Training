@@ -85,7 +85,7 @@
                 <% }) %>
             </tr>
         </table>
-        <form action="/sql/main" method="post" id="form">
+        <form action="/main" method="post" id="form">
             <label for="">Select Operation of Query</label>
             <select name="opt" id="opt">
                 <option value="select" selected>Select</option>
@@ -115,11 +115,11 @@
             <h3>Showing <%= first  %> to <%= last %> of <%= tot  %> entries</h3>
             <input type="hidden" name="" id="total" value="<%= tot/10 %>">
         </div>
-      <a href="/sql/ofirst/<%= sql %>" onclick="first()" id="first"><<</a>
-      <a href="/sql/oprev/<%= i  %>/<%= sql  %>" onclick="prev()" id="prev"><</a>
+      <a href="/ofirst/<%= sql %>" onclick="first()" id="first"><<</a>
+      <a href="/oprev/<%= i  %>/<%= sql  %>" onclick="prev()" id="prev"><</a>
       <input type="text" value="<%= i %>" id="page" disabled>
-      <a href="/sql/onext/<%= i  %>/<%= sql %>" onclick="next()" id="next">></a>
-      <a href="/sql/olast/<%= sql %>" onclick="last()" id="last">>></a>
+      <a href="/onext/<%= i  %>/<%= sql %>" onclick="next()" id="next">></a>
+      <a href="/olast/<%= sql %>" onclick="last()" id="last">>></a>
     </div>
 
     

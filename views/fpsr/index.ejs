@@ -99,7 +99,7 @@
             <td><%= row.final_p%></td>
             <td><%= row.total%></td>
             <td>1200</td>
-            <td align="center" ><a href="/fpsr/report/<%=row.id%>">View</a></td>
+            <td align="center" ><a href="/report/<%=row.id%>">View</a></td>
           </tr>    
         <% }) %>
       </table>
@@ -108,10 +108,10 @@
             <h3>Showing <%= first  %> to <%= last %> of 300 entries</h3>
         </div>
         <a href="/fpsr" onclick="first()" id="first"><<</a>
-        <a href="/fpsr/oprev/<%= i  %>" onclick="prev()" id="prev"><</a>
+        <a href="/oprev/<%= i  %>" onclick="prev()" id="prev"><</a>
         <input type="text" value="<%= i %>" id="page" disabled>
-        <a href="/fpsr/onext/<%= i  %>" onclick="next()" id="next">></a>
-        <a href="/fpsr/olast/" onclick="last()" id="last">>></a>
+        <a href="/onext/<%= i  %>" onclick="next()" id="next">></a>
+        <a href="/olast/" onclick="last()" id="last">>></a>
     </div>
 
     </body>
