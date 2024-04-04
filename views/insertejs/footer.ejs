@@ -345,30 +345,28 @@ function validation(){
 }
 function work_add(){
          var table = document.getElementById('work');
-         var p = table.lastElementChild.innerHTML;
-         table.lastElementChild.innerHTML = p + `<tr>
-                <td>Company name</td>
+         var tr = document.createElement('tr');
+         tr.innerHTML = 
+                `<td>Company name</td>
                 <td><input type="text" name="cname" class="cname"></td>
                 <td>Designation</td>
                 <td><input type="text" name="cdes" class="cdes"></td>
                 <td>From</td>
                 <td><input type="text" name="cfrom" class="cfrom"></td>
                 <td>To</td>
-                <td><input type="text" name="cto" class="cto"></td>
-            </tr>`;
-      }
+                <td><input type="text" name="cto" class="cto"></td>`;
+         table.children[0].appendChild(tr);
+}
 function ref_add(){
          var table = document.getElementById('ref');
-         var p = table.lastElementChild.innerHTML;
-         
-         table.lastElementChild.innerHTML = p + `<tr>
-                <td>Name</td>
+         var tr = document.createElement('tr');
+         tr.innerHTML = `<td>Name</td>
                 <td><input type="text" name="refname" class="refname"></td>
                 <td>Contact Number</td>
                 <td><input type="text" name="refcon" class="refcon"></td>
                 <td>Relation</td>
-                <td><input type="text" name="refrel" class="refrel"></td>
-            </tr>`;
+                <td><input type="text" name="refrel" class="refrel"></td>`;
+         table.children[0].appendChild(tr);
 }
  async function work_del(){
 

@@ -23,7 +23,7 @@ const insert = async (req,res)=>{
     try{
 
         var data = req.body;
-        
+        console.log(data);
         // basic details insertion... 
         let index;
         var insert = `insert into basicDetails (fname,lname,designation,email,mobile,address,city,state,zipcode,gender,relationship,dob) values (?)`;
