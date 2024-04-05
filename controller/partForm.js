@@ -13,28 +13,23 @@ const partForm = async (req,res)=>{
 }
 const form = async (req,res)=>{
     try{
-     
         var data = req.body;
-       
         // basic details insertion... 
-        console.log(data);
-        var basicindex = `select Id from basicDetails order by Id desc limit 1`;
-        var index = await con.query(basicindex);
-        index = index[0][0].Id + 1;
-        var insert = `insert into basicDetails values (?)`;
-        var values = [index,data.fname,data.lname,data.des,data.email,data.num,data.add1+data.add2,data.city,data.state,data.zip,data.gender,data.status,data.dob];
-        
+        let index;
+        var insert = `insert into basicDetails (fname,lname,designation,email,mobile,address,city,state,zipcode,gender,relationship,dob) values (?)`;
+        var values = [data.fname,data.lname,data.des,data.email,data.num,data.add1+' '+data.add2,data.city,data.state,data.zip,data.gender,data.status,data.dob];
+    
         var nre = "^[6-9]{1}[0-9]{9}$";
         var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
 
         if(data.fname == ''|| data.lname == '' || data.des == '' || data.email == '' || (data.add1 == '' && data.add2 == '') || data.num == '' || data.city == '' || data.zip == '' || data.dob == '' || data.gender == '' ){
-             res.send({ alert : 'error occur1'})
+            res.send({ alert : 'error occur'})
         }
         else if(!(data.email.match(ereg))){
-            res.send({ alert : 'error occur2'})
+            res.send({ alert : 'error occur'})
         }
         else if(!(data.num.match(nre))){
-          res.send({ alert : 'error occur3'})
+            res.send({ alert : 'error occur'})
         }
         else{
             var basicInsert = await con.query(insert,[values]);
@@ -46,155 +41,150 @@ const form = async (req,res)=>{
         var insert = `insert into educationDetails values ?`;
 
         if(data.sboard == '' || data.syear== '' || data.sper == '' || data.hboard == '' || data.hyear== '' || data.hper == '' || data.bboard == '' || data.bcourse == '' || data.byear == '' ||data.bper == ''){
-            res.send({ alert : 'error occur4'})
+            res.send({ alert : 'error occur'})
         }
         else if(data.mboard == '' || data.mcourse == '' || data.myear == '' || data.mper == ''){
             var values = [[index,'ssc','10th',data.sboard,data.syear,data.sper],
                           [index,'hsc','12th',data.hboard,data.hyear,data.hper],
-                          [index,'be',data.bboard,data.bcourse,data.byear,data.bper]];
+                          [index,'be',data.bcourse,data.bboard,data.byear,data.bper]];
             await con.query(insert,[values]);
         }
         else if(data.mboard != '' && data.mcourse != '' && data.myear != '' && data.mper != ''){
             var values = [[index,'ssc','10th',data.sboard,data.syear,data.sper],
             [index,'hsc','12th',data.hboard,data.hyear,data.hper],
-                          [index,'be',data.bboard,data.bcourse,data.byear,data.bper],
-                          [index,'me',data.mboard,data.mcourse,data.myear,data.mper]];
+                          [index,'be',data.bcourse,data.bboard,data.byear,data.bper],
+                          [index,'me',data.mcourse,data.mboard,data.myear,data.mper]];
             await con.query(insert,[values]);
         }
         else{
-        res.send({ alert : 'error occur5'})
+            res.send({ alert : 'error occur'})
        }
        
-    //    work experience
+       // work experience
 
-       for(var i=0;i<data.cname.length;i++){
-           
-           if(data.cname[i] != '' && data.cdes[i] != '' && data.cfrom[i] != '' && data.cto[i] != ''){
+        var insert = `insert into workExper values (?)`;
 
-            var insert = `insert into workExper values (?)`;
-            var values = [index,data.cname[i],data.cdes[i],data.cfrom[i],data.cto[i]];
-            var result = await con.query(insert,[values]);
-            console.log(result);
-       }
-    }
+        if(data.cname == '' || data.cdes== ''  || data.from == '' || data.cto == ''){
 
+        }
+        else{
+            if(typeof(data.cname) == 'string'){
+               values = [index,data.cname,data.cdes,data.cfrom,data.cto]
+               await con.query(insert,[values]);
+            }
+            else{
+                data.cname.forEach(async (element,ind) => {
+                    if(data.cname[ind] == '' || data.cdes[ind]== ''  || data.cfrom[ind] == '' || data.cto[ind] == ''){
+                        
+                    }
+                    else{
+                        var values = [index,data.cname[ind],data.cdes[ind],data.cfrom[ind],data.cto[ind]];
+                        await con.query(insert,[values]);
+                    }
+                });
+            }
+        }
        // language 
       
-        var v1 = 'n';
-        var v2= 'n';
-        var v3 = 'n';
+        
         if(typeof(data.gujarati) == 'undefined' && typeof(data.hindi) == 'undefined' && typeof(data.english) == 'undefined'){
-            res.send({ alert : 'error occur6'})
+            res.send({ alert : 'error occur'})
         }
-        if(typeof(data.gujarati) != 'undefined'){
-            if(data.gujarati[0] == 'Gujarati'){
-                 for(var j = 1;j<data.gujarati.length;j++){
-                     if(data.gujarati[j] == 'Read'){v1='y';} 
-                     if(data.gujarati[j] == 'Write'){v2 = 'y';} 
-                     if(data.gujarati[j] == 'Speak'){v3 = 'y';}  
-                 }
-                 var insert = `insert into languageKnown values (${index},'Gujarati','${v1}','${v2}','${v3}')`;
-                 await con.query(insert);
+        let lan = [data.hindi,data.gujarati,data.english];
+        let language= ['Hindi','Gujarati','English'];
+        lan.forEach(async(element,ind)=>{
+            if(typeof(element) != 'undefined'){
+                if(element[0] == language[ind]) {
+                    let v1 = 'n';
+                    let v2= 'n';
+                    let v3 = 'n';
+                    for(var j = 1;j<4;j++){
+                         if(element[j] == 'Read'){v1='y';} 
+                         if(element[j] == 'Write'){v2 = 'y';} 
+                         if(element[j] == 'Speak'){v3 = 'y';}  
+                        }
+                    var insert = `insert into languageKnown values (${index},'${element[0]}','${v1}','${v2}','${v3}')`;
+                    await con.query(insert);
+                }
             }
-        }
-        if(typeof(data.hindi) != 'undefined'){
-            if(data.hindi[0] == 'Hindi'){
-            for(var j = 1;j<data.hindi.length;j++){
-                if(data.hindi[j] == 'Read'){v1='y';} 
-                if(data.hindi[j] == 'Write'){v2 = 'y';} 
-                if(data.hindi[j] == 'Speak'){v3 = 'y';}  
-            }
-            var insert = `insert into languageKnown values (${index},'Hindi','${v1}','${v2}','${v3}')`;
-            await con.query(insert);
-         }
-       }
-       if(typeof(data.english) != 'undefined'){
-         if(data.english[0] == 'English'){
-            for(var j = 1;j<data.english.length;j++){
-                if(data.english[j] == 'Read'){v1='y';} 
-                if(data.english[j] == 'Write'){v2 = 'y';} 
-                if(data.english[j] == 'Speak'){v3 = 'y';}  
-            }
-            var insert = `insert into languageKnown values (${index},'English','${v1}','${v2}','${v3}')`;
-            await con.query(insert);
-         }
-       }
+        });
 
        // technoligies
 
-        var v1 = 'n';
-        var v2= 'n';
-        var v3 = 'n';
         if(typeof(data.larvel) == 'undefined' && typeof(data.php) == 'undefined' && typeof(data.oracle) == 'undefined' && typeof(data.mysql) == 'undefined'){
-            res.send({ alert : 'error occur7'})
+            res.send({ alert : 'error occur'})
         }
-        if(typeof(data.php) != 'undefined'){
-            if(data.php == 'php'){
-                 var insert = `insert into technologie values (${index},'php','${data.rphp}')`;
-                 await con.query(insert);
-            }
-        }
-       if(typeof(data.larvel) != 'undefined'){
-           if(data.larvel == 'larvel'){
-            var insert = `insert into technologie values (${index},'larvel','${data.rlarvel}')`;
-            await con.query(insert);
-           }
-       }
-       if(typeof(data.mysql) != 'undefined'){
-           if(data.mysql == 'mysql'){
-            var insert = `insert into technologie values (${index},'mysql','${data.rmysql}')`;
-            await con.query(insert);
-           }
-       }
-       if(typeof(data.oracle) != 'undefined'){
-           if(data.oracle == 'oracle'){
-             var insert = `insert into technologie values (${index},'oracle','${data.roracle}')`;
-             await con.query(insert);
-           }
-       }
- 
 
-    // // referances
+        let tech = [data.php,data.larvel,data.mysql,data.oracle];
+        let technoligies = [data.rphp,data.rlarvel,data.rmysql,data.roracle];
+        let realValue = ['php','larvel','mysql','oracle'];
+        tech.forEach(async(element,ind)=>{
+            if(typeof(element) != 'undefined'){
+                if(element == realValue[ind]) {
+        
+                     var insert = `insert into technologie values (${index},'${realValue[ind]}','${technoligies[ind]}')`;
+                     await con.query(insert);
+                    
+                }
+            }
+        });
+
+    // referances
      var insert = `insert into referance values (?)`;
-  
-     for(var i=0;i<data.refname.length;i++){
-        if(data.refname[i] == '' && data.refcon[i] == '' && data.refrel[i] == ''){}
-        else if(data.refname[i] == '' ||data.refcon[i] == '' || data.refrel[i] == ''){
-            if(data.refname[i] != ''){ 
-                res.send({ alert : 'error occur8'})
-            }
-            if(data.refcon[i] != ''){
-                res.send({ alert : 'error occur9'})
-            }
-            if(data.refrel[i] != ''){
-                res.send({ alert : 'error occur10'})
-            }
+ 
+    if(data.refname == '' || data.refcon == '' || data.refrel == ''){
+
+    }
+    else{
+
+        if(typeof(data.refname) == 'string'){
+           var values = [index,data.refname,data.refcon,data.refrel];
+           await con.query(insert,[values]);
         }
         else{
-            var values = [index,data.refname[i],data.refcon[i],data.refrel[i]];
-            await con.query(insert,[values]);
-        }
-    }
 
-    // // preferance
+            data.refname.forEach(async (element,ind) => {
+              
+                if(data.refname[ind] == '' && data.refcon[ind] == '' && data.refrel[ind] == ''){}
+
+                else if(data.refname[ind] == '' || data.refcon[ind] == '' || data.refrel[ind] == ''){
+                    let ref = [data.refname[ind],data.refcon[ind],data.refrel[ind]];
+                    ref.forEach(element =>{
+                        if(element != ''){ 
+                            res.send({ alert : 'error occur'})
+                        }
+                    });
+                }
+            else{
+                        
+                            if(data.refname[ind] == '' && data.refcon[ind] == '' && data.refrel[ind] == ''){}
+                            
+                            else{       
+                                var values = [index,data.refname[ind],data.refcon[ind],data.refrel[ind]];
+                                await con.query(insert,[values]);
+                            }
+                
+            }
+        });
+            
+    // preferance
     
     var insert = `insert into preferance values (?)`;
     if(data.notice == '' || data.ectc == '' || data.cctc == ''){
-        return res.send({ alert : 'error occur11'})
+        res.send({ alert : 'error occur'})
     }
     else{
         var values = [index,data.loc,data.notice,data.ectc,data.cctc,data.dept];
         var basicInsert = await con.query(insert,[values]);
-    
     }
-    res.send({
-        alert: 'submited...'
-    });
+   
+    res.send({ alert : 'data inserted...'});
 }
+}
+}
+
     catch(e){
-        res.send({
-            alert: `error occur12 ${e}`
-        })
+        res.send({ alert : 'error occur'})
     }
 }
 
@@ -205,7 +195,7 @@ const update = async (req,res)=>{
     }
     catch(e){
         res.send({
-            alert: `error occur13 ${e}`
+            alert: `error occur ${e}`
         })
     }
 }
@@ -265,207 +255,165 @@ try{
         
         // basic details update... 
        
-        var update = `update basicDetails set fname = '${data.fname}',lname = '${data.lname}',designation='${data.des}',email = '${data.email}' ,mobile = '${data.num}',ver,address='${data.add1+data.add2}',city='${data.city}',state = '${data.state}',zipcode= '${data.zip}', gender = '${data.gender}',relationship = '${data.status}',dob = '${data.dob}' where Id = ${id}`;
-        
+        var update = `update basicDetails set fname = ?,lname = ?,designation= ?,email = ?,mobile = ?,address=?,city=?,state = ?,zipcode= ?,gender = ?,relationship = ?,dob = ? where Id = ?`;
+        let basic = [data.fname,data.lname,data.des,data.email,data.num,data.add1+" "+data.add2,data.city,data.state,data.zip,data.gender,data.status,data.dob,id];
         var nre = "^[6-9]{1}[0-9]{9}$";
         var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
 
         if(data.fname == ''|| data.lname == '' || data.des == '' || data.email == '' || (data.add1 == '' && data.add2 == '') || data.num == '' || data.city == '' || data.zip == '' || data.dob == '' || data.gender == '' ){
-           res.send({
-            alert:'error occur15'
-           })
+            res.send({ alert : 'error occur'})
         }
         else if(!(data.email.match(ereg))){
-            res.send({
-                alert:'error occur16'
-               })
+            res.send({ alert : 'error occur'})
         }
         else if(!(data.num.match(nre))){
-            res.send({
-                alert:'error occur17'
-               })
+            res.send({ alert : 'error occur'})
         }
         else{
-            var basicUpdate = await con.query(update);
-            index = basicUpdate[0]['insertId'];
+            await con.query(update,basic);
         }
         
         // eduction details...
 
-        
+        var insert = `update educationDetails set courseName = ?,board = ?,year = ?,percentage = ? where Id = ? and degree = ?` ;
 
         if(data.sboard == '' || data.syear== '' || data.sper == '' || data.hboard == '' || data.hyear== '' || data.hper == '' || data.bboard == '' || data.bcourse == '' || data.byear == '' ||data.bper == ''){
-            res.send({
-                alert:'error occur18'
-               })
+            res.send({ alert : 'error occur'})
         }
         else if(data.mboard == '' || data.mcourse == '' || data.myear == '' || data.mper == ''){
-            
-            var values = [['ssc','10th',data.sboard,data.syear,data.sper],
-                          ['hsc','12th',data.hboard,data.hyear,data.hper],
-                          ['be',data.bboard,data.bcourse,data.byear,data.bper]];
-           values.forEach(async element =>{
-
-            let insert = `update educationDetails set degree = '${element[0]}',courseName = '${element[1]}' ,board = '${element[2]}',year = '${element[3]}',percentage = '${element[4]}' where Id = ${id} and degree = '${element[0]}'`;
-              await con.query(insert,[element]);
+            var values = [['10th',data.sboard,data.syear,data.sper,id,'ssc'],
+                          ['12th',data.hboard,data.hyear,data.hper,id,'hsc'],
+                          [data.bcourse,data.bboard,data.byear,data.bper,id,'be']];
+            values.forEach(async element =>{
+                await con.query(insert,element);
+    
             });
         }
         else if(data.mboard != '' && data.mcourse != '' && data.myear != '' && data.mper != ''){
-            var values = [['ssc','10th',data.sboard,data.syear,data.sper],
-                          ['hsc','12th',data.hboard,data.hyear,data.hper],
-                          ['be',data.bboard,data.bcourse,data.byear,data.bper],
-                          ['me',data.mboard,data.mcourse,data.myear,data.mper]];
+          
+            var values = [['10th',data.sboard,data.syear,data.sper,id,'ssc'],
+                          ['12th',data.hboard,data.hyear,data.hper,id,'hsc'],
+                          [data.bcourse,data.bboard,data.byear,data.bper,id,'be'],
+                          [data.mcourse,data.mboard,data.myear,data.mper,id,'me']];
             values.forEach(async element =>{
-                let insert = `update educationDetails set degree = '${element[0]}',courseName = '${element[1]}' ,board = '${element[2]}',year = '${element[3]}',percentage = '${element[4]}' where Id = ${id} and degree = '${element[0]}'`;
-                await con.query(insert,[element]); 
+              await con.query(insert,element);
             });
         }
         else{
-            res.send({
-                alert:'error occur19'
-               });
+            res.send({ alert : 'error occur'})
        }
-   
+
        // work experience
-
-       for(var i=0;i<data.cname.length;i++){
-        if(data.cname[i] == '' || data.cdes[i] == '' || data.cfrom[i] == '' || data.cto[i] == ''){
-
-        }
-        else{
-            var values = [index,data.cname[i],data.cdes[i],data.cfrom[i],data.cto[i]];
-            var update = `update workExper set cname = '${values[1]}',designation ='${values[2]}',fromW = '${values[3]}',toW = '${values[4]}' where Id = ${id}`;
-            var result =  await con.query(update);
-        }
-       }
-
-      
-    //    // language 
-      
-        var v1 = 'n';
-        var v2= 'n';
-        var v3 = 'n';
-        if(typeof(data.gujarati) == 'undefined' && typeof(data.hindi) == 'undefined' && typeof(data.english) == 'undefined'){
-            res.send({
-                alert: 'error occur20'
-            })
-        }
-        if(typeof(data.gujarati) != 'undefined'){
-            if(data.gujarati[0] == 'Gujarati'){
-                 for(var j = 1;j<data.gujarati.length;j++){
-                     if(data.gujarati[j] == 'Read'){v1='y';} 
-                     if(data.gujarati[j] == 'Write'){v2 = 'y';} 
-                     if(data.gujarati[j] == 'Speak'){v3 = 'y';}  
-                 }
-                 var insert = `update languageKnown set lread = '${v1}',lwrite = '${v2}',speak = '${v3}' where language = 'gujarati' and Id = ${id}`;
-                 var result =  await con.query(insert);
-            }
-        }
-        if(typeof(data.hindi) != 'undefined'){
-            if(data.hindi[0] == 'Hindi'){
-            for(var j = 1;j<data.hindi.length;j++){
-                if(data.hindi[j] == 'Read'){v1='y';} 
-                if(data.hindi[j] == 'Write'){v2 = 'y';} 
-                if(data.hindi[j] == 'Speak'){v3 = 'y';}  
-            }
-            var insert = `update languageKnown set lread = '${v1}',lwrite = '${v2}',speak = '${v3}' where language = 'hindi' and Id = ${id}`;
-            var result = await con.query(insert);
-         }
-       }
-       if(typeof(data.english) != 'undefined'){
-         if(data.english[0] == 'English'){
-            for(var j = 1;j<data.english.length;j++){
-                if(data.english[j] == 'Read'){v1 = 'y';} 
-                if(data.english[j] == 'Write'){v2 = 'y';} 
-                if(data.english[j] == 'Speak'){v3 = 'y';}  
-            }
-            var insert = `update languageKnown set lread = '${v1}',lwrite = '${v2}',speak = '${v3}' where language = 'english' and Id = ${id}`;
-            var result = await con.query(insert);
-         }
-       }
-     
-
-       // technoligies
-
-        var v1 = 'n';
-        var v2= 'n';
-        var v3 = 'n';
-
-        if(typeof(data.larvel) == 'undefined' && typeof(data.php) == 'undefined' && typeof(data.oracle) == 'undefined' && typeof(data.mysql) == 'undefined'){
-           res.send({
-            alert: 'error occur21'
-           })
-        }
-            if(data.php == 'php'){
-                 var insert = `update technologie set level = '${data.rphp}' where technologies = 'php' and Id = ${id}`;
-                 await con.query(insert);
-    
-        }
-     
-           if(data.larvel == 'larvel'){
-            var insert = `update technologie set level = '${data.rlarvel}' where technologies = 'laravel' and Id = ${id}`;
-            await con.query(insert);
-           }
        
-           if(data.mysql == 'mysql'){
-            var insert = `update technologie set level = '${data.rmysql}' where technologies = 'mysql' and Id = ${id}`;
-            await con.query(insert);
-       }
-      
-           if(data.oracle == 'oracle'){
-            var insert = `update technologie set level = '${data.roracle}' where technologies = 'oracle' and Id = ${id}`; 
-            await con.query(insert);
+       let workUpdate = `update workExper set cname = ?,designation = ?,fromW = ?,toW = ? where Id = ? and cname = ?`;
+            if(typeof(data.cname) == 'string'){
+                let values = [data.cname,data.cdes,data.cfrom,data.cto,id,data.cname];
+                await con.query(workUpdate,values);
+            }
+            else{
+                data.cname.forEach(async (element,index) => {
+                    let values  = [data.cname[index],data.cdes[index],data.cfrom[index],data.cto[index],id,data.cname[index]];
+                    await con.query(workUpdate,values);
+                });
+            }
+// language
+            if(typeof(data.gujarati) == 'undefined' && typeof(data.hindi) == 'undefined' && typeof(data.english) == 'undefined'){
+                res.send({ alert : 'error occur'})
+            }
+            let lan = [data.hindi,data.gujarati,data.english];
+            let language= ['Hindi','Gujarati','English'];
+            lan.forEach(async(element,ind)=>{
+                if(typeof(element) != 'undefined'){
+                    if(element[0] == language[ind]) {
+                        let v1 = 'n';
+                        let v2= 'n';
+                        let v3 = 'n';
+                        for(var j = 1;j<4;j++){
+                             if(element[j] == 'Read'){v1='y';} 
+                             if(element[j] == 'Write'){v2 = 'y';} 
+                             if(element[j] == 'Speak'){v3 = 'y';}  
+                            }
+                        let update =`update languageKnown set lread = ?,lwrite = ?,speak = ? where language = ? and Id = ?`;
+                        let value = [v1,v2,v3,element[0],id];
+                        await con.query(update,value);
+                    }
+                }
+            });
+        
+            if(typeof(data.larvel) == 'undefined' && typeof(data.php) == 'undefined' && typeof(data.oracle) == 'undefined' && typeof(data.mysql) == 'undefined'){
+                res.send({ alert : 'error occur'})
+            }
+    
+            let tech = [data.php,data.larvel,data.mysql,data.oracle];
+            let technoligies = [data.rphp,data.rlarvel,data.rmysql,data.roracle];
+            let realValue = ['php','larvel','mysql','oracle'];
+            tech.forEach(async(element,ind)=>{
+                if(typeof(element) != 'undefined'){
+                    if(element == realValue[ind]) {
+
+                         let update = `update technologie set level = ? where technologies = ? and Id = ?`;
+                         let value = [technoligies[ind],element,id]
+                         await con.query(update,value);
+                       
+                    }
+                }
+            });
+
+
+            let refUpdate = `update referance set name = ?,contact = ?,relationship = ? where Id = ?`
+            if(data.refname == '' || data.refcon == '' || data.refrel == ''){
+
+            }
+            else{
+        
+                if(typeof(data.refname) == 'string'){
+                   var values = [data.refname,data.refcon,data.refrel,id];
+                   await con.query(refUpdate,values);
+                }
+                else{
+           
+                    for(var i=0;i<data.refname.length;i++){
+                      
+                        if(data.refname[i] == '' && data.refcon[i] == '' && data.refrel[i] == ''){}
+        
+                        else if(data.refname[i] == '' || data.refcon[i] == '' || data.refrel[i] == ''){
+                          let ref = [data.refname[i],data.refcon[i],data.refrel[i]];
+                          ref.forEach(element =>{
+                              if(element != ''){ 
+                                res.send({ alert : 'error occur'})
+                              }
+                          })
+                       }
+                       else{
+                                data.cname.forEach(async (element,index) => {
+                                    
+                                    if(data.refname[index] == '' && data.refcon[index] == '' && data.refrel[index] == ''){}
+                                    
+                                    else{       
+                                        var values = [data.refname[index],data.refcon[index],data.refrel[index],id];
+                                        await con.query(update,values);
+                                    }
+                                });
+                       }
+                    }
+               }
+            }
+   
+            if(data.notice == '' || data.ectc == '' || data.cctc == ''){
+                res.send({ alert : 'error occur'})
            }
-     
-    // referances
-
-    
-    for(var i=0;i<data.refname.length;i++){
-        if(data.refname[i] == '' && data.refcon[i] == '' && data.refrel[i] == ''){}
-        else if(data.refname[i] == '' ||data.refcon[i] == '' || data.refrel[i] == ''){
-            if(data.refname[i] != ''){ 
-                res.send({
-                    alert: 'error occur22'
-                })
-            }
-            if(data.refcon[i] != ''){
-                res.send({
-                    alert: 'error occur23'
-                })
-            }
-            if(data.refrel[i] != ''){
-                res.send({
-                    alert: 'error occur24'
-                })
-            }
-        }
-        else{
-            var values = [index,data.refname[i],data.refcon[i],data.refrel[i]];
-            var insert = `update referance set name = '${values[1]}',contact = '${values[2]}',relationship = '${values[3]}' where Id = ${id}`;
-            await con.query(insert);
-        }
-    }
-
-    // // preferance
-    
-    if(data.notice == '' || data.ectc == '' || data.cctc == ''){
-        res.send({
-            alert : 'error occur25'
-        })
-    }
-    else{
-        var values = [index,data.loc,data.notice,data.ectc,data.cctc,data.dept];
-        var insert = `update preferance set location = '${values[1]}',notice = '${values[2]}',ectc = '${values[3]}',cctc = '${values[4]}',department = '${values[5]}' where Id = ${id}`;
-        await con.query(insert);
-    }
-
+           else{
+               let values = [data.loc,data.notice,data.ectc,data.cctc,data.dept,id];
+               let update = `update preferance set location = ?,notice = ?,ectc = ?,cctc = ?,department = ? where Id = ?`;
+                await con.query(update,values);
+           }
     res.send({
         alert: 'Data Updated Successfully...'
     })
 }
     catch(e){
         res.send({
-            alert : `error occur26 ${e}`
+            alert : `error occur ${e}`
         })
     }
 }

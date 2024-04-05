@@ -4,7 +4,6 @@
     var part = 0;
     var formPart = document.getElementsByClassName('menu');
     var highlight = document.getElementsByClassName('highlight');
-    var div = document.getElementById('hidden');
     var p = document.getElementById('error');
         if(part == 0){
           formPart[0].style.display = 'block'; 
@@ -22,6 +21,76 @@
             highlight[n - 1].style.background = 'red';
             highlight[n].style.background = 'white'; 
         } 
+
+        function error(i,arr,actualName){
+              let p = document.getElementsByClassName('error');
+              p[i].innerText = `* please enter ${actualName}`;
+              p[i].style.color = 'red';
+              arr.focus();
+              
+            }
+            function valid(i,arr,actualName){
+              let p = document.getElementsByClassName('error');
+              p[i].innerText = `* please enter valid ${actualName}`;
+              p[i].style.color = 'red';
+              arr.focus();
+              
+            }
+            function select(i,arr,actualName){
+              let p = document.getElementsByClassName('error');
+              p[i].innerText = `* please select ${actualName}`;
+              p[i].style.color = 'red';
+              arr.focus();
+            }
+            function erase(i){
+               setTimeout(function(e){
+                  let p = document.getElementsByClassName('error');
+                  p[i].innerText = '';
+                  },5000);
+            }
+          
+            function work_add(){
+         var table = document.getElementById('work');
+         var tr = document.createElement('tr');
+         tr.innerHTML = 
+                `<td>Company name</td>
+                <td><input type="text" name="cname" class="cname"></td>
+                <td>Designation</td>
+                <td><input type="text" name="cdes" class="cdes"></td>
+                <td>From</td>
+                <td><input type="text" name="cfrom" class="cfrom"></td>
+                <td>To</td>
+                <td><input type="text" name="cto" class="cto"></td>`;
+         table.children[0].appendChild(tr);
+}
+function ref_add(){
+         var table = document.getElementById('ref');
+         var tr = document.createElement('tr');
+         tr.innerHTML = `<td>Name</td>
+                <td><input type="text" name="refname" class="refname"></td>
+                <td>Contact Number</td>
+                <td><input type="text" name="refcon" class="refcon"></td>
+                <td>Relation</td>
+                <td><input type="text" name="refrel" class="refrel"></td>`;
+         table.children[0].appendChild(tr);
+}
+ async function work_del(){
+
+         let table = document.getElementById('work');
+         let tr = await table.lastElementChild.querySelectorAll('tr');
+         if(tr.length > 1){
+             tr[tr.length - 1].remove();
+         }
+      }
+async function ref_del(){
+         let table = document.getElementById('ref');
+         let tr = await table.lastElementChild.querySelectorAll('tr');
+         if(tr.length > 1){
+             tr[tr.length - 1].remove();
+         }
+   }
+
+
         function validation1(){
             var fname = document.getElementById('fname');
             var lname = document.getElementById('lname');
@@ -34,148 +103,189 @@
             var dob = document.getElementById('dob');
             var zip = document.getElementById('zip'); 
 
-            var arr = [fname,lname,email,des,num,city,dob,zip];
-           var actualName = ['first name','last name','email','Designation','Phone','city','date of birth','zip code'];
-           for(var i=0;i<arr.length;i++){
-               if(arr[i].value == ''){
-                p.innerText = `please enter ${actualName[i]}`;
-                div.style.display = 'block';
-                return false;
+          const arr = [fname,lname,des,email,num,city,dob,zip];
+            for(let i=0;i<arr.length;i++){
+               
+               const actualName = ['first name','last name','Designation','email','Phone','city','date of birth','zip code'];
+               let nre = "^[6-9]{1}[0-9]{9}$";
+               let ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
+               let date = '[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])';
+
+              if(arr[i].value == ''){ 
+                  error(0,arr[i],actualName[i]);
+                  erase(0);
+                  return false;
                }
-            }
-            if(add1.value == '' && add2.value == ''){
-                p.innerText = `please enter address1 or address2`;
-                div.style.display = 'block';
+               else if(arr[i] == email && !(email.value.match(ereg))){
+                  valid(0,arr[i],actualName[i]);
+                  erase(0);
+                  return false;
+                  
+               }
+               else if(arr[i] == num && !(num.value.match(nre))){
+                  valid(0,arr[i],actualName[i]);
+                  erase(0);
+                  return false;
+               }
+               else if(arr[i] == dob && !(dob.value.match(date))){
+                  valid(0,arr[i],actualName[i]);
+                  erase(0);
+                  return false;
+               }
+               else if(arr[i] == zip && (isNaN(zip.value) || zip.value.length != 6)){
+                  valid(0,arr[i],actualName[i]);
+                  erase(0);
+                  return false;
+               }
+         }
+         if(add1.value == '' && add2.value == ''){ 
+               let p = document.getElementsByClassName('error');
+                p[0].innerText = `* please enter address`;
+                p[0].style.color = 'red';
+                add1.focus();
+                erase(0);
                 return false;
-            }
-            var nre = "^[6-9]{1}[0-9]{9}$";
-            var ereg = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"; 
-            if(!(email.value.match(ereg))){
-                p.innerText = `please enter valid email`;
-                div.style.display = 'block';
-                return false;
-            }
-            if(!(num.value.match(nre))){
-                p.innerText = `please enter valid number`;
-                div.style.display = 'block';
-                return false;
-            }
-            var date = '[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])';
-   
-            if(!(dob.value.match(date))){
-               p.innerText = `please enter valid Date of Birth`;
-               div.style.display = 'block';
-               return false;
-            }
-         
-            if( isNaN(zip.value) || zip.value.length != 6){
-               p.innerText = `please enter valid zipcode`;
-               div.style.display = 'block';
-               return false;
-            }
+         }
             
             onshow(1);
         }
+        
         function validation2(){
-            var sscn = document.getElementById('sscn'); 
-            var sscy = document.getElementById('sscy'); 
-            var sscp = document.getElementById('sscp'); 
-            var hscn = document.getElementById('hscn'); 
-            var hscy = document.getElementById('hscy'); 
-            var hscp = document.getElementById('hscp'); 
-            var bdn = document.getElementById('bdn'); 
-            var bcourse = document.getElementById('bcourse'); 
-            var bdy = document.getElementById('bdy'); 
-            var bdp = document.getElementById('bdp');
+         var sscn = document.getElementById('sscn'); 
+           var sscy = document.getElementById('sscy'); 
+           var sscp = document.getElementById('sscp'); 
+           var hscn = document.getElementById('hscn'); 
+           var hscy = document.getElementById('hscy'); 
+           var hscp = document.getElementById('hscp'); 
+           var bdn = document.getElementById('bdn'); 
+           var bcourse = document.getElementById('bcourse'); 
+           var bdy = document.getElementById('bdy'); 
+           var bdp = document.getElementById('bdp'); 
+           var mdn = document.getElementById('mdn');
+           var mcourse = document.getElementById('mcourse');
+           var mdy = document.getElementById('mdy');
+           var mdp = document.getElementById('mdp');
      
-           var arr = [sscn,sscy,sscp,hscn,hscy,hscp,bdn,bcourse,bdy,bdp];
-           var actualName = ['ssc board','ssc year','ssc percentage','hsc board','hsc year','hsc percentage','bachelor board','bachelor course','bachelor year','bachelor percentage'];
-           for(var i=0;i<arr.length;i++){
-               if(arr[i].value == ''){
-                p.innerText = `please enter ${actualName[i]}`;
-                div.style.display = 'block';
-                return false;
-               }
+           var education = [sscn,sscy,sscp,hscn,hscy,hscp,bdn,bcourse,bdy,bdp];
+      
+      for(var i = 0;i < education.length;i++){
+            console.log(sscy.value.length);
+            let eduName = ['ssc board','ssc year','ssc percentage','hsc board','hsc year','hsc percentage','bachelor board','bachelor course','bachelor year','bachelor percentage'];
+            if(education[i].value == ''){ 
+               error(1,education[i],eduName[i]);
+               erase(1);
+               return false;
             }
+            else if((education[i] == sscy) & ( isNaN(sscy.value) ||  sscy.value.length != 4)){
+               valid(1,education[i],eduName[i]);
+               erase(1);
+               return false;
+            }
+            else if((education[i] == hscy) & (isNaN(hscy.value) || hscy.value.length != 4)){
+               valid(1,education[i],eduName[i]);
+               erase(1);
+               return false;
+            }
+            else if((education[i] == bdy) & (isNaN(bdy.value) || bdy.value.length != 4)){
+               valid(1,education[i],eduName[i]);
+               erase(1);
+               return false;
+            }
+            else if((education[i] == sscp) & (isNaN(sscp.value) ||  sscp.value.length > 2)){
+               valid(1,education[i],eduName[i]);
+               erase(1);
+               return false;
+            }
+            else if((education[i] == hscp) & (isNaN(hscp.value) || hscp.value.length > 2)){
+               valid(1,education[i],eduName[i]);
+               erase(1);
+               return false;
+            }
+            else if((education[i] == bdp) & (isNaN(bdp.value) || bdp.value.length > 2)){
+               valid(1,education[i],eduName[i]);
+               erase(1);
+               return false;
+            }
+      }
 
-            if( isNaN(sscy.value) || isNaN(hscy.value) || isNaN(bdy.value)){
-               p.innerText = `please enter year`;
-               div.style.display = 'block';
-               return false;
-            }
-            if( sscy.value.length != 4 || hscy.value.length != 4 || bdy.value.length != 4 ){
-               p.innerText = `please enter valid year`;
-               div.style.display = 'block';
-               return false;
-            }
-            if( isNaN(sscp.value) || isNaN(hscp.value) || isNaN(bdp.value)){
-               p.innerText = `please enter number for percentage`;
-               div.style.display = 'block';
-               return false;
-            }
-            if( sscp.value.length != 2 || hscp.value.length != 2 || bdp.value.length != 2){
-               p.innerText = `please enter valid percentage`;
-               div.style.display = 'block';
-               return false;
-            }
-            if(mdn.value != '' || mcourse.value != '' || mdy.value != '' || mdp.value != ''){
-               var arr = [mdn,mcourse,mdy,mdp];
-               var actualName = ['University of Master','Course Name of Master','Passing Year of master','Percantage of master'];
+      if(mdn.value != '' || mcourse.value != '' || mdy.value != '' || mdp.value != ''){
+               
+               let arr = [mdn,mcourse,mdy,mdp];
                for(var i=0;i<arr.length;i++){
+                  let univerName = ['University of Master','Course Name of Master','Passing Year of master','Percantage of master'];
                   if(arr[i].value == ''){
-                  p.innerText = `please enter ${actualName[i]}`;
-                  div.style.display = 'block';
-                  return false;
-                 }
+                     error(1,arr[i],univerName[i]);
+                     erase(1);
+                     return false;
+                  }
+                  else if((arr[i] == mdy) && (isNaN(mdy.value) || mdy.value.length > 4)){
+                     valid(1,arr[i],univerName[i]);
+                     erase(1);
+                     return false;
+                  }
+                  else if((arr[i] == mdp) && (isNaN(mdp.value) || mdp.value.length > 2)){
+                     valid(1,arr[i],univerName[i]);
+                     erase(1);
+                     return false;
+                  }
                }
-            }
+      }
 
             onshow(2);
         }
+        
         function validation3(){
-            var cname = document.getElementById('cname');
-            var cdes = document.getElementById('cdes');
-            var cfrom = document.getElementById('cfrom');
-            var cto = document.getElementById('cto');
+         var cname = document.getElementsByClassName('cname');
+           var cdes = document.getElementsByClassName('cdes');
+           var cfrom = document.getElementsByClassName('cfrom');
+           var cto = document.getElementsByClassName('cto');
 
-            if(cname.value != '' || cdes.value != '' || cfrom.value != '' || cto.value != ''){
-               if(cname.value == ''){
-                  p.innerText = `please enter Last Company Name `;
-                  div.style.display = 'block';
-                  return false;
-               }
-               if(cdes.value == ''){
-                  p.innerText = `please enter Last Job Designation `;
-                  div.style.display = 'block';
-                  return false;
-               }
-               if(cfrom.value == ''){
-                  p.innerText = `please enter work Experience join Data `;
-                  div.style.display = 'block';
-                  return false;
-               }
-               if(cto.value == ''){
-                  p.innerText = `please enter work Experience Left Data `;
-                  div.style.display = 'block';
-                  return false;
-               }
-               var date = '[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])';
-   
-               if(!(cto.value.match(date))){
-               p.innerText = `please enter valid Date of Join`;
-               div.style.display = 'block';
-               return false;
-               }
-                if(!(cfrom.value.match(date))){
-                p.innerText = `please enter valid Date of left`;
-                div.style.display = 'block';
-                return false;
-                }
+           const table = document.getElementById('work');
+          const tr = table.rows.length;
+          console.log(tr);
+          for(var i=0;i<tr;i++){
+             
+             if(cname[i].value != '' || cdes[i].value != '' || cfrom[i].value != '' || cto[i].value != '' ){
+                  
+                     let date = '[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])';
+                     if(cname[i].value == ''){
+                       error(2,cname[i],'company name');
+                       erase(2);
+                       return false;
+                     }
+                     else if(cdes[i].value == ''){
+                       error(2,cdes[i],'company desgination');
+                       erase(2);
+                       return false;
+                     }
+                     else if(cfrom[i].value == ''){
+                        error(2,cfrom[i],'company date from');
+                        erase(2);
+                       return false;
+                     }
+                     else if(!(cfrom[i].value.match(date))){
+                       valid(2,cfrom[i],'company date from');
+                       erase(2);
+                        return false;
+                     }
+                     else if(cto[i].value == ''){
+                        error(2,cto[i],'company date to');
+                        erase(2);
+                        return false;
+                     }
+                     else if(!(cto[i].value.match(date))){
+                       valid(2,cto[i],'company date to');
+                       erase(2);
+                       return false;
+                     }
+
             }
+          }
             onshow(3);
         }
+        
         function validation4(){
-           var hindi = document.getElementById('hindi');
+         var hindi = document.getElementById('hindi');
            var guj = document.getElementById('guj');
            var eng = document.getElementById('eng');
            var hread = document.getElementById('hread');
@@ -189,132 +299,136 @@
            var gspeak = document.getElementById('gspeak');
 
            if(hindi.checked != true && eng.checked != true && guj.checked != true){
-                  p.innerText = `please select any language that you known`;
-                  div.style.display = 'block';
+                  select(3,hindi,'any language that you know');
+                  erase(3);
                   return false;
          }
-         if(hindi.checked == true){
-            if(hread.checked != true  && hwrite.checked != true && hspeak.checked != true){
-                  p.innerText = `please select language know type for hindi`;
-                  div.style.display = 'block';
-                  return false;
-               }
+          
+         let lang = [hindi,guj,eng];
+         for(let i = 0;i<lang.length;i++){
+            let language= ['hindi','gujarati','english'];
+            let level = [[hread,hwrite,hspeak],[gread,gwrite,gspeak],[eread,ewrite,espeak]];
+            console.log(level[i][0],lang[i]);
+             if(lang[i].checked == true){
+                if(level[i][0].checked == false &&  level[i][1].checked == false && level[i][2].checked == false){
+                      select(3,lang[i],`language know type for ${language[i]}`);
+                      erase(3);
+                      return false;
+                   }
+             }
          }
-         if(guj.checked == true){
-            if(gread.checked != true && gspeak.checked != true && gwrite != true){
-                  p.innerText = `please select language know type gujarati`;
-                  div.style.display = 'block';
-                  return false;
+            for(let i = 0;i<lang.length;i++){
+               let language= ['hindi','gujarati','english'];
+               let level = [[hread,hwrite,hspeak],[gread,gwrite,gspeak],[eread,ewrite,espeak]];
+   
+               if(level[i][0].checked == true  ||  level[i][1].checked == true || level[i][2].checked == true){
+                  if(lang[i].checked == false){
+                     lang[i].checked = true;
+                   }
+             }
             }
-         }
-         if(eng.checked == true){
-            if(eread.checked != true && espeak.checked != true && ewrite != true){
-                  p.innerText = `please select language know type english`;
-                  div.style.display = 'block';
-                  return false;
-               }
-         }
-
          onshow(4);
-        }function validation5(){
-           var php = document.getElementById('php');
-           var rphp = document.getElementById('rphp');
+        }
+      
+        function validation5(){
+         var php = document.getElementById('php');
+           var rphp = document.getElementsByClassName('rphp');
            var oracle = document.getElementById('oracle');
-           var roracle = document.getElementById('roracle');
+           var roracle = document.getElementsByClassName('roracle');
            var mysql = document.getElementById('mysql');
-           var rmysql = document.getElementById('rmysql');
+           var rmysql = document.getElementsByClassName('rmysql');
            var larvel = document.getElementById('larvel');
-           var rlarvel = document.getElementById('rlarvel');
+           var rlarvel = document.getElementsByClassName('rlarvel');
 
-           if(php.checked == true){
-            var getSelectedValue = document.querySelector( 'input[name="rphp"]:checked');  
-            if(getSelectedValue == null) {   
-                  p.innerText = `please select level of technologie for php`;
-                  div.style.display = 'block';
-                  return false;
+           let tech = [php,mysql,larvel,oracle];
+         for(var i=0;i<4;i++){
+            let radio = [rphp,rmysql,rlarvel,roracle];
+            if(tech[i].checked == true){
+               
+               console.log(radio[i][0],radio[i][1],radio[i][2].checked);
+               if(radio[i][0].checked == false && radio[i][1].checked == false && radio[i][2].checked == false) {   
+                     select(4,tech[i],` level of technologie for ${tech[i].value}`);
+                     erase(4);
+                     return false;
+                  }
+            }
+            else if(radio[i][0].checked == true || radio[i][1].checked == true || radio[i][2].checked == true){
+               if(tech[i].checked == false){
+                  tech[i].checked = true;
                }
-         }
-         if(mysql.checked == true){
-            var getSelectedValue = document.querySelector( 'input[name="rmysql"]:checked');
-            if(getSelectedValue == null) {    
-               p.innerText = `please select level of technologie for mysql`;
-               div.style.display = 'block';
-               return false;
-            }
-         }
-         if(larvel.checked == true){
-            var getSelectedValue = document.querySelector( 'input[name="rlarvel"]:checked');
-            if(getSelectedValue == null) {      
-               p.innerText = `please select level of technologie for laravel`;
-               div.style.display = 'block';
-               return false;
-            }
-         }
-         if(oracle.checked == true){
-            var getSelectedValue = document.querySelector( 'input[name="roracle"]:checked');   
-            if(getSelectedValue == null) {   
-               p.innerText = `please select level of technologie for oracle`;
-               div.style.display = 'block';
-               return false;
             }
          }
          onshow(5);
         }
+        
         function validation6(){
-           var refname = document.getElementById('refname');
-           var refcon = document.getElementById('refcon');
-           var refrel = document.getElementById('refrel');
-           var getSelectedValue = document.querySelectorAll( 'input[name="refcon"]');
+         var refname = document.getElementsByClassName('refname');
+         var refcon = document.getElementsByClassName('refcon');
+         var refrel = document.getElementsByClassName('refrel');
    
-         if(refcon.value != '' || refname.value != '' || refrel.value != ''){
-               if(refcon.value == ''){
-                  p.innerText = `please enter refrence contact number `;
-                  div.style.display = 'block';
-                  return false;
-               }
-               if(refname.value == ''){
-                  p.innerText = `please enter referance contact name `;
-                  div.style.display = 'block';
-                  return false;
-               }
-               if(refrel.value == ''){
-                  p.innerText = `please enter referance contact relationship `;
-                  div.style.display = 'block';
-                  return false;
-               }
-         }
+         const table1 = document.getElementById('ref');
+         const tr1 = table1.rows.length;
+          for(var i=0;i<tr1;i++){
+             
+             if(refname[i].value != '' || refcon[i].value != '' || refrel[i].value != ''){
+                  
+                     
+                      let nre = "^[6-9]{1}[0-9]{9}$";
+
+                      if(refname[i].value == ''){
+                       error(5,refname[i],'reference name');
+                       erase(5);
+                       return false;
+                     }
+                     else if(refcon[i].value == ''){
+                       error(5,refcon[i],'reference contact');
+                       erase(5);
+                       return false;
+                     }
+                     else if(!(refcon[i].value.match(nre))){
+                       valid(5,refcon[i],'reference contact');
+                       erase(5);
+                        return false;
+                     }
+                     else if(refrel[i].value == ''){
+                        error(5,refrel[i],'reference relation');
+                        erase(5);
+                       return false;
+                     }
+              
+
+                  }
+          }
             onshow(6);
         }
-        function showError(){
-            document.getElementById('hidden').style.display = 'none';
-         }
+        
+   
         document.getElementById('submit').addEventListener('click',async (e)=>{
      
            e.preventDefault();
-            var notice = document.getElementById('notice');
-            var ctc = document.getElementById('ctc');
-            var ectc = document.getElementById('ectc');
-            var arr = [notice,ectc,cctc];
-            var actualName = ['notice period','expected ctc','current ctc'];
-            for(var i=0;i<arr.length;i++){
-                  if(arr[i].value == ''){
-                  p.innerText = `please enter ${actualName[i]}`;
-                  div.style.display = 'block';
+           var notice = document.getElementById('notice');
+           var ctc = document.getElementById('ctc');
+           var ectc = document.getElementById('ectc');
+            let preferance = [notice,ectc,cctc];
+            let prefeName = ['notice period','expected ctc','current ctc'];
+            for(var i=0;i<preferance.length;i++){
+               if(preferance[i].value == ''){
+                  error(6,preferance[i],`${prefeName[i]}`);
+                  erase(6);
                   return false;
-                  }
                }
-               if( isNaN(notice.value) || isNaN(cctc.value) || isNaN(ectc.value)){
-                        p.innerText = `please enter valid details for preferance. `;
-                        div.style.display = 'block';
-                        return false;
+               else if(isNaN(preferance[i].value)){
+                  valid(6,refcon[i],`${prefeName[i]}`);
+                  erase(5);
+                  return false;
                }
-
-            if(window.location.pathname == '/partForm/partForm'){
+           }
+            if(window.location.pathname == '/partForm'){
 
             
                let form = document.getElementById('form2');
                const data = new URLSearchParams(new FormData(form));
-               let bodyData = await fetch('http://localhost:3000/partForm/partForm/form',{
+               let bodyData = await fetch('http://localhost:3000/partForm/form',{
                   method:"POST",
                   headers: {
                      'Content-Type': ' application/x-www-form-urlencoded'
@@ -323,14 +437,14 @@
                });
                var result = await bodyData.json();
                alert(`${result.alert}`);
-              window.location.pathname = '/partForm'; 
+              
             }
             
             if(window.location.pathname == '/partForm/update'){
                let form = document.getElementById('form2');
                const data = new URLSearchParams(new FormData(form));
                var Id = window.location.href.split('?id=')[1];
-               let bodyData = await fetch('http://localhost:3000/partForm/partForm/update/form',{
+               let bodyData = await fetch('http://localhost:3000/partForm/update/form',{
                   method:"POST",
                   headers: {
                      'Content-Type': ' application/x-www-form-urlencoded',

@@ -1,19 +1,19 @@
 <%- include('header') %>
  <h1 align = "center">Job Application Form</h1>
+ <h1 align = "center">For Update localhost:3000/insert/update/20</h1>
      <div id="hidden">
         <p id="error"></p>
         <h2 id="cancel" onclick="showError()">-</h2>
      </div>
-    <form action="/update/<%= id %>" name="form2" method="post" onsubmit=" return validation();">
+     <form action="/update/<%= id %>" name="form2" method="post" onsubmit=" return validation();">
     <fieldset>
         <legend>Basic Details</legend>
       <div class="basic">
-
+            <p class="error"></p>
         <table align="center">
             <tr>
                 <td>First Name:</td>
                 <td><input type="text" name="fname" id="fname" value="<%= result1[0].fname %>"/></div></td>
-                
             </tr>
             <tr>
                 <td>Designation:</td>
@@ -73,136 +73,127 @@
 
     <fieldset class="eduf">
         <legend>Education Details</legend>
-          <table class="edu">
-           <tr>
-            <td colspan="2">SSC Result</td>
-           </tr>
-           <tr>
-            <td colspan="2">Name of board</td>
-            <td><input type="tel" name="sboard" id="sscn" <%= result2[0].courseName == '10th' ? `value=${result2[0].board}`:'' %>></td>
-            <td colspan="1">Passiong Year</td>
-            <td><input type="text" name="syear" id="sscy" <%= result2[0].courseName == '10th' ? `value=${result2[0].year}`:'' %>></td>
-            <td>Percentage</td>
-            <td><input type="text" name="sper" id="sscp" <%= result2[0].courseName == '10th' ? `value=${result2[0].percentage}`:'' %>></td>
+        <p class="error"></p>
+        <table class="edu">
             <tr>
-                <td colspan="8">
-                    <h4 class="line"></h4>
-                </td>
+             <td colspan="2">SSC Result</td>
             </tr>
-        </tr>
-           <tr>
-            <td colspan="2">HSC/Diploma Result</td>
-           </tr>
-           <tr>
-            <td colspan="2">Name of board</td>
-            <td><input type="tel" name="hboard" id="hscn" <%= result2[1].degree == 'hsc' ? `value=${result2[1].board}`:'' %>></td>
-            <td colspan="1">Passiong Year</td>
-            <td><input type="text" name="hyear" id="hscy" <%= result2[1].degree == 'hsc' ? `value=${result2[1].year}`:'' %>></td>
-            <td>Percentage</td>
-            <td><input type="text" name="hper" id="hscp" <%= result2[1].degree == 'hsc' ? `value=${result2[1].percentage}`:'' %>></td>
-           </tr>
-           <tr>
-            <td colspan="8">
-                <h4 class="line"></h4>
-            </td>
-        </tr>
-           <tr>
-            <td colspan="2">Bachelor degree</td>
-           </tr>
-           <tr>
-            <td>University</td>
-            <td><input type="tel" name="bboard" id="bdn" <%= result2[2].degree == 'be' ? `value=${result2[2].board}`:'' %>></td>
-            <td>Course Name</td>
-            <td><input type="text" name="bcourse" id="bcourse" <%= result2[2].degree == 'be' ? `value=${result2[2].courseName}`:'' %>></td>
-            <td>Passiong Year</td>
-            <td><input type="text" name="byear" id="bdy" <%= result2[2].degree == 'be' ? `value=${result2[2].year}`:'' %>></td>
-            <td>Percentage</td>
-            <td><input type="text" name="bper" id="bdp" <%= result2[2].degree == 'be' ? `value=${result2[2].percentage}`:'' %>></td>
-           </tr>
-           <tr>
-            <td colspan="8">
-                <h4 class="line"></h4>
-            </td>
-        </tr>
-           <tr>
-            <td colspan="2">Master degree</td>
-           </tr>
-           <% console.log(result2[3]); %>
-           <% if(result2[3] != undefined){ %>
-           <tr>
-            <td>University</td>
-            <td><input type="tel" name="mboard" id="mdn" <%= result2[3].degree == 'me' ? `value=${result2[3].board}`:'' %>></td>
-            <td>Course Name</td>
-            <td><input type="text" name="mcourse" id="mcourse" <%= result2[3].degree == 'me' ? `value=${result2[3].courseName}`:'' %>></td>
-            <td>Passiong Year</td>
-            <td><input type="text" name="myear" id="mdy" <%= result2[3].degree == 'me' ? `value=${result2[3].year}`:'' %>></td>
-            <td>Percentage</td>
-            <td><input type="text" name="mper" id="mdp" <%= result2[3].degree == 'me' ? `value=${result2[3].percentage}`:'' %>></td>
-           </tr>
-           <%}else{%>
             <tr>
-                <td colspan="2">Master degree</td>
-               </tr>
-               <tr>
-                <td>University</td>
-                <td><input type="tel" name="mboard" id="mdn"></td>
-                <td>Course Name</td>
-                <td><input type="text" name="mcourse" id="mcourse"></td>
-                <td>Passiong Year</td>
-                <td><input type="text" name="myear" id="mdy"></td>
-                <td>Percentage</td>
-                <td><input type="text" name="mper" id="mdp"></td>
-               </tr>
-            <% } %>
-          </table>   
+             <td colspan="2">Name of board</td>
+             <td><input type="tel" name="sboard" id="sscn" <%= result2[0].courseName == '10th' ? `value=${result2[0].board}`:'' %>></td>
+             <td colspan="1">Passiong Year</td>
+             <td><input type="text" name="syear" id="sscy" <%= result2[0].courseName == '10th' ? `value=${result2[0].year}`:'' %>></td>
+             <td>Percentage</td>
+             <td><input type="text" name="sper" id="sscp" <%= result2[0].courseName == '10th' ? `value=${result2[0].percentage}`:'' %>></td>
+             <tr>
+                 <td colspan="8">
+                     <h4 class="line"></h4>
+                 </td>
+             </tr>
+         </tr>
+            <tr>
+             <td colspan="2">HSC/Diploma Result</td>
+            </tr>
+            <tr>
+             <td colspan="2">Name of board</td>
+             <td><input type="tel" name="hboard" id="hscn" <%= result2[1].degree == 'hsc' ? `value=${result2[1].board}`:'' %>></td>
+             <td colspan="1">Passiong Year</td>
+             <td><input type="text" name="hyear" id="hscy" <%= result2[1].degree == 'hsc' ? `value=${result2[1].year}`:'' %>></td>
+             <td>Percentage</td>
+             <td><input type="text" name="hper" id="hscp" <%= result2[1].degree == 'hsc' ? `value=${result2[1].percentage}`:'' %>></td>
+            </tr>
+            <tr>
+             <td colspan="8">
+                 <h4 class="line"></h4>
+             </td>
+         </tr>
+            <tr>
+             <td colspan="2">Bachelor degree</td>
+            </tr>
+           
+            <tr>
+             <td>University</td>
+             <td><input type="tel" name="bboard" id="bdn" <%= result2[2].degree == 'be' ? `value=${result2[2].board}`:'' %>></td>
+             <td>Course Name</td>
+             <td><input type="text" name="bcourse" id="bcourse" <%= result2[2].degree == 'be' ? `value=${result2[2].courseName}`:'' %>></td>
+             <td>Passiong Year</td>
+             <td><input type="text" name="byear" id="bdy" <%= result2[2].degree == 'be' ? `value=${result2[2].year}`:'' %>></td>
+             <td>Percentage</td>
+             <td><input type="text" name="bper" id="bdp" <%= result2[2].degree == 'be' ? `value=${result2[2].percentage}`:'' %>></td>
+            </tr>
+            <tr>
+             <td colspan="8">
+                 <h4 class="line"></h4>
+             </td>
+         </tr>
+         <% if(result2[3] != undefined){ %>
+            <tr>
+             <td colspan="2">Master degree</td>
+            </tr>
+            <tr>
+             <td>University</td>
+             <td><input type="tel" name="mboard" id="mdn" <%= result2[3].degree == 'me' ? `value=${result2[3].board}`:'' %>></td>
+             <td>Course Name</td>
+             <td><input type="text" name="mcourse" id="mcourse" <%= result2[3].degree == 'me' ? `value=${result2[3].courseName}`:'' %>></td>
+             <td>Passiong Year</td>
+             <td><input type="text" name="myear" id="mdy" <%= result2[3].degree == 'me' ? `value=${result2[3].year}`:'' %>></td>
+             <td>Percentage</td>
+             <td><input type="text" name="mper" id="mdp" <%= result2[3].degree == 'me' ? `value=${result2[3].percentage}`:'' %>></td>
+            </tr>
+            <%}%>
+            
+           </table>    
 
     </fieldset>
 
     <fieldset>
         <legend>Work Experience</legend>
-        <table>
+        <p class="error"></p>
+        <table id="work">
             <%  result3.forEach(element => { %>
             <tr>
                 <td>Company name</td>
-                <td><input type="text" name="cname" id="cname" value="<%= element.cname %>"></td>
+                <td><input type="text" name="cname" class="cname" value="<%= element.cname %>"></td>
                 <td>Designation</td>
-                <td><input type="text" name="cdes" id="cdes" value="<%= element.designation %>"></td>
+                <td><input type="text" name="cdes" class="cdes" value="<%= element.designation %>"></td>
                 <td>From</td>
-                <td><input type="text" name="cfrom" id="cfrom" value="<%=  element.fromW %>"></td>
+                <td><input type="text" name="cfrom" class="cfrom" value="<%=  element.fromW %>"></td>
                 <td>To</td>
-                <td><input type="text" name="cto" id="cto" value="<%= element.toW %>"></td>
+                <td><input type="text" name="cto" class="cto" value="<%= element.toW %>"></td>
             </tr>
             <% }); %>
         
         </table>
 
+
     </fieldset>
      <fieldset>
         <legend>Language known</legend>  
-            <table>
+        <p class="error"></p>
+        <table>
             <% result4.forEach((element,index) => { %>
-                <% if(element.language == 'hindi') {%>
+                <% if(element.language == 'Hindi') {%>
                 <tr>
-                    <td><input type="checkbox" name="hindi" id="hindi" value="Hindi" <%= element.language == 'hindi' ? 'checked':''%>>Hindi</td>
+                    <td><input type="checkbox" name="hindi" id="hindi" value="Hindi" <%= element.language == 'Hindi' ? 'checked':''%>>Hindi</td>
                     <td><input type="checkbox" name="hindi" id="hread"  value="Read" <%= result4[index].lread == 'y' ? 'checked':''%>>Read</td>
                     <td><input type="checkbox" name="hindi" id="hwrite" value="Write" <%= result4[index].lwrite == 'y' ? 'checked':''%>>Write</td>
                     <td><input type="checkbox" name="hindi" id="hspeak" value="Speak" <%= result4[index].speak == 'y' ? 'checked':''%>>Speak</td>
                 </tr>
                 <% } %>
-                <% if(element.language == 'english') {%>
+                <% if(element.language == 'English') {%>
                 <tr>
-                    <td> <input type="checkbox" name="english" id="eng" value="English" <%= element.language == 'english' ? 'checked':''%>>English</td>
+                    <td> <input type="checkbox" name="english" id="eng" value="English" <%= element.language == 'English' ? 'checked':''%>>English</td>
                     <td><input type="checkbox" name="english" id="eread" value="Read" <%= result4[index].lread == 'y' ? 'checked':''%>>Read </td>
                     <td><input type="checkbox" name="english" id="ewrite" value="Write" <%= result4[index].lwrite == 'y' ? 'checked':''%>>Write</td>
                     <td><input type="checkbox" name="english" id="espeak" value="Speak" <%= result4[index].speak == 'y' ? 'checked':''%>>Speak</td>
                 </tr>
                 <% } %>
-                <% if(element.language == 'gujarati') {%>
+                <% if(element.language == 'Gujarati') {%>
                 <tr>
-                    <td><input type="checkbox" name="gujarati" id="guj" value="Gujarati" <%= element.language == 'gujarati' ? 'checked':''%>>Gujarati</td>
+                    <td><input type="checkbox" name="gujarati" id="guj" value="Gujarati" <%= element.language == 'Gujarati' ? 'checked':''%>>Gujarati</td>
                     <td><input type="checkbox" name="gujarati" id="gread" value="Read" <%= result4[index].lread == 'y' ? 'checked':''%>>Read</td>
-                    <td><input type="checkbox" name="gujarati" id="gwrite" value="Write" <%= result4[index].lread == 'y' ? 'checked':''%>>Write</td>
-                    <td><input type="checkbox" name="gujarati" id="gspeak" value="Speak" <%= result4[index].lread == 'y' ? 'checked':''%>>Speak</td>
+                    <td><input type="checkbox" name="gujarati" id="gwrite" value="Write" <%= result4[index].lwrite == 'y' ? 'checked':''%>>Write</td>
+                    <td><input type="checkbox" name="gujarati" id="gspeak" value="Speak" <%= result4[index].speak == 'y' ? 'checked':''%>>Speak</td>
                 </tr>
                 <% } %>
 
@@ -211,45 +202,47 @@
      </fieldset>
      <fieldset>
         <legend>Technologies you know</legend>
+        <p class="error"></p>
         <table>
-        <% result5.forEach((element,index) => { %>
-            <% if( element.technologies == 'php'){ %>
-            <tr>
-                <td><input type="checkbox" name="php" id="php" value="php" checked>PHP</td>
-                <td><input type="radio" name="rphp" id="rphp" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
-                <td><input type="radio" name="rphp" id="rphp" value="Mediater" <%= result5[index].level == 'Mideator' ? 'checked':''%>>Mediater</td>
-                <td><input type="radio" name="rphp" id="rphp" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>>Expert</td>
-            </tr>
-            <% } %>
-            <% if(element.technologies == 'mysql') {%>
-            <tr>
-                <td><input type="checkbox" name="mysql" id="mysql" value="mysql" checked>Mysql</td>
-                <td><input type="radio" name="rmysql"  id="rmysql" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
-                <td> <input type="radio" name="rmysql"  id="rmysql" value="Mediater" <%= result5[index].level == 'Mideator' ? 'checked':''%>>Mediater</td>
-                <td><input type="radio" name="rmysql" id="rmysql" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>> Expert</td>
-            </tr>
-            <% } %>
-            <% if(element.technologies == 'larvel') {%>
-            <tr>
-                <td><input type="checkbox" name="larvel" id="larvel" value="larvel" checked>Larvel</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel" value="Mediater" <%= result5[index].level == 'Mideator' ? 'checked':''%>>Mediater</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>>Expert</td>
-            </tr>
-            <% } %>
-            <% if(element.technologies == 'oracle') {%>
-            <tr>
-                <td><input type="checkbox" name="oracle" id="oracle" value="oracle" checked>Oracle</td>
-                <td><input type="radio" name="roracle"  id="roracle" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
-                <td><input type="radio" name="roracle"  id="roracle" value="Mediater" <%= result5[index].level == 'Mideator' ? 'checked':''%>>Mediater</td>
-                <td> <input type="radio" name="roracle" id="roracle" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>>Expert</td>
-            </tr>
-            <% } %>
-        <% }); %>
-        </table>
+            <% result5.forEach((element,index) => { %>
+                <% if( element.technologies == 'php'){ %>
+                <tr>
+                    <td><input type="checkbox" name="php" id="php" value="php" checked>PHP</td>
+                    <td><input type="radio" name="rphp" id="rphp" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
+                    <td><input type="radio" name="rphp" id="rphp" value="Mediater" <%= result5[index].level == 'Mediater' ? 'checked':''%>>Mediater</td>
+                    <td><input type="radio" name="rphp" id="rphp" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>>Expert</td>
+                </tr>
+                <% } %>
+                <% if(element.technologies == 'mysql') {%>
+                <tr>
+                    <td><input type="checkbox" name="mysql" id="mysql" value="mysql" checked>Mysql</td>
+                    <td><input type="radio" name="rmysql"  id="rmysql" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
+                    <td> <input type="radio" name="rmysql"  id="rmysql" value="Mediater" <%= result5[index].level == 'Mediater' ? 'checked':''%>>Mediater</td>
+                    <td><input type="radio" name="rmysql" id="rmysql" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>> Expert</td>
+                </tr>
+                <% } %>
+                <% if(element.technologies == 'larvel') {%>
+                <tr>
+                    <td><input type="checkbox" name="larvel" id="larvel" value="larvel" checked>Larvel</td>
+                    <td><input type="radio" name="rlarvel" id="rlarvel" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
+                    <td><input type="radio" name="rlarvel" id="rlarvel" value="Mediater" <%= result5[index].level == 'Mediater' ? 'checked':''%>>Mediater</td>
+                    <td><input type="radio" name="rlarvel" id="rlarvel" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>>Expert</td>
+                </tr>
+                <% } %>
+                <% if(element.technologies == 'oracle') {%>
+                <tr>
+                    <td><input type="checkbox" name="oracle" id="oracle" value="oracle" checked>Oracle</td>
+                    <td><input type="radio" name="roracle"  id="roracle" value="Beginer" <%= result5[index].level == 'Beginer' ? 'checked':''%>>Beginer</td>
+                    <td><input type="radio" name="roracle"  id="roracle" value="Mediater" <%= result5[index].level == 'Mediater' ? 'checked':''%>>Mediater</td>
+                    <td> <input type="radio" name="roracle" id="roracle" value="Expert" <%= result5[index].level == 'Expert' ? 'checked':''%>>Expert</td>
+                </tr>
+                <% } %>
+            <% }); %>
+            </table>
      </fieldset>
      <fieldset>
         <legend>referances</legend>
+        <p class="error"></p>
         <table>
             <% result6.forEach(element => { %>
             <tr>
@@ -265,14 +258,15 @@
      </fieldset>
      <fieldset>
         <legend>Preferances</legend>
+        <p class="error"></p>
         <table>
             <tr>
                 <td>Perferd location</td>
                 <td><select name="loc" id="loc">
                     <option value="defualt" disabled>select location</option>
                     <option value="Ahmedabad"  <%= result7[0].location == 'Ahmedabad' ? 'selected':''%>>Ahmedabad</option>
-                    <option value="surat" <%= result7[0].location == 'Surat' ? 'selected':''%>>Surat</option>
-                    <option value="rajkot" <%= result7[0].location == 'Rajkot' ? 'selected':''%>>Rajkot</option>
+                    <option value="Surat" <%= result7[0].location == 'Surat' ? 'selected':''%>>Surat</option>
+                    <option value="Rajkot" <%= result7[0].location == 'Rajkot' ? 'selected':''%>>Rajkot</option>
                 </select></td>
                 <tr >
                     <td>Notice period</td>

@@ -4,56 +4,51 @@
  
  <div class="tab">
      <ul class="list">
-         <li class="highlight">Basic Details</li>
-         <li class="highlight">Education Details</li>
-         <li class="highlight">Work Experience</li>
-         <li class="highlight">Language Known</li>
-         <li class="highlight">Technologies Known</li>
-         <li class="highlight">Referances</li>
-         <li class="highlight">Preferances</li>
+         <li class="highlight" onclick="show(1)">Basic Details</li>
+         <li class="highlight" onclick="show(2)">Education Details</li>
+         <li class="highlight" onclick="show(3)">Work Experience</li>
+         <li class="highlight" onclick="show(4)">Language Known</li>
+         <li class="highlight" onclick="show(5)">Technologies Known</li>
+         <li class="highlight" onclick="show(6)">Referances</li>
+         <li class="highlight" onclick="show(7)">Preferances</li>
         </ul>
     </div>
-    <div id="hidden">
-       <p id="error"></p>
-       <h2 id="cancel" onclick="showError()">-</h2>
-    </div>
+  
     <form id="form2" name="form">
         <input type="hidden" name="hidden" id="hidden">
         <div class="menu">
         <div class="basic">
             <fieldset>
-                    <legend>Basic Details</legend>
-
-        <table align="center">
-
-
+                <legend>Basic Details</legend>
+                
+                <p class="error"></p>
+            <table align="center">
                 <tr>
                     <td>First Name:</td>
                     <td><input type="text" name="fname" id="fname" /></div></td>
-                    
                 </tr>
                 <tr>
-                <td>Designation:</td>
-                <td><input type="text" name="des" id="des" /></td>
-                <td>Last Name:</td>
-                <td><input type="text" name="lname" id="lname" /> </td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input type="text" name="email" id="email" /></td>
-                <td>Address 1:</td>
-                <td><input type="text" name="add1" id="add1" /></td>
-            </tr>
-            <tr>
-                <td>Phone</td>
-                <td><input type="text" name="num" id="num" /></td>
-                <td>Address 2:</td>
-                <td><input type="text" name="add2" id="add2" /></td>
-            </tr>
-            <tr>
-                <td>Gender</td>
-                <td>Male<input type="radio" name="gender" id="male" class="rg" value="male" checked/>
-                    Female<input type="radio" name="gender" id="female" class="rg"  value="female"/></td>
+                    <td>Designation:</td>
+                    <td><input type="text" name="des" id="des" /></td>
+                    <td>Last Name:</td>
+                    <td><input type="text" name="lname" id="lname" /> </td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" id="email" /></td>
+                    <td>Address 1:</td>
+                    <td><input type="text" name="add1" id="add1" /></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="text" name="num" id="num" /></td>
+                    <td>Address 2:</td>
+                    <td><input type="text" name="add2" id="add2" /></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>Male<input type="radio" name="gender" id="male" class="rg" value="male" checked/>
+                        Female<input type="radio" name="gender" id="female" class="rg"  value="female"/></td>
                     <td>City:</td>
                     <td><input type="text" name="city" id="city" /></td>
                 </tr>
@@ -63,7 +58,7 @@
                         <option value="defualt" disabled>Select Status</option>
                         <option value="married">married</option>
                         <option value="unmarried">unmarried</option>
-                    </select></td>
+                      </select></td>
                     <td>State:</td>
                     <td><select name="state" id="state">
                         <option value="1" disabled>Select State</option>
@@ -76,15 +71,15 @@
                         <option value="Bihar">Bihar</option>
                         <option value="tamilnadu">tamilnadu</option>
                         <option value="Assam">Assam</option>
-                    </select></td>
-            </tr>
-            <tr>
-                <td>DOB:</td>
-                <td><input type="text" name="dob" id="dob" placeholder="yyyy-mm-dd"/></td>
-                <td>Zip Code:</td>
-                <td><input type="text" name="zip" id="zip" /></td>
-            </tr>
-        </table>
+                      </select></td>
+                </tr>
+                <tr>
+                    <td>DOB:</td>
+                    <td><input type="text" name="dob" id="dob" /></td>
+                    <td>Zip Code:</td>
+                    <td><input type="text" name="zip" id="zip" /></td>
+                </tr>
+            </table>
 
     </fieldset>
     <div class="submit">
@@ -96,72 +91,72 @@
     <div class="menu">
     <fieldset class="eduf">
         <legend>Education Details</legend>
-
-            <table class="edu">
-                <tr>
-                    <td colspan="2">SSC Result</td>
+        <p class="error"></p>
+          <table class="edu">
+           <tr>
+            <td colspan="2">SSC Result</td>
            </tr>
            <tr>
-               <td colspan="2">Name of board</td>
-               <td><input type="tel" name="sboard" id="sscn"></td>
-               <td colspan="1">Passiong Year</td>
-               <td><input type="text" name="syear" id="sscy"></td>
-               <td>Percentage</td>
-               <td><input type="text" name="sper" id="sscp"></td>
+            <td colspan="2">Name of board</td>
+            <td><input type="tel" name="sboard" id="sscn"></td>
+            <td colspan="1">Passiong Year</td>
+            <td><input type="text" name="syear" id="sscy"></td>
+            <td>Percentage</td>
+            <td><input type="text" name="sper" id="sscp"></td>
             <tr>
                 <td colspan="8">
                     <h4 class="line"></h4>
                 </td>
             </tr>
         </tr>
-        <tr>
+           <tr>
             <td colspan="2">HSC/Diploma Result</td>
-        </tr>
-        <tr>
+           </tr>
+           <tr>
             <td colspan="2">Name of board</td>
             <td><input type="tel" name="hboard" id="hscn"></td>
             <td colspan="1">Passiong Year</td>
             <td><input type="text" name="hyear" id="hscy"></td>
             <td>Percentage</td>
             <td><input type="text" name="hper" id="hscp"></td>
-        </tr>
-        <tr>
+           </tr>
+           <tr>
             <td colspan="8">
                 <h4 class="line"></h4>
             </td>
         </tr>
-        <tr>
+           <tr>
             <td colspan="2">Bachelor degree</td>
+           </tr>
+           <tr>
+            <td>University</td>
+            <td><input type="tel" name="bboard" id="bdn"></td>
+            <td>Course Name</td>
+            <td><input type="text" name="bcourse" id="bcourse"></td>
+            <td>Passiong Year</td>
+            <td><input type="text" name="byear" id="bdy"></td>
+            <td>Percentage</td>
+            <td><input type="text" name="bper" id="bdp"></td>
+           </tr>
+           <tr>
+            <td colspan="8">
+                <h4 class="line"></h4>
+            </td>
         </tr>
            <tr>
-               <td>University</td>
-               <td><input type="tel" name="bboard" id="bdn"></td>
-               <td>Course Name</td>
-               <td><input type="text" name="bcourse" id="bcourse"></td>
-               <td>Passiong Year</td>
-               <td><input type="text" name="byear" id="bdy"></td>
-               <td>Percentage</td>
-               <td><input type="text" name="bper" id="bdp"></td>
-            </tr>
-            <tr>
-                <td colspan="8">
-                    <h4 class="line"></h4>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">Master degree</td>
-            </tr>
-            <tr>
-                <td>University</td>
-                <td><input type="tel" name="mboard" id="mdn"></td>
-                <td>Course Name</td>
-                <td><input type="text" name="mcourse" id="mcourse"></td>
-                <td>Passiong Year</td>
-                <td><input type="text" name="myear" id="mdy"></td>
-                <td>Percentage</td>
-                <td><input type="text" name="mper" id="mdp"></td>
-            </tr>
-        </table>   
+            <td colspan="2">Master degree</td>
+           </tr>
+           <tr>
+            <td>University</td>
+            <td><input type="tel" name="mboard" id="mdn"></td>
+            <td>Course Name</td>
+            <td><input type="text" name="mcourse" id="mcourse"></td>
+            <td>Passiong Year</td>
+            <td><input type="text" name="myear" id="mdy"></td>
+            <td>Percentage</td>
+            <td><input type="text" name="mper" id="mdp"></td>
+           </tr>
+          </table>
         
     </fieldset>
     <div class="submit">
@@ -173,37 +168,19 @@
     <div class="menu">
     <fieldset>
         <legend>Work Experience</legend>
-            <table>
-                
-                <tr>
-                    <td>Company name</td>
-                <td><input type="text" name="cname" id="cname"></td>
-                <td>Designation</td>
-                <td><input type="text" name="cdes" id="cdes"></td>
-                <td>From</td>
-                <td><input type="text" name="cfrom" id="cfrom" placeholder="yyyy-mm-dd"></td>
-                <td>To</td>
-                <td><input type="text" name="cto" id="cto" placeholder="yyyy-mm-dd"></td>
-            </tr>
+        <p class="error"></p>
+        <input type="button" value="+" onclick="work_add()">
+        <input type="button" value="-" onclick="work_del()" id="work_minus">
+        <table id="work">
             <tr>
                 <td>Company name</td>
-                <td><input type="text" name="cname" id="cname"></td>
+                <td><input type="text" name="cname" class="cname"  value=""></td>
                 <td>Designation</td>
-                <td><input type="text" name="cdes" id="cdes"></td>
+                <td><input type="text" name="cdes" class="cdes"  value=""></td>
                 <td>From</td>
-                <td><input type="text" name="cfrom" id="cfrom" placeholder="yyyy-mm-dd"></td>
+                <td><input type="text" name="cfrom" class="cfrom" value=""></td>
                 <td>To</td>
-                <td><input type="text" name="cto" id="cto" placeholder="yyyy-mm-dd"></td>
-            </tr>
-            <tr>
-                <td>Company name</td>
-                <td><input type="text" name="cname" id="cname"></td>
-                <td>Designation</td>
-                <td><input type="text" name="cdes" id="cdes"></td>
-                <td>From</td>
-                <td><input type="text" name="cfrom" id="cfrom" placeholder="yyyy-mm-dd"></td>
-                <td>To</td>
-                <td><input type="text" name="cto" id="cto" placeholder="yyyy-mm-dd"></td>
+                <td><input type="text" name="cto" class="cto" value=""></td>
             </tr>
         </table>
     </fieldset>
@@ -216,26 +193,27 @@
      <fieldset>
         <legend>Language known</legend>  
 
-            <table>
-                <tr>
-                    <td><input type="checkbox" name="hindi" id="hindi" value="Hindi">Hindi</td>
-                    <td><input type="checkbox" name="hindi" id="hread"  value="Read">Read</td>
-                    <td><input type="checkbox" name="hindi" id="hwrite" value="Write">Write</td>
-                    <td><input type="checkbox" name="hindi" id="hspeak" value="Speak">Speak</td>
-                </tr>
-                <tr>
-                    <td> <input type="checkbox" name="english" id="eng" value="English">English</td>
-                    <td><input type="checkbox" name="english" id="eread" value="Read">Read </td>
-                    <td><input type="checkbox" name="english" id="ewrite" value="Write">Write</td>
-                    <td><input type="checkbox" name="english" id="espeak" value="Speak">Speak</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="gujarati" id="guj" value="Gujarati">Gujarati</td>
-                    <td><input type="checkbox" name="gujarati" id="gread" value="Read">Read</td>
-                    <td><input type="checkbox" name="gujarati" id="gwrite" value="Write">Write</td>
-                    <td><input type="checkbox" name="gujarati" id="gspeak" value="Speak">Speak</td>
-                </tr>
-            </table>
+        <p class="error"></p>
+        <table>
+            <tr>
+                <td><input type="checkbox" name="hindi" id="hindi" value="Hindi">Hindi</td>
+                <td><input type="checkbox" name="hindi" id="hread"  value="Read">Read</td>
+                <td><input type="checkbox" name="hindi" id="hwrite" value="Write">Write</td>
+                <td><input type="checkbox" name="hindi" id="hspeak" value="Speak">Speak</td>
+            </tr>
+            <tr>
+                <td> <input type="checkbox" name="english" id="eng" value="English">English</td>
+                <td><input type="checkbox" name="english" id="eread" value="Read">Read </td>
+                <td><input type="checkbox" name="english" id="ewrite" value="Write">Write</td>
+                <td><input type="checkbox" name="english" id="espeak" value="Speak">Speak</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="gujarati" id="guj" value="Gujarati">Gujarati</td>
+                <td><input type="checkbox" name="gujarati" id="gread" value="Read">Read</td>
+                <td><input type="checkbox" name="gujarati" id="gwrite" value="Write">Write</td>
+                <td><input type="checkbox" name="gujarati" id="gspeak" value="Speak">Speak</td>
+            </tr>
+        </table>
         </fieldset>
         <div class="submit">
             <input type="button" value="Previous" onclick="return prev(3)">
@@ -245,33 +223,33 @@
     <div class="menu">
      <fieldset>
          <legend>Technologies you know</legend>
-
-             <table>
-                 <tr>
-                     <td><input type="checkbox" name="php" id="php" value="php">PHP</td>
-                     <td><input type="radio" name="rphp" id="rphp" class="lphp" value="Beginer">Beginer</td>
-                     <td><input type="radio" name="rphp" id="rphp" class="lphp" value="Mediater">Mediater</td>
-                     <td><input type="radio" name="rphp" id="rphp" class="lphp" value="Expert">Expert</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="mysql" id="mysql"   value="mysql">Mysql</td>
-                        <td><input type="radio" name="rmysql"  id="rmysql"  class="lmysql" value="Beginer">Beginer</td>
-                        <td> <input type="radio" name="rmysql"  id="rmysql" class="lmysql"  value="Mediater">Mediater</td>
-                        <td><input type="radio" name="rmysql" id="rmysql"  class="lmysql" value="Expert"> Expert</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="larvel" id="larvel"  value="larvel">Larvel</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel" class="llarvel" value="Beginer">Beginer</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel"  class="llarvel"value="Mediater">Mediater</td>
-                <td><input type="radio" name="rlarvel" id="rlarvel"  class="llarvel"value="Expert">Expert</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="oracle" id="oracle" value="oracle">Oracle</td>
-                <td><input type="radio" name="roracle"  id="roracle" class="loracle" value="Beginer">Beginer</td>
-                <td><input type="radio" name="roracle"  id="roracle" class="loracle" value="Mediater">Mediater</td>
-                <td> <input type="radio" name="roracle" id="roracle" class="loracle" value="Expert">Expert</td>
-            </tr>
-        </table>
+         <p class="error"></p>
+         <table>
+             <tr>
+                 <td><input type="checkbox" name="php" id="php" value="php">PHP</td>
+                 <td><input type="radio" name="rphp" class="rphp" value="Beginer">Beginer</td>
+                 <td><input type="radio" name="rphp" class="rphp" value="Mediater">Mediater</td>
+                 <td><input type="radio" name="rphp" class="rphp" value="Expert">Expert</td>
+             </tr>
+             <tr>
+                 <td><input type="checkbox" name="mysql" id="mysql" value="mysql">Mysql</td>
+                 <td><input type="radio" name="rmysql"  class="rmysql" value="Beginer">Beginer</td>
+                 <td> <input type="radio" name="rmysql"  class="rmysql" value="Mediater">Mediater</td>
+                 <td><input type="radio" name="rmysql" class="rmysql" value="Expert"> Expert</td>
+             </tr>
+             <tr>
+                 <td><input type="checkbox" name="larvel" id="larvel" value="larvel">Larvel</td>
+                 <td><input type="radio" name="rlarvel" class="rlarvel" value="Beginer">Beginer</td>
+                 <td><input type="radio" name="rlarvel" class="rlarvel" value="Mediater">Mediater</td>
+                 <td><input type="radio" name="rlarvel" class="rlarvel" value="Expert">Expert</td>
+             </tr>
+             <tr>
+                 <td><input type="checkbox" name="oracle" id="oracle" value="oracle">Oracle</td>
+                 <td><input type="radio" name="roracle"  class="roracle" value="Beginer">Beginer</td>
+                 <td><input type="radio" name="roracle"  class="roracle" value="Mediater">Mediater</td>
+                 <td> <input type="radio" name="roracle" class="roracle" value="Expert">Expert</td>
+             </tr>
+         </table>
     </fieldset>
     <div class="submit">
         <input type="button" value="Previous" onclick="return prev(4)">
@@ -281,23 +259,17 @@
 <div class="menu">
     <fieldset>
         <legend>referances</legend>
-
-            <table>
-                <tr>
-                    <td>Name</td>
-                    <td><input type="text" name="refname" id="refname"></td>
-                    <td>Contact Number</td>
-                    <td><input type="text" name="refcon" id="refcon"></td>
-                <td>Relation</td>
-                <td><input type="text" name="refrel" id="refrel"></td>
-            </tr>
+        <p class="error"></p>
+        <input type="button" value="+" onclick="ref_add()">
+        <input type="button" value="-" onclick="ref_del()">
+        <table id="ref">
             <tr>
                 <td>Name</td>
-                <td><input type="text" name="refname" id="refname"></td>
+                <td><input type="text" name="refname" class="refname"></td>
                 <td>Contact Number</td>
-                <td><input type="text" name="refcon" id="refcon"></td>
+                <td><input type="text" name="refcon" class="refcon"></td>
                 <td>Relation</td>
-                <td><input type="text" name="refrel" id="refrel"></td>
+                <td><input type="text" name="refrel" class="refrel"></td>
             </tr>
         </table>
     </fieldset>
@@ -309,35 +281,36 @@
     <div class="menu">
     <fieldset>
         <legend>Preferances</legend>
-            <table>
-                <tr>
-                    <td>Perferd location</td>
-                    <td><select name="loc" id="loc">
-                        <option value="defualt" disabled>select location</option>
-                        <option value="ahmedabad" id="ahmedabad">Ahmedabad</option>
-                        <option value="surat" id="surat">Surat</option>
-                        <option value="rajkot" id="rajkot">Rajkot</option>
-                    </select></td>
-                    <tr >
-                        <td>Notice period</td>
-                        <td><input type="text" name="notice" id="notice"></td>
-                        <td>Expacted CTC</td>
-                        <td><input type="text" name="ectc" id="ectc"></td>
-                        <td>Current CTC</td>
+        <p class="error"></p>
+        <table>
+            <tr>
+                <td>Perferd location</td>
+                <td><select name="loc" id="loc">
+                    <option value="defualt" disabled>select location</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Surat">Surat</option>
+                    <option value="Rajkot">Rajkot</option>
+                </select></td>
+                <tr >
+                    <td>Notice period</td>
+                    <td><input type="text" name="notice" id="notice"></td>
+                    <td>Expacted CTC</td>
+                    <td><input type="text" name="ectc" id="ectc"></td>
+                    <td>Current CTC</td>
                     <td><input type="text" name="cctc" id="cctc"></td>
                 </tr>
                 <tr>
                     <td rowspan="2">Department</td>
                     <td>  <select name="dept" id="dept">
                         <option value="1" disabled>Select Department</option>
-                        <option value="software devloper" id="software">Software Devloper</option>
-                        <option value="web devlopment" id="web">Web Devlopment</option>
-                        <option value="bussiness analyst" id="bussi">Bussiness analyst</option>
-                    </select>
-                </td>
+                        <option value="Software Devloper">Software Devloper</option>
+                        <option value="Web Designer">Web Designer</option>
+                        <option value="Bussiness analyst">Bussiness analyst</option>
+                        </select>
+                    </td>
+                </tr>
             </tr>
-        </tr>
-    </table>
+        </table>
 </fieldset>  
 <div class="submit">
     <input type="button" value="Previous" onclick="return prev(6)">
