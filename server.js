@@ -9,5 +9,6 @@ const router = require("./routes");
 const ver = require('./middleware/verify');
 
 app.use('/',router);
+app.get('*',(req,res)=>{ res.render('wrongUrl');});
 
 app.listen(3000);
