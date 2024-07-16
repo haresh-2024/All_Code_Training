@@ -70,7 +70,6 @@
            var searchTime = document.getElementById('ftime').value;
            var arr = searchTime.split(':');
            arr[0] = arr[0]; 
-            console.log(arr);
         
             if(arr[0] > 23 || arr[0] < 0 || arr[1] > 59 || arr[2] > 59 || arr[1] < 0 || arr[2] < 0){
                 alert('invalid time...');
@@ -81,6 +80,7 @@
                 document.getElementById('totime').innerText = `Current time of ${select2.value} is ` + time.toLocaleTimeString('en-US',{timeZone: select2.value});
                 
                 var current = time.toLocaleDateString();
+                console.log(current)
                 var ar = current.split('/');
                 var t = new Date(ar[2],ar[1],ar[0],arr[0],arr[1],arr[2]);
                 console.log(t);

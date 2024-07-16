@@ -11,4 +11,6 @@ const ver = require('./middleware/verify');
 app.use('/',router);
 app.get('*',(req,res)=>{ res.render('wrongUrl');});
 
-app.listen(3000);
+app.listen(3000,()=>{
+    console.log('server is running on port: 3000');
+});

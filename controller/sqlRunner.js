@@ -163,7 +163,7 @@ const olast = async(req,res)=>{
         sql = atob(sql);
         var  len = await con.query(sql);
         var tot = len[0].length;
-        var i = tot / 10;
+        var i = Math.ceil(tot / 10);
         off = tot - 10;
         var first = tot-10;
         var last = tot;

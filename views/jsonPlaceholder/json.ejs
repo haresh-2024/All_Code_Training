@@ -37,6 +37,7 @@
             <input type="button" name="last" id="last" onclick="last()" value=">>">
 </body>
 <script>
+
     function rel(){
         window.location.reload()
     }
@@ -50,8 +51,9 @@
         search = document.getElementById('search').value;
         document.getElementById('page').value = 1;
        let searchArr = data.filter(items =>{
-          return Object.values(items).join(" ").includes(search);
-       });  
+          return Object.values(items).join("").includes(search);
+       });
+       console.log(searchArr)
        data = searchArr;
        readData(data,0,10);
     }
@@ -60,7 +62,6 @@
             try{
                 const response = await fetch('https://jsonplaceholder.org/posts');
                 const data = await response.json();
-                console.log(data);
                 return data;
             }
             catch(e){
@@ -72,9 +73,7 @@
                 return;
             }
             var page  = document.getElementById('page').value;
-            len = (data.length)/ 10;
-            len = len -1;
-         
+            len = Math.ceil((data.length)/ 10);
                 document.getElementById('first').style.pointerEvents = 'auto';
                 document.getElementById('prev').style.pointerEvents = 'auto';
                 document.getElementById('next').style.pointerEvents = 'auto';
@@ -128,9 +127,10 @@
             readData(data,start,end);
         }
         function last(){
+            document.getElementById('next').style.pointerEvents = 'none';
             let end = data.length; 
             let start = end - 10;
-            document.getElementById('page').value = (data.length)/10;
+            document.getElementById('page').value = Math.ceil((data.length)/10);
             readData(data,start,end); 
         }
         onetime();

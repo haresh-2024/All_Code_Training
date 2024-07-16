@@ -169,7 +169,6 @@ async function ref_del(){
            var education = [sscn,sscy,sscp,hscn,hscy,hscp,bdn,bcourse,bdy,bdp];
       
       for(var i = 0;i < education.length;i++){
-            console.log(sscy.value.length);
             let eduName = ['ssc board','ssc year','ssc percentage','hsc board','hsc year','hsc percentage','bachelor board','bachelor course','bachelor year','bachelor percentage'];
             if(education[i].value == ''){ 
                error(1,education[i],eduName[i]);
@@ -242,7 +241,6 @@ async function ref_del(){
 
            const table = document.getElementById('work');
           const tr = table.rows.length;
-          console.log(tr);
           for(var i=0;i<tr;i++){
              
              if(cname[i].value != '' || cdes[i].value != '' || cfrom[i].value != '' || cto[i].value != '' ){
@@ -308,7 +306,6 @@ async function ref_del(){
          for(let i = 0;i<lang.length;i++){
             let language= ['hindi','gujarati','english'];
             let level = [[hread,hwrite,hspeak],[gread,gwrite,gspeak],[eread,ewrite,espeak]];
-            console.log(level[i][0],lang[i]);
              if(lang[i].checked == true){
                 if(level[i][0].checked == false &&  level[i][1].checked == false && level[i][2].checked == false){
                       select(3,lang[i],`language know type for ${language[i]}`);
@@ -345,7 +342,7 @@ async function ref_del(){
             let radio = [rphp,rmysql,rlarvel,roracle];
             if(tech[i].checked == true){
                
-               console.log(radio[i][0],radio[i][1],radio[i][2].checked);
+               
                if(radio[i][0].checked == false && radio[i][1].checked == false && radio[i][2].checked == false) {   
                      select(4,tech[i],` level of technologie for ${tech[i].value}`);
                      erase(4);
@@ -502,10 +499,10 @@ async function update(){
        }
        
       result.res3.forEach((element,index)=> {
-         document.getElementById('cname').value = result.res3[index].cname;
-         document.getElementById('cdes').value = result.res3[index].designation;
-         document.getElementById('cfrom').value = result.res3[index].fromW;
-         document.getElementById('cto').value = result.res3[index].toW;         
+         document.getElementsByClassName('cname')[index].value = result.res3[index].cname;
+         document.getElementsByClassName('cdes')[index].value = result.res3[index].designation;
+         document.getElementsByClassName('cfrom')[index].value = result.res3[index].fromW;
+         document.getElementsByClassName('cto')[index].value = result.res3[index].toW;         
       });
 
            var hindi = document.getElementById('hindi');
@@ -522,8 +519,7 @@ async function update(){
            var gspeak = document.getElementById('gspeak');
            
          result.res4.forEach( (element,index) =>{
-
-            if(result.res4[index].language == 'hindi'){
+            if(result.res4[index].language == 'Hindi'){
                hindi.checked = true;
                if(result.res4[index].lread == 'y'){
                   hread.checked = true;
@@ -536,7 +532,7 @@ async function update(){
                }
                
             }
-            if(result.res4[index].language == 'english'){
+            if(result.res4[index].language == 'English'){
                eng.checked = true;
                if(result.res4[index].lread == 'y'){
                   eread.checked = true;
@@ -548,7 +544,7 @@ async function update(){
                   espeak.checked = true;
                }
             }
-            if(result.res4[index].language == 'gujarati'){
+            if(result.res4[index].language == 'Gujarati'){
                guj.checked = true;
                if(result.res4[index].lread == 'y'){
                   gread.checked = true;
@@ -563,16 +559,15 @@ async function update(){
          });
 
            var php = document.getElementById('php');
-           var lphp = document.getElementsByClassName('lphp');
+           var lphp = document.getElementsByClassName('rphp');
            var oracle = document.getElementById('oracle');
-           var loracle = document.getElementsByClassName('loracle');
+           var loracle = document.getElementsByClassName('roracle');
            var mysql = document.getElementById('mysql');
-           var lmysql = document.getElementsByClassName('lmysql');
+           var lmysql = document.getElementsByClassName('rmysql');
            var larvel = document.getElementById('larvel');
-           var llarvel = document.getElementsByClassName('llarvel');
-   
-
-           result.res5.forEach((element,index)=>{
+           var llarvel = document.getElementsByClassName('rlarvel');
+           console.log(result.res7)
+           for(index = 0;index<4;index++){
                if(result.res5[index].technologies == 'php'){
                   php.checked = true;
                   if(result.res5[index].level == 'Beginer'){
@@ -585,7 +580,6 @@ async function update(){
                      lphp[2].checked = true;
                   }
                } 
-
                if(result.res5[index].technologies == 'mysql'){
                   mysql.checked = true;
                   if(result.res5[index].level == 'Beginer'){
@@ -624,14 +618,14 @@ async function update(){
                      llarvel[2].checked = true;
                   }
                } 
-           });
-
+            }
+           console.log('hi')
            result.res6.forEach((element,index) => {
-              document.getElementById('refname').value = result.res6[index].name;
-              document.getElementById('refcon').value = result.res6[index].contact;
-              document.getElementById('refrel').value = result.res6[index].relationship;
+              document.getElementsByClassName('refname')[index].value = result.res6[index].name;
+              document.getElementsByClassName('refcon')[index].value = result.res6[index].contact;
+              document.getElementsByClassName('refrel')[index].value = result.res6[index].relationship;
             });
-
+            console.log('hii')
             document.getElementById('notice').value = result.res7[0].notice;
             document.getElementById('cctc').value = result.res7[0].cctc;
             document.getElementById('ectc').value = result.res7[0].ectc;

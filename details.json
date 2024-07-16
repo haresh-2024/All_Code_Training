@@ -6,8 +6,10 @@
     "gender": "Male",
     "age": "22",
     "hobbie": [
+      "A",
       "B",
-      "C"
+      "C",
+      "D"
     ],
     "num": "7536984121",
     "address": "rajkot"
@@ -47,5 +49,29 @@
     ],
     "num": "9632587410",
     "address": "junagadh"
+  },
+  {
+    "fname": "Pradip",
+    "email": "haresh@gmail.com",
+    "lname": "Chauhan",
+    "gender": "Male",
+    "age": "22",
+    "hobbie": "B",
+    "num": "8141755953",
+    "address": "Rajula"
+  },
+  {
+    "fname": "Blanche Fritsch",
+    "email": "your.email+fakedata64238@gmail.com",
+    "lname": "Amparo Collins",
+    "gender": "Female",
+    "age": "12",
+    "hobbie": [
+      "B",
+      "C",
+      "D"
+    ],
+    "num": "7845129630",
+    "address": "98606 Hettinger Underpass"
   }
 ]

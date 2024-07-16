@@ -99,17 +99,11 @@ document.getElementById('submit').addEventListener('click',async (e)=>{
                     if(result.alert == 'Register Successfully...'){
                         document.getElementById('hidden').style.display = 'block';
                         document.getElementById('hidden').innerHTML = `To active your account click on this link <a href="http://localhost:3000/active?user=${result.user}&pin=${result.pin}" target="_blank" id="click">http://localhost:3000/active?user=${result.user}&pin=${result.pin}</a>`;
-                        document.getElementById('click').addEventListener('click',async (e) =>{
-                            window.location.href = 'http://localhost:3000/login';
-                        });
                     }
                    if(result.alert == 'you already register but your account in inactive..'){
                    
                     document.getElementById('hidden').style.display = 'block';
                         document.getElementById('hidden').innerHTML = `${result.alert} to active your account <a href="http://localhost:3000/active?user=${result.user}&pin=${result.pin}" target="_blank" id="click">http://localhost:3000/active?user=${result.user}&pin=${result.pin}</a>`;
-                        document.getElementById('click').addEventListener('click',async (e) =>{
-                            window.location.href = 'http://localhost:3000/login';
-                        });
                    }
                 }
 

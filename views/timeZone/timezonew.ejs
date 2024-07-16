@@ -51,7 +51,6 @@
                },
            });
            var result = await cityData.json();
-           console.log(result);
            const select1 =  document.getElementById('fcity');
            result.forEach((element ,index)=> {
                  select1.innerHTML = select1.innerHTML +`<option value="${element.city}" id="${index}">${element.city}</option>`;

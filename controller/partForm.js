@@ -219,7 +219,7 @@ const partUpdate = async (req,res)=>{
         let result5 = await con.query(sql5);
         let result6 = await con.query(sql6);
         let result7 = await con.query(sql7);
-        
+
         result1 = result1[0];
         result2 = result2[0];
         result3 = result3[0];
